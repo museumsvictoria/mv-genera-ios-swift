@@ -1,0 +1,117 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+
+body {
+	background: #000;
+	color: #bbb;
+	font: 15px/23px "Helvetica Neue";
+}
+
+
+@media screen and (max-width: 1024px){
+    .welcomeportrait{
+
+    display: none;
+
+    }
+
+}
+@media screen and (max-width: 768px){
+    .welcomeportrait{
+        display:block;
+        width:100%;
+        }
+        
+    .welcomelandscape{
+
+    visibility: hidden;
+    display: none;
+    }
+    
+
+}
+
+section {
+	border-top: 1px solid rgba(190,190,190,0.75);
+	padding: 8px 0;	
+	width: 612px;
+	margin: 0 auto;
+	clear: both;
+}
+section div:last-child {
+	padding-bottom: 10px;	
+}
+h1 {
+	color: #fff;
+	font: 400 19px/32px "Helvetica Neue";
+	width: 612px;
+	margin: 20px auto 20px auto;
+	padding: 0 0 24px 0;
+}
+h1 a {
+	text-decoration: underline;
+}
+h2 {
+	color: #bbb;
+	font: 400 19px "Helvetica Neue";
+	width: 612px;
+	margin: 20px auto 10px auto;
+}
+h3 {
+	color: #fff;
+	font-size: 15px;
+	margin: 0 0 24px 0;
+}
+p {
+	margin: 0 0 20px 0;
+}
+p.tight {
+	margin: 0 0 10px 0;
+}
+a {
+	color: #fff;
+	text-decoration: none;
+}
+.left {
+	float: left;
+	width: 20%;
+}
+.left img {
+	margin: 4px 0 25px 0;
+    max-width: 93px;
+}
+.right {
+	float: right;
+	width: 480px;
+}
+.logos {
+	display: block;
+	padding-bottom: 20px;	
+}
+.logos img {
+	margin: -8px 0 20px 0;
+	float: left;
+	max-height:91px;
+}
+#instructions h2 {
+	color: #fff;
+	border-top: 1px solid #bed29f;
+	padding: 20px 0 0 0;
+}
+#instructions h2:first-child {
+	border-top: none;
+	padding: 0;
+}
+#instructions img:last-child {
+	margin: 0 0 0 -10px;	
+}
+
+ul {
+    list-style:none;
+    padding-left:10px;
+    
+}

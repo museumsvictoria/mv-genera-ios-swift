@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
+                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z9z-go-Ag9">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchBackground.png" translatesAutoresizingMaskIntoConstraints="NO" id="3iu-ek-Bmw">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blursquare.png" translatesAutoresizingMaskIntoConstraints="NO" id="D0t-pG-nL4">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.19607843137254902" green="0.36862745098039218" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3iu-ek-Bmw" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="7uY-yR-pCn"/>
+                            <constraint firstItem="D0t-pG-nL4" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="BTP-ra-YVf"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="D0t-pG-nL4" secondAttribute="bottom" id="EDv-mQ-c2t"/>
+                            <constraint firstAttribute="trailing" secondItem="D0t-pG-nL4" secondAttribute="trailing" id="KN5-IA-WfK"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="Z9z-go-Ag9" secondAttribute="bottom" id="TTG-qC-s42"/>
+                            <constraint firstItem="3iu-ek-Bmw" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Tsu-5G-6J0"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="3iu-ek-Bmw" secondAttribute="bottom" id="Ttb-69-Hth"/>
+                            <constraint firstItem="D0t-pG-nL4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="fVQ-wQ-rxv"/>
+                            <constraint firstAttribute="trailing" secondItem="3iu-ek-Bmw" secondAttribute="trailing" id="h5N-pZ-6Q5"/>
+                            <constraint firstItem="Z9z-go-Ag9" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hYq-Bp-4HU"/>
+                            <constraint firstItem="Z9z-go-Ag9" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="kv2-6L-pFk"/>
+                            <constraint firstAttribute="trailing" secondItem="Z9z-go-Ag9" secondAttribute="trailing" id="loE-DV-gh3"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Z9z-go-Ag9"/>
+                                <exclude reference="3iu-ek-Bmw"/>
+                                <exclude reference="D0t-pG-nL4"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="EDv-mQ-c2t"/>
+                                <exclude reference="TTG-qC-s42"/>
+                                <exclude reference="Ttb-69-Hth"/>
+                                <exclude reference="7uY-yR-pCn"/>
+                                <exclude reference="Tsu-5G-6J0"/>
+                                <exclude reference="h5N-pZ-6Q5"/>
+                                <exclude reference="BTP-ra-YVf"/>
+                                <exclude reference="KN5-IA-WfK"/>
+                                <exclude reference="fVQ-wQ-rxv"/>
+                                <exclude reference="hYq-Bp-4HU"/>
+                                <exclude reference="kv2-6L-pFk"/>
+                                <exclude reference="loE-DV-gh3"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="D0t-pG-nL4"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="EDv-mQ-c2t"/>
+                                <include reference="BTP-ra-YVf"/>
+                                <include reference="KN5-IA-WfK"/>
+                                <include reference="fVQ-wQ-rxv"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="3iu-ek-Bmw"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="Ttb-69-Hth"/>
+                                <include reference="7uY-yR-pCn"/>
+                                <include reference="Tsu-5G-6J0"/>
+                                <include reference="h5N-pZ-6Q5"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Z9z-go-Ag9"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="TTG-qC-s42"/>
+                                <include reference="hYq-Bp-4HU"/>
+                                <include reference="kv2-6L-pFk"/>
+                                <include reference="loE-DV-gh3"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="D0t-pG-nL4"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LaunchBackground.png" width="2050" height="2050"/>
+        <image name="blursquare.png" width="2048" height="2048"/>
+    </resources>
+</document>

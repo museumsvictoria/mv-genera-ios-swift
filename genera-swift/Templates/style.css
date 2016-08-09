@@ -1,0 +1,752 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #000;
+	color: #bbb;
+	font: normal 15px/22px 'Helvetica Neue', Helvetica, sans-serif;
+	padding: 30px;
+}
+h1 {
+	color: #fff;
+	font-size: 24px;
+	line-height: 29px;
+	font-weight: bold;
+}
+h2 {
+	color: #bbb;
+	font-size: 24px;
+	line-height: 29px;
+	font: 300 24px/29px 'HelveticaNeue-Light', 'Helvetica Neue Light','Helvetica Neue', Helvetica, sans-serif;
+	font-style: italic;
+}
+
+h2.normal{
+    font-style: normal;
+}
+
+
+h3 {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0 0 3px 0;
+	padding: 20px 0 0 0;
+}
+h3:first-child {
+	padding: 0;	
+}
+h3 .light {
+	color: #999;
+	margin: 0 0 0 4px;
+}
+.leftcolumn {
+	float: left;
+	width: 52%;
+}
+.rightcolumn {
+	float: left;
+	width: 43.5%;
+	margin: 0 0 0 30px;
+}
+.invisible {
+	display: none;
+}
+/* Hides Commercial, Depth and Marine Location panels if no values */
+.false,  .false-false-false, .false-false-false-false, .nottrue {
+	display: none;
+}
+.hidden {
+	visibility: hidden;
+    display:none;
+}
+
+/*Detail Default for blank page */
+
+#detailDefault
+{
+display:block;
+min-height: 768px;
+background-color:#000;
+}
+
+/* Audio Panel */
+div.play{
+
+	background-image: url(playButtonSmall.png);
+	background-position:left center;
+	background-repeat: no-repeat;
+	padding:20px 5px 20px 40px;
+	vertical-align: middle;
+	border-bottom: 1px solid #171717;
+
+}
+
+
+
+div.stop{
+
+	background-image: url(stopButtonSmall.png);
+	background-position:left center;
+	background-repeat: no-repeat;
+	padding:20px 5px 20px 40px;
+	vertical-align: middle;
+	border-bottom: 1px solid #171717;
+
+}
+
+
+.audiocredit
+{
+	padding:20px 5px 20px 40px;
+	vertical-align: middle;
+	border-bottom: 1px solid #171717;
+
+}
+
+/* Widgets / Panels */
+.widget {
+	-webkit-perspective: 600;
+	margin: 0 0 30px 0;
+}
+.widget h3 {
+    font-size: 16px;
+    font-weight: normal;
+	margin: 0;
+	padding: 9px 14px 10px 14px;
+	/*text-shadow: 0px -1px 1px #000;*/
+	border-bottom: 1px solid #171717;
+}
+.widget .infobutton {
+	background: url(icon_info.png) 0 0 no-repeat;
+	background-size: 72px 144px;
+	width: 72px;
+	height: 57px;
+	margin: -24px -24px 0 0;
+	overflow: visible;
+	float: right;
+	opacity: 0.6;
+}
+.widget .infobutton:hover,
+.widget .infobutton:focus,
+.widget .infobutton:active {
+	opacity: 1;
+	background-position: 0 -72px;
+}
+.widget .button {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#707070), color-stop(50%,#303030), color-stop(51%,#000000));
+	background: -webkit-linear-gradient(top, #707070 0%, #303030 50%, #000000 51%);
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	margin: -1px -6px 0 0;
+	padding: 1px 12px;
+	float: right;
+	-webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.2);
+	text-shadow: 0px -1px 1px #000;
+	border: 1px solid #111;
+	border-radius: 4px;
+}
+.widget .button:hover,
+.widget .button:focus,
+.widget .button:active {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#888888), color-stop(50%,#444444), color-stop(51%,#222222));
+	background: -webkit-linear-gradient(top, #888888 0%, #444444 50%, #222222 51%);
+}
+.widget p {
+	padding: 10px 14px;	
+    line-height: 20px;
+}
+
+/* Info Flip Behaviour */
+.widget .front,
+.widget .back {
+	background: #222222;
+	margin: 0 0 30px 0;
+    padding: 0 0 10px 0;
+	-webkit-box-shadow: inset 0 1px 2px rgba(255,255,255,0.10);
+	border-radius: 5px;
+	clear: both;
+}
+.widget .front {
+	width: inherit;
+	height: inherit;
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	transition: all .8s ease-in-out;
+	-webkit-transition: all .8s ease-in-out;
+	
+}
+.widget.flip .front {
+	-webkit-transform: rotateY(180deg);
+}
+.widget .back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: inherit;
+	-webkit-transform: rotateY(-180deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	transition: all .8s ease-in-out;
+	-webkit-transition: all .8s ease-in-out;
+}
+.widget.flip .back {
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: flat;
+}
+.widget.flip .action {
+	display: none;
+}
+
+/* Info Formatting */
+.back .overlay {
+	padding: 0 0 15px 0;
+	-webkit-backface-visibility: hidden;
+}
+.back .overlay p {
+	margin: 0 0 -8px 0;
+}
+.back .overlay a,
+a.extlink {
+	color: #fff;
+	text-decoration: underline;
+	background: url(icon_extlink.png) right center no-repeat;
+	background-size: 14px 14px;
+	padding-right: 20px;
+}
+a.extlink {
+	font-size: 14px;
+	line-height: 40px;
+}
+
+/* Distribution Panel */
+.distributionimage {
+	width: 100%;
+}
+#distribution .back img {
+	opacity: 0.1;
+	-webkit-transform: rotateY(180deg);
+}	
+#distribution .front p {
+	padding: 4px 14px 10px 14px;	
+}
+
+#distribution .front p.first{
+	padding: 14px 14px 10px 14px;
+}
+
+#distribution .back .overlay {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	-webkit-backface-visibility: hidden;
+}
+/* Locations Panel */
+.distributionimage {
+	width: 100%;
+}
+#locations .back img {
+	opacity: 0.1;
+	-webkit-transform: rotateY(180deg);
+}
+#locations .front p {
+	padding: 14px 14px 10px 14px;
+}
+#locations .back .overlay {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	-webkit-backface-visibility: hidden;
+}
+.locationImage {
+    position: relative; 
+    width: 90%;
+    height: 215px; 
+    padding: 30px 10px 10px 10px;
+    overflow: hidden;
+}
+.location_position {
+    width: 100%;
+    height: 100%; 
+    
+    position: absolute;
+    
+    z-index: 999; 
+}
+
+/* Depths Panel */
+#depths .back img {
+	opacity: 0.1;
+	-webkit-transform: rotateY(180deg);
+}
+#depths .front p {
+	padding: 4px 14px 10px 14px;	
+}
+#depths .back .overlay {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	-webkit-backface-visibility: hidden;
+}
+.depthWrapperOut {
+width: 100%;
+  text-align: center;
+}
+.depthWrapper {
+    position: relative; 
+    width: 261px;
+    height: 80px;
+    display: inline-block;
+    margin: 20px auto;
+}
+.depthWrapper div {
+    margin-right: 20px;
+    float: right;
+}
+#depthShore {
+    width: 55px;
+    height: 85px;
+    background-size: 110px 85px;
+    background-image: url('Interface Images/water-depth-1Shore.png');
+    background-position:  0;
+    background-repeat: no-repeat;
+}
+#depthShore.false{
+    display:block;
+    visibility: visible;
+}
+#depthShore.true {
+    background-position: -55px 0px;
+}
+#depthShallow{
+    width: 55px;
+    height: 85px;
+    background-size: 110px 85px;
+    background-image: url('Interface Images/water-depth-2Shallow.png');
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+#depthShallow.false{
+    display:block;
+    visibility: visible;
+}
+#depthShallow.true {
+    background-position: -55px 0px;
+}
+#depthDeep {
+    width: 55px;
+    height: 85px;
+    background-size: 110px 85px;
+    background-image: url('Interface Images/water-depth-3Deep.png');
+    background-position: 0px 0;
+    background-repeat: no-repeat;
+}
+#depthDeep.false{
+    display:block;
+visibility: visible;
+}
+#depthDeep.true {
+      background-position: -55px 0px;
+}
+
+
+
+/* Threatened Status Panel */
+#status ul {
+	/*min-height: 196px;*/
+	padding: 10px 14px;	
+	/*border-top: 1px solid rgba(255,255,255,0.05)*/;
+}
+#status li {
+	font-size: 12.5px;
+	font-weight: normal;
+	line-height: 17px;
+	text-indent: 0px;
+	color: #dddddd;
+	/*text-shadow: 0px -1px 1px #000;*/
+	list-style: none;
+	clear: both;
+}
+#status li img {
+	width: 44px;
+	height: 44px;	
+	margin: 0 15px 24px 15px;
+	float: left;
+}
+.track {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e1e1e), color-stop(100%,#2a2a2a));
+	background: -webkit-linear-gradient(top, #1e1e1e 0%, #2a2a2a 100%);
+	width: 75%;
+	height: 14px;
+	margin: 13px 12px 0 0;
+	padding: 1px;
+	float: right;
+	-webkit-box-shadow: 0 1px 2px rgba(255,255,255,0.25);
+	border-radius: 7px;
+}
+.track span {
+	height: 14px;
+	display: block;
+	border-radius: 7px;
+}
+/*
+span.Critically.endangered,
+span.Critically.Endangered {
+	width: 20%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#D5B1AA), color-stop(55%,#BA4935), color-stop(56%,#B71B00), color-stop(70%,#B21B00), color-stop(100%,#CA1E00));
+	background: -webkit-linear-gradient(top, #D5B1AA 0%, #BA4935 55%, #B71B00 56%, #B21B00 70%, #CA1E00 100%);
+}
+span.endangered,
+span.Endangered,
+span.threatened,
+span.Threatened {
+	width: 40%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffbeaa), color-stop(55%,#f85b2b), color-stop(56%,#dc3d0d), color-stop(100%,#e14312));
+	background: -webkit-linear-gradient(top, #ffbeaa 0%, #f85b2b 55%, #dc3d0d 56%, #e14312 100%);
+}
+span.vulnerable,
+span.Vulnerable {
+	width: 60%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffd1a4), color-stop(55%,#ff8c17), color-stop(56%,#e57000), color-stop(100%,#f17500));
+	background: -webkit-linear-gradient(top, #ffd1a4 0%, #ff8c17 55%, #e57000 56%, #f17500 100%);
+}
+span.Near.threatened,
+span.Near.Threatened {
+	width: 80%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff2b0), color-stop(55%,#debc0c), color-stop(56%,#c2a100), color-stop(100%,#c9a700));
+	background: -webkit-linear-gradient(top, #fff2b0 0%, #debc0c 55%, #c2a100 56%, #c9a700 100%);
+}
+span.Not.threatened,
+span.Not.Threatened,
+span.Least.concern,
+span.Least.Concern,
+span.Data.deficient,
+span.Data.Deficient,
+span.Not.listed,
+span.Not.Listed,
+span.Marine.listed,
+span.Marine.Listed,
+span.Listed.marine.species,
+span.Listed.Marine.Species {
+	width: 100%;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b2d2b2), color-stop(55%,#43a843), color-stop(56%,#0f9b0f), color-stop(100%,#0ca70c));
+	background: -webkit-linear-gradient(top, #b2d2b2 0%, #43a843 55%, #0f9b0f 56%, #0ca70c 100%);
+}
+*/
+
+.constatus{
+padding: 4px 0 0 0;
+font: 13px/22px 'Helvetica Neue', Helvetica, sans-serif;
+color: #aaa;
+}
+
+/*Red*/
+span.Critically.endangered,
+span.Critically.Endangered {
+    color:#e04d53;
+    font: 18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+    display:block;
+}
+span.extinct,
+span.Extinct,
+span.endangered,
+span.Endangered,
+span.threatened,
+span.Threatened {
+   color:#e04d53;
+  font:  18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+/*Orange*/
+
+span.vulnerable,
+span.Vulnerable {
+   color:#f09426;
+    font: 18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+/*Yellow*/
+span.rare,
+span.Rare,
+span.Priority,
+span.priority,
+span.Endangered.Populations,
+span.Endangered.populations,
+span.populations,
+span.Populations,
+span.Conservation.Dependant,
+span.Conservation.dependant,
+span.conservation,
+span.Near.threatened,
+span.Near.Threatened {
+   color:#ded13e;
+    font: 18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+/*Green*/
+span.Not.threatened,
+span.Not.Threatened,
+span.Least.concern,
+span.Least.Concern,
+span.Not.listed,
+span.Not.Listed,
+span.Marine.listed,
+span.Marine.Listed,
+span.Listed.marine.species,
+span.Listed.Marine.Species {
+   color:#39b54A;
+ font: 18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+span.Data.deficient,
+span.Data.Deficient
+{
+ color:#555;
+  font: 18px/17px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+span.Critically.endangeredm,
+span.Critically.Endangeredm {
+    color:#f4343b;
+    font: bold 22px/22px 'Helvetica Neue', Helvetica, sans-serif;
+    display:block;
+}
+span.endangeredm,
+span.Endangeredm,
+span.threatenedm,
+span.Threatenedm {
+   color:#f4343b;
+  font: bold 22px/22px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+span.vulnerablem,
+span.Vulnerablem {
+   color:#f7941D;
+    font: bold 22px/22px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+span.Near.threatenedm,
+span.Near.Threatenedm {
+   color:#eee426;
+    font: bold 22px/22px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+span.Not.threatenedm,
+span.Not.Threatenedm,
+span.Least.concernm,
+span.Least.Concernm,
+span.Data.deficientm,
+span.Data.Deficientm,
+span.Not.listedm,
+span.Not.Listedm,
+span.Marine.listedm,
+span.Marine.Listedm,
+span.Listed.marine.speciesm,
+span.Listed.Marine.Speciesm {
+   color:#39b54A;
+ font: bold 22px/22px 'Helvetica Neue', Helvetica, sans-serif;
+   display:block;
+}
+
+
+/* Table formatting */
+table {
+	background: #1e1e1e;
+	width: 100%;
+	text-align: left;
+	border: 1px solid #333;
+	border-radius: 5px;
+	border-spacing: 0;
+	margin: 30px 0;
+}
+tr {
+	padding: 2px 10px;
+}
+tr.even {
+	background: #222;
+}
+th {
+	padding: 7px 10px 10px 10px;
+}
+td {
+	padding: 2px 10px;	
+}
+
+.tablelabel
+{
+    font-weight: normal;
+    color: #d9d9d9;
+}
+
+/*Flight and Call Widget Formatting */
+/*        <div id="flightCallWidget" class="<%flightFrom%>|<%flightTo%>|<%callingFrom%>|<%callingTo%> widget">
+		<h3 id="flightHeader" class="<%flightFrom%>|<%flightTo%>">Flight Season</h3>
+        <h3  id="callingHeader" class="<%flightFrom%>|<%flightTo%>">Calling</h3>
+            <span id="jan" class="<%flightFrom%>|<%flightTo%>">Jan</span>
+             <span id="feb" class="<%flightFrom%>|<%flightTo%>">Feb</span>
+             <span id="mar" class="<%flightFrom%>|<%flightTo%>">Mar</span>
+             <span id="apr" class="<%flightFrom%>|<%flightTo%>">Apr</span>
+             <span id="may" class="<%flightFrom%>|<%flightTo%>">May</span>
+             <span id="jun" class="<%flightFrom%>|<%flightTo%>">Jun</span>
+             <span id="jul" class="<%flightFrom%>|<%flightTo%>">Jul</span>
+             <span id="aug" class="<%flightFrom%>|<%flightTo%>">Aug</span>
+             <span id="sep" class="<%flightFrom%>|<%flightTo%>">Sep</span>
+             <span id="oct" class="<%flightFrom%>|<%flightTo%>">Oct</span>
+             <span id="nov" class="<%flightFrom%>|<%flightTo%>">Nov</span>
+             <span id="dec" class="<%flightFrom%>|<%flightTo%>">Dec</span>
+        </div>*/
+
+#jan, #feb, #mar, #apr, #may, #jun, #jul, #aug, #sep, #oct, #nov, #dec
+{
+    font-size:11.5px;
+    color: #fff;
+    text-shadow: 0px 1px #222;
+    background: #ae835d;
+    padding-top:2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+#jan._2-3,#jan._2-4,#jan._2-5,#jan._2-6,#jan._2-7,#jan._2-8,#jan._2-9,#jan._2-10,#jan._2-11,#jan._2-12,#jan._3-4,#jan._3-5,#jan._3-6,#jan._3-7,#jan._3-8,#jan._3-9,#jan._3-10,#jan._3-11,#jan._3-12,#jan._4-5,#jan._4-6,#jan._4-7,#jan._4-8,#jan._4-9,#jan._4-10,#jan._4-11,#jan._4-12,#jan._5-6,#jan._5-7,#jan._5-8,#jan._5-9,#jan._5-10,#jan._5-11,#jan._5-12,#jan._6-7,#jan._6-8,#jan._6-9,#jan._6-10,#jan._6-11,#jan._6-12,#jan._7-8,#jan._7-9,#jan._7-10,#jan._7-11,#jan._7-12,#jan._8-9,#jan._8-10,#jan._8-11,#jan._8-12,#jan._9-10,#jan._9-11,#jan._9-12,#jan._10-11,#jan._10-12,#jan._11-12,#feb._3-1,#feb._3-4,#feb._3-5,#feb._3-6,#feb._3-7,#feb._3-8,#feb._3-9,#feb._3-10,#feb._3-11,#feb._3-12,#feb._4-1,#feb._4-5,#feb._4-6,#feb._4-7,#feb._4-8,#feb._4-9,#feb._4-10,#feb._4-11,#feb._4-12,#feb._5-1,#feb._5-6,#feb._5-7,#feb._5-8,#feb._5-9,#feb._5-10,#feb._5-11,#feb._5-12,#feb._6-1,#feb._6-7,#feb._6-8,#feb._6-9,#feb._6-10,#feb._6-11,#feb._6-12,#feb._7-1,#feb._7-8,#feb._7-9,#feb._7-10,#feb._7-11,#feb._7-12,#feb._8-1,#feb._8-9,#feb._8-10,#feb._8-11,#feb._8-12,#feb._9-1,#feb._9-10,#feb._9-11,#feb._9-12,#feb._10-1,#feb._10-11,#feb._10-12,#feb._11-1,#feb._11-12,#feb._12-1,#mar._1-2,#mar._4-1,#mar._4-2,#mar._4-5,#mar._4-6,#mar._4-7,#mar._4-8,#mar._4-9,#mar._4-10,#mar._4-11,#mar._4-12,#mar._5-1,#mar._5-2,#mar._5-6,#mar._5-7,#mar._5-8,#mar._5-9,#mar._5-10,#mar._5-11,#mar._5-12,#mar._6-1,#mar._6-2,#mar._6-7,#mar._6-8,#mar._6-9,#mar._6-10,#mar._6-11,#mar._6-12,#mar._7-1,#mar._7-2,#mar._7-8,#mar._7-9,#mar._7-10,#mar._7-11,#mar._7-12,#mar._8-1,#mar._8-2,#mar._8-9,#mar._8-10,#mar._8-11,#mar._8-12,#mar._9-1,#mar._9-2,#mar._9-10,#mar._9-11,#mar._9-12,#mar._10-1,#mar._10-2,#mar._10-11,#mar._10-12,#mar._11-1,#mar._11-2,#mar._11-12,#mar._12-1,#mar._12-2,#apr._1-2,#apr._1-3,#apr._2-3,#apr._5-1,#apr._5-2,#apr._5-3,#apr._5-6,#apr._5-7,#apr._5-8,#apr._5-9,#apr._5-10,#apr._5-11,#apr._5-12,#apr._6-1,#apr._6-2,#apr._6-3,#apr._6-7,#apr._6-8,#apr._6-9,#apr._6-10,#apr._6-11,#apr._6-12,#apr._7-1,#apr._7-2,#apr._7-3,#apr._7-8,#apr._7-9,#apr._7-10,#apr._7-11,#apr._7-12,#apr._8-1,#apr._8-2,#apr._8-3,#apr._8-9,#apr._8-10,#apr._8-11,#apr._8-12,#apr._9-1,#apr._9-2,#apr._9-3,#apr._9-10,#apr._9-11,#apr._9-12,#apr._10-1,#apr._10-2,#apr._10-3,#apr._10-11,#apr._10-12,#apr._11-1,#apr._11-2,#apr._11-3,#apr._11-12,#apr._12-1,#apr._12-2,#apr._12-3,#may._1-2,#may._1-3,#may._1-4,#may._2-3,#may._2-4,#may._3-4,#may._6-1,#may._6-2,#may._6-3,#may._6-4,#may._6-7,#may._6-8,#may._6-9,#may._6-10,#may._6-11,#may._6-12,#may._7-1,#may._7-2,#may._7-3,#may._7-4,#may._7-8,#may._7-9,#may._7-10,#may._7-11,#may._7-12,#may._8-1,#may._8-2,#may._8-3,#may._8-4,#may._8-9,#may._8-10,#may._8-11,#may._8-12,#may._9-1,#may._9-2,#may._9-3,#may._9-4,#may._9-10,#may._9-11,#may._9-12,#may._10-1,#may._10-2,#may._10-3,#may._10-4,#may._10-11,#may._10-12,#may._11-1,#may._11-2,#may._11-3,#may._11-4,#may._11-12,#may._12-1,#may._12-2,#may._12-3,#may._12-4,#jun._1-2,#jun._1-3,#jun._1-4,#jun._1-5,#jun._2-3,#jun._2-4,#jun._2-5,#jun._3-4,#jun._3-5,#jun._4-5,#jun._7-1,#jun._7-2,#jun._7-3,#jun._7-4,#jun._7-5,#jun._7-8,#jun._7-9,#jun._7-10,#jun._7-11,#jun._7-12,#jun._8-1,#jun._8-2,#jun._8-3,#jun._8-4,#jun._8-5,#jun._8-9,#jun._8-10,#jun._8-11,#jun._8-12,#jun._9-1,#jun._9-2,#jun._9-3,#jun._9-4,#jun._9-5,#jun._9-10,#jun._9-11,#jun._9-12,#jun._10-1,#jun._10-2,#jun._10-3,#jun._10-4,#jun._10-5,#jun._10-11,#jun._10-12,#jun._11-1,#jun._11-2,#jun._11-3,#jun._11-4,#jun._11-5,#jun._11-12,#jun._12-1,#jun._12-2,#jun._12-3,#jun._12-4,#jun._12-5,#jul._1-2,#jul._1-3,#jul._1-4,#jul._1-5,#jul._1-6,#jul._2-3,#jul._2-4,#jul._2-5,#jul._2-6,#jul._3-4,#jul._3-5,#jul._3-6,#jul._4-5,#jul._4-6,#jul._5-6,#jul._8-1,#jul._8-2,#jul._8-3,#jul._8-4,#jul._8-5,#jul._8-6,#jul._8-9,#jul._8-10,#jul._8-11,#jul._8-12,#jul._9-1,#jul._9-2,#jul._9-3,#jul._9-4,#jul._9-5,#jul._9-6,#jul._9-10,#jul._9-11,#jul._9-12,#jul._10-1,#jul._10-2,#jul._10-3,#jul._10-4,#jul._10-5,#jul._10-6,#jul._10-11,#jul._10-12,#jul._11-1,#jul._11-2,#jul._11-3,#jul._11-4,#jul._11-5,#jul._11-6,#jul._11-12,#jul._12-1,#jul._12-2,#jul._12-3,#jul._12-4,#jul._12-5,#jul._12-6,#aug._1-2,#aug._1-3,#aug._1-4,#aug._1-5,#aug._1-6,#aug._1-7,#aug._2-3,#aug._2-4,#aug._2-5,#aug._2-6,#aug._2-7,#aug._3-4,#aug._3-5,#aug._3-6,#aug._3-7,#aug._4-5,#aug._4-6,#aug._4-7,#aug._5-6,#aug._5-7,#aug._6-7,#aug._9-1,#aug._9-2,#aug._9-3,#aug._9-4,#aug._9-5,#aug._9-6,#aug._9-7,#aug._9-10,#aug._9-11,#aug._9-12,#aug._10-1,#aug._10-2,#aug._10-3,#aug._10-4,#aug._10-5,#aug._10-6,#aug._10-7,#aug._10-11,#aug._10-12,#aug._11-1,#aug._11-2,#aug._11-3,#aug._11-4,#aug._11-5,#aug._11-6,#aug._11-7,#aug._11-12,#aug._12-1,#aug._12-2,#aug._12-3,#aug._12-4,#aug._12-5,#aug._12-6,#aug._12-7,#sep._1-2,#sep._1-3,#sep._1-4,#sep._1-5,#sep._1-6,#sep._1-7,#sep._1-8,#sep._2-3,#sep._2-4,#sep._2-5,#sep._2-6,#sep._2-7,#sep._2-8,#sep._3-4,#sep._3-5,#sep._3-6,#sep._3-7,#sep._3-8,#sep._4-5,#sep._4-6,#sep._4-7,#sep._4-8,#sep._5-6,#sep._5-7,#sep._5-8,#sep._6-7,#sep._6-8,#sep._7-8,#sep._10-1,#sep._10-2,#sep._10-3,#sep._10-4,#sep._10-5,#sep._10-6,#sep._10-7,#sep._10-8,#sep._10-11,#sep._10-12,#sep._11-1,#sep._11-2,#sep._11-3,#sep._11-4,#sep._11-5,#sep._11-6,#sep._11-7,#sep._11-8,#sep._11-12,#sep._12-1,#sep._12-2,#sep._12-3,#sep._12-4,#sep._12-5,#sep._12-6,#sep._12-7,#sep._12-8,#oct._1-2,#oct._1-3,#oct._1-4,#oct._1-5,#oct._1-6,#oct._1-7,#oct._1-8,#oct._1-9,#oct._2-3,#oct._2-4,#oct._2-5,#oct._2-6,#oct._2-7,#oct._2-8,#oct._2-9,#oct._3-4,#oct._3-5,#oct._3-6,#oct._3-7,#oct._3-8,#oct._3-9,#oct._4-5,#oct._4-6,#oct._4-7,#oct._4-8,#oct._4-9,#oct._5-6,#oct._5-7,#oct._5-8,#oct._5-9,#oct._6-7,#oct._6-8,#oct._6-9,#oct._7-8,#oct._7-9,#oct._8-9,#oct._11-1,#oct._11-2,#oct._11-3,#oct._11-4,#oct._11-5,#oct._11-6,#oct._11-7,#oct._11-8,#oct._11-9,#oct._11-12,#oct._12-1,#oct._12-2,#oct._12-3,#oct._12-4,#oct._12-5,#oct._12-6,#oct._12-7,#oct._12-8,#oct._12-9,#nov._1-2,#nov._1-3,#nov._1-4,#nov._1-5,#nov._1-6,#nov._1-7,#nov._1-8,#nov._1-9,#nov._1-10,#nov._2-3,#nov._2-4,#nov._2-5,#nov._2-6,#nov._2-7,#nov._2-8,#nov._2-9,#nov._2-10,#nov._3-4,#nov._3-5,#nov._3-6,#nov._3-7,#nov._3-8,#nov._3-9,#nov._3-10,#nov._4-5,#nov._4-6,#nov._4-7,#nov._4-8,#nov._4-9,#nov._4-10,#nov._5-6,#nov._5-7,#nov._5-8,#nov._5-9,#nov._5-10,#nov._6-7,#nov._6-8,#nov._6-9,#nov._6-10,#nov._7-8,#nov._7-9,#nov._7-10,#nov._8-9,#nov._8-10,#nov._9-10,#nov._12-1,#nov._12-2,#nov._12-3,#nov._12-4,#nov._12-5,#nov._12-6,#nov._12-7,#nov._12-8,#nov._12-9,#nov._12-10,#dec._1-2,#dec._1-3,#dec._1-4,#dec._1-5,#dec._1-6,#dec._1-7,#dec._1-8,#dec._1-9,#dec._1-10,#dec._1-11,#dec._2-3,#dec._2-4,#dec._2-5,#dec._2-6,#dec._2-7,#dec._2-8,#dec._2-9,#dec._2-10,#dec._2-11,#dec._3-4,#dec._3-5,#dec._3-6,#dec._3-7,#dec._3-8,#dec._3-9,#dec._3-10,#dec._3-11,#dec._4-5,#dec._4-6,#dec._4-7,#dec._4-8,#dec._4-9,#dec._4-10,#dec._4-11,#dec._5-6,#dec._5-7,#dec._5-8,#dec._5-9,#dec._5-10,#dec._5-11,#dec._6-7,#dec._6-8,#dec._6-9,#dec._6-10,#dec._6-11,#dec._7-8,#dec._7-9,#dec._7-10,#dec._7-11,#dec._8-9,#dec._8-10,#dec._8-11,#dec._9-10,#dec._9-11,#dec._10-11
+{
+    background: #3b3b3b;
+    color: #888888;
+    text-shadow: 0px 0px;
+}
+
+/* Frog Variant */
+#janf, #febf, #marf, #aprf, #mayf, #junf, #julf, #augf, #sepf, #octf, #novf, #decf
+{
+    font-size:11.5px;
+  /*  color: #fff;
+    text-shadow: 0px 1px #222;
+    background: #ae835d; */
+    background: #3b3b3b;
+    color: #888888;
+    text-shadow: 0px 0px;
+    padding-top:2px;
+    padding-bottom: 2px;
+    text-align: center;
+}
+
+#janf.Jan, #febf.Feb, #marf.Mar, #aprf.Apr, #mayf.May, #junf.Jun, #julf.Jul, #augf.Aug, #sepf.Sep, #octf.Oct, #novf.Nov, #decf.Dec
+{
+    color: #fff;
+    text-shadow: 0px 1px #222;
+    background: #ae835d;
+    
+}
+
+
+audio
+{
+ height:25px;
+ width:25px;
+ background:#222222;
+}
+
+#flightCallWidget, #callWidget
+{
+	width:100%;
+	background: #222222;
+	margin: 30px 0 30px 0;
+	-webkit-box-shadow: inset 0 1px 2px rgba(255,255,255,0.10);
+	border-radius: 5px;
+	clear: both;
+	padding-bottom: 10px;
+
+
+}
+
+#flightCallWidget .months, #callWidget .months{
+
+padding-left: 5px;
+padding-right: 5px;	
+-webkit-column-count:12;
+-webkit-column-gap:1px;
+}
+
+
+#flightHeader, #callingHeader{
+padding-top: 6px;
+padding-bottom:6px;
+padding-left:10px;
+margin-bottom: 10px;
+}
+
+#flightHeader img, #callingHeader img{
+	width:45px;
+	height:30px;
+	vertical-align: bottom;
+    padding-right:10px;
+}
+
+
+#flightCallWidget.-_-
+{
+    display:none;
+}
+#flightHeader.-a
+{
+    display:none;
+}
+#callingHeader.-a
+{
+    display:none;
+}
+
+.-a {
+    display:none;
+}
+
+#noConStatus
+{
+    display: none;
+}
+
+#noConStatus.-___
+{
+    display:block;
+    padding: 10px 14px;
+
+}
+
+#status .front
+{
+	min-height: 129px
+}
+#status .back
+{
+	min-height: 129px
+}
+#status ul.-___
+{
+    display:none;
+}
+
+
+
+/*native status */
+.nativeLabel
+{
+    color: #fff;
+    font-weight:normal;
+    margin-right:10px;
+}
+
+/* Online info - placeholder class to hide */
+
+.ol_-
+{
+    display: none;
+}

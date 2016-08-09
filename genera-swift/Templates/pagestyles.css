@@ -1,0 +1,139 @@
+        * {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+        body {
+            background: #000 url(page_background.jpg) center -44px no-repeat;
+            color: #fff;
+            font: 15px/23px "Helvetica Neue";
+        }
+        body.iphone {
+            background-size: 480px 480px;
+        }
+        #wrapper {
+        position: relative;
+   margin-left: 10%;
+   margin-right: 10%;
+   }
+   #wrapper.iphone {
+   margin-left: 5%;
+   margin-right: 5%;
+   }
+   .invisible {
+     display: none;
+   }
+        section {
+            border-top: 1px solid rgba(19,152,170,0.75); 
+            padding: 8px 0;
+            width: 100%;
+            margin: 0 auto;
+            clear: both;
+        }
+        section div:last-child {
+            padding-bottom: 10px;
+        }
+        h1 {
+            color: #fff;
+            font: 200 18px/27px "Helvetica Neue";
+            width: 100%;
+            margin: 122px auto 20px auto;
+            padding: 0 0 24px 0;
+        }
+        #wrapper.iphone h1 {
+            margin: 60px auto 0 auto;
+            padding: 0 0 10px 0;
+        }
+        .helplink {
+            position: absolute; 
+            top: 75px;
+            right: 20px;
+            color: #000;
+        }
+        h1 div.heading1, h1 div.heading2 {
+            color: #adfffe;
+            font-size: 50px;
+            font-weight: 100;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 50px;
+        }
+        h1 div.heading2 {
+            padding-bottom: 25px;
+        }
+        h1 div.heading-iphone {
+            color: #adfffe;
+            font-size: 30px;
+            font-weight: 100;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        h1 .heading1.heading-iphone {
+            line-height: 50px;
+        }
+        h1 .heading2.heading-iphone {
+            position: absolute;
+            right: 25px;
+            top: 89px;
+            padding-bottom: 10px;
+        }
+        h1 a {
+            text-decoration: underline;
+        }
+        h2 {
+            color: #A0F2F2;
+            font: 200 19px "Helvetica Neue";
+            width: 100%;
+            margin: 20px auto 10px auto;
+        }
+        h3 {
+            color: #A0F2F2;
+            font-size: 15px;
+            margin: 0 0 24px 0;
+        }
+        h3 {
+            color: #fff;
+        }
+        p {
+            margin: 0 0 20px 0;
+        }
+        p.tight {
+            margin: 0 0 10px 0;
+        }
+        a {
+            color: #A0F2F2;
+            text-decoration: none;
+        }
+        .left {
+            float: left;
+            width: 20%;
+        }
+        .left img {
+            margin: 4px 0 25px 0;
+            width: 100px;
+        }
+        .right {
+            float: right;
+            width: 80%;
+        }
+        .logos {
+            display: block;
+            padding-bottom: 20px;
+        }
+        .logos img {
+            margin: -8px 0 20px 0;
+            float: left;
+        }
+        #instructions h2 {
+            color: #fff;
+            border-top: 1px solid #bed29f;
+            padding: 20px 0 0 0;
+        }
+        #instructions h2:first-child {
+            border-top: none;
+            padding: 0;
+        }
+        #instructions img:last-child {
+            margin: 0 0 0 -10px;
+        }
+        

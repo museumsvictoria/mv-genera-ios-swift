@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qD1-2q-sAa">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Test Page View Controller-->
+        <scene sceneID="Lke-jH-PhE">
+            <objects>
+                <pageViewController storyboardIdentifier="PageController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="qD1-2q-sAa" customClass="TestPageViewController" customModule="genera_swift" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J3O-oX-c5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="98" y="723"/>
+        </scene>
+        <!--Speci Image View Controller-->
+        <scene sceneID="7Gk-g9-1Vl">
+            <objects>
+                <viewController storyboardIdentifier="SpeciImageView" id="Jqv-vs-14O" customClass="SpeciImageViewController" customModule="genera_swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="E0c-dR-Vbr"/>
+                        <viewControllerLayoutGuide type="bottom" id="Nyd-Ag-DpK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cWj-dA-aMZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIq-v9-JnQ" customClass="ImageScrollView" customModule="genera_swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kcx-fl-zfM">
+                                <rect key="frame" x="0.0" y="537" width="600" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="Dyx-Mu-lMC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NyA-kJ-mZb">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="e2u-1v-jpI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oIq-v9-JnQ" firstAttribute="top" secondItem="cWj-dA-aMZ" secondAttribute="top" id="8gK-qM-JbA"/>
+                            <constraint firstItem="NyA-kJ-mZb" firstAttribute="leading" secondItem="oIq-v9-JnQ" secondAttribute="leading" id="Jck-VO-54L"/>
+                            <constraint firstItem="NyA-kJ-mZb" firstAttribute="leading" secondItem="kcx-fl-zfM" secondAttribute="leading" id="R1I-Lp-uU4"/>
+                            <constraint firstItem="NyA-kJ-mZb" firstAttribute="trailing" secondItem="oIq-v9-JnQ" secondAttribute="trailing" id="ROb-k3-snX"/>
+                            <constraint firstAttribute="trailing" secondItem="oIq-v9-JnQ" secondAttribute="trailing" id="Tk0-10-ghL"/>
+                            <constraint firstItem="NyA-kJ-mZb" firstAttribute="top" secondItem="oIq-v9-JnQ" secondAttribute="top" id="Z5g-13-B1O"/>
+                            <constraint firstItem="NyA-kJ-mZb" firstAttribute="trailing" secondItem="kcx-fl-zfM" secondAttribute="trailing" id="hfs-cq-uQA"/>
+                            <constraint firstItem="oIq-v9-JnQ" firstAttribute="bottom" secondItem="Nyd-Ag-DpK" secondAttribute="top" id="oic-9k-WmG"/>
+                            <constraint firstItem="oIq-v9-JnQ" firstAttribute="leading" secondItem="cWj-dA-aMZ" secondAttribute="leading" id="v2X-JK-Cha"/>
+                            <constraint firstItem="Nyd-Ag-DpK" firstAttribute="top" secondItem="kcx-fl-zfM" secondAttribute="bottom" constant="1" id="wBr-RM-2iI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="creditLabel" destination="NyA-kJ-mZb" id="TWi-gW-WiL"/>
+                        <outlet property="descriptionLabel" destination="kcx-fl-zfM" id="xYa-c2-Hax"/>
+                        <outlet property="imageScrollView" destination="oIq-v9-JnQ" id="zsz-Uj-XgW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ioi-rU-3Og" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="950" y="714"/>
+        </scene>
+    </scenes>
+</document>

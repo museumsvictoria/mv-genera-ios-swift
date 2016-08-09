@@ -1,0 +1,79 @@
+<!doctype html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<link href="style.css" rel="stylesheet" type="text/css">
+<script>
+	function toggleFlip(objectid) {
+		currentobj = document.getElementById(objectid);
+		//currentobj = objectid
+		//currentobj = document.getElementById('distribution');
+		if (currentobj.className.indexOf("flip") != -1) {
+			currentobj.className = currentobj.className.replace( " flip", "");
+		} else {
+		currentobj.className += " flip";
+		}
+	}
+
+<%audioSetup%>
+
+
+function toggleAudio(divnamed,audio){
+    audiocurrentobj = document.getElementById(divnamed);
+    //alert(currentobj.className);
+    if (audiocurrentobj.className == "play"){
+        audiocurrentobj.className = "stop";
+        audio.play();
+        audio.addEventListener('ended', function() {
+                               document.getElementById(divnamed).className = "play";
+                               
+                               });
+        
+    }	else
+    
+    {
+        audiocurrentobj.className= "play";
+        audio.pause();
+        audio.currentTime = 0;
+    }
+}
+
+</script>
+</head>
+<body>
+
+	<section class="leftcolumn">
+		<header>
+			<h1><%label%></h1>
+			<h2 class="<%sublabelStyle%>"><%sublabel%></h2>
+		</header>
+         <h3>Brief Description</h3><p><%distinctive%></p>
+ 		<h3 class="<%commonNamesClass%>">Other Common Names</h3><%commonNames%>
+		<h3>Identifying Characteristics</h3><%description%>
+		        <h3 class="<%authorsClass%>">Author Credit</h3><%authors%>
+    
+    </section>
+	
+	<section class="rightcolumn">
+
+<div class="<%audioClass%>" id="audio">
+    <div class="front">
+      <h3>Audio <span class="button" onClick="toggleFlip('audio')">Credits</span></h3>
+        <%audioNames%>
+    </div>
+    <div class="back">
+		<h3>Audio Credits <span onClick="toggleFlip('audio')" class="button">Done</span></h3>
+        <%audioCredits%>
+    </div>
+    
+</div>
+<div class="<%localknowledgeClass%> widget">
+    <div class="front">
+        <h3>Local Information</h3>
+        <p><%localknowledge%></p>
+    </div>
+</div>
+
+	</section>
+	
+</body>
+</html>
