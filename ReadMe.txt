@@ -12,8 +12,16 @@ This is the latest version of Museum Victoria's Genera platform for iOS. The cur
 
 This project supersedes the genera-ios project on Github. 
 
+Design elements in this project - icons and layout -  include the work by Simon O'Shea, David Bleja, Simone Downey and Mischa Brus
+
+
+
+
 //What's Changed:
 
+
+
+//Data Changes
 - Data format is now JSON 
 The format of the datafile has been changed from Apple's plist format to JSON, and the expected filename is now "data.json". We did this for format consistency across operating systems.
 
@@ -26,7 +34,7 @@ SupergroupList is an array of supergroup objects (see below). GalleryImages is a
 
 Supergroups have been extracted to a separate section to remove the duplication in the group entries. 
 
-Image galleries are a part of the latest MV field Guide for Gippsland lakes. Although not part of the base Genera spec, the code has been left in for this build. If there are no images in the galleryImages list, the gallery function is hidden in the app.
+The latest MV field Guide - for Gippsland lakes - included an separate image gallery. Although not part of the base Genera spec, the code has been left in for this build. If there are no images in the galleryImages list, the gallery function is hidden in the app.
 
 
 - Supergroup object
@@ -52,10 +60,9 @@ Audio entries now have two extra fields:
 2. "licenseType" - license information for the audio file.
 The Alternate Text and LicenseType are currently not expressed in the interface.
 
-- "objectData" array of Speci now "data" array of Speci objects
+- The array of "speci" objects is now titled "data" instead of "objectData"
 
-- Speci object
-"audioFiles" array of audio objects now called "audio" 
+- In Speci object the array of audio objects is now called "audio" instead of "audioFiles"
 
 
 //Setup Changes
@@ -66,6 +73,9 @@ Images -> genera-swift/Images
 Audio Files -> genera-swift/Audio
 HTML Templates -> genera-swift/Templates
 
-Subdirectories created under the Templates directory - e.g. for CSS, javascript and CSS Assets - will also be automatically included in the project.
+Any subdirectories you create under the Templates directory - e.g. for CSS, javascript and CSS Assets - will be automatically included in the project. The app expects the iPad About page to be "about-ipad.html" and the iPhone About page to be "about-iphone.html"
 
+
+Developing and Adding Content:
+Although the data structure has changed slightly, a lot of the information on content from our original blog posts is still relevant and can be found here: https://museumvictoria.com.au/discoverycentre/mv-field-guide-app/blog/
 
