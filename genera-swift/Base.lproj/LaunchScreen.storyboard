@@ -110,7 +110,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchBackground.png" width="2050" height="2050"/>
+        <image name="LaunchBackground.png" width="320" height="480"/>
         <image name="blursquare.png" width="2048" height="2048"/>
     </resources>
 </document>
