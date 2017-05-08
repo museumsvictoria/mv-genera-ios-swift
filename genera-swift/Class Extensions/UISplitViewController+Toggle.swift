@@ -17,7 +17,7 @@ import UIKit
 
 extension UISplitViewController {
     func toggleMasterView() {
-        let barButtonItem = self.displayModeButtonItem()
-        UIApplication.sharedApplication().sendAction(barButtonItem.action, to: barButtonItem.target, from: nil, forEvent: nil)
+        let barButtonItem = self.displayModeButtonItem
+        UIApplication.shared.sendAction(barButtonItem.action!, to: barButtonItem.target, from: nil, for: nil)
     }
 }

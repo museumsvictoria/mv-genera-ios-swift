@@ -21,7 +21,7 @@ class MVUIWebViewController: UIViewController, UIWebViewDelegate {
     var templateFilename:String? = ""
     var displayHTML:String = "<html><h1>Default Display HTML</h1></html>"
     var templateHTML:String? = ""
-    let baseURL = NSBundle.mainBundle().bundleURL
+    let baseURL = Bundle.main.bundleURL
    
     
     
@@ -31,8 +31,8 @@ class MVUIWebViewController: UIViewController, UIWebViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         self.customWebView = UIWebView()
         self.customWebView?.delegate = self;
-        customWebView!.backgroundColor = UIColor.clearColor()
-        customWebView!.opaque = false
+        customWebView!.backgroundColor = UIColor.clear
+        customWebView!.isOpaque = false
         
         self.view = self.customWebView
         
@@ -70,12 +70,12 @@ class MVUIWebViewController: UIViewController, UIWebViewDelegate {
         
     }
     
-    func webView(webView: UIWebView,
-                   shouldStartLoadWithRequest request: NSURLRequest,
+    func webView(_ webView: UIWebView,
+                   shouldStartLoadWith request: URLRequest,
                                               navigationType: UIWebViewNavigationType) -> Bool{
 
-        if (navigationType == UIWebViewNavigationType.LinkClicked){
-            UIApplication.sharedApplication().openURL((request.mainDocumentURL)!)
+        if (navigationType == UIWebViewNavigationType.linkClicked){
+            UIApplication.shared.openURL((request.mainDocumentURL)!)
             return false
             
         }
@@ -119,30 +119,30 @@ class MVUIWebViewController: UIViewController, UIWebViewDelegate {
     }
     
     
-    func replacePlaceholder(placeholder:String, with:String?){
+    func replacePlaceholder(_ placeholder:String, with:String?){
         
         if let replacementString = with {
-            if placeholder.containsString("_file"){
+            if placeholder.contains("_file"){
                 //find filepath
                 let filepath = replacementString.FileLocation
-                displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:filepath)
-                displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: replacementString)
+                displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:filepath)
+                displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: replacementString)
                 
             }else
             {
                 if replacementString == "" { //where a entry has no value, set the class placeholder to "invisible"
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:"")
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: "invisible")
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:"")
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: "invisible")
                 }else{
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:replacementString)
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: replacementString)
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:replacementString)
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: replacementString)
                 }
             }
             
         } else // string is null, so treat as blank
         {
-            displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:"")
-            displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: "invisible")
+            displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:"")
+            displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: "invisible")
             
         }
         
@@ -165,7 +165,7 @@ class MVUIWebViewController: UIViewController, UIWebViewDelegate {
                 let audios = audioSet 
                 audioClass = "widget"
                 var audioCounter:Int = 1
-                for audio in audios.sort(>){
+                for audio in audios.sorted(by: >){
                     audioSetup = audioSetup + "var audio\(audioCounter) = new Audio(\"\(audio.FilePath())\");"
                     audioCredits = audioCredits + " <div class=\"audiocredit\">\(audio.credit ?? "")</div>"
                     audioNames = audioNames + " <div class=\"play\" id=\"audio\(audioCounter)div\" onclick=\"toggleAudio('audio\(audioCounter)div', audio\(audioCounter);\"> \(audio.audioDescription ?? "")</div>"

@@ -24,7 +24,7 @@ class iPhoneMainTabBarController: UITabBarController, SpeciImageCollectionViewCo
         //if Gallery is empty, hide the gallery tab.
         
         if !LocalDefaults.sharedInstance.hasGallery{
-            self.viewControllers?.removeAtIndex(2)
+            self.viewControllers?.remove(at: 2)
             
         }
         
@@ -37,9 +37,9 @@ class iPhoneMainTabBarController: UITabBarController, SpeciImageCollectionViewCo
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NSNotificationCenter.defaultCenter().postNotificationName(NotificationType.AppReadyToCheckForUpdates, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: NotificationType.AppReadyToCheckForUpdates), object: self, userInfo: nil)
     }
 
     /*

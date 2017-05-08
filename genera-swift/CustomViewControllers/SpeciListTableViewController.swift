@@ -70,37 +70,37 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
 
         print("\( self.fetchedResultsController.sections?.count ?? 0)")
        return self.fetchedResultsController.sections?.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         print("\(sectionInfo.numberOfObjects)")
         return sectionInfo.numberOfObjects
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SpeciCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
 
         self.configureCell(cell, atIndexPath: indexPath)
 
         return cell
     }
     
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speci
+    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        let object = self.fetchedResultsController.object(at: indexPath) as! Speci
         cell.textLabel!.text = object.label
         cell.detailTextLabel!.text = object.sublabel!
         if object.sublabelStyle == "italic"{
-            cell.detailTextLabel!.font = UIFont.italicSystemFontOfSize((cell.detailTextLabel?.font.pointSize)!)
+            cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
         }
         if let imagePath:String = object.squareThumbnail!.FileLocation{
             print("imagePath: \(imagePath)")
-            if NSFileManager.defaultManager().fileExistsAtPath(imagePath){
+            if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)
             } else
             {
@@ -111,13 +111,14 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
        let sectioninfo = self.fetchedResultsController.sections![section]
 
         if let sectionObjects = sectioninfo.objects {
             let firstGroup:Speci = sectionObjects[0] as! Speci
-            return firstGroup.subgroup
+            let speciSubgroup:Subgroup = firstGroup.subgroup as! Subgroup
+            return speciSubgroup.label
         } else
         {
             return "Unknown Group"
@@ -164,16 +165,16 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     */
 
     
-    var fetchedResultsController: NSFetchedResultsController {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         //Clear cache from previous launch - could be removed from production code if there is a significant boost.
-        NSFetchedResultsController.deleteCacheWithName("Speci")
+        NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Speci")
         
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest()
         // Edit the entity name as appropriate.
-        let entity = NSEntityDescription.entityForName("Speci", inManagedObjectContext: self.managedObjectContext)
+        let entity = NSEntityDescription.entity(forEntityName: "Speci", in: self.managedObjectContext)
         fetchRequest.entity = entity
         
         // Set the batch size to a suitable number.
@@ -205,38 +206,38 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController? = nil
+    var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             return
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-        case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            self.configureCell(tableView.cellForRow(at: indexPath!)!, atIndexPath: indexPath!)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.endUpdates()
     }
     
@@ -253,16 +254,16 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speci
+                let object = self.fetchedResultsController.object(at: indexPath) as! Speci
                 //let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
 
                 controller.detailItem = object
                 controller.title = object.label
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftBarButtonItem?.title = self.title
                 self.navigationItem.backBarButtonItem?.title = self.title
                 self.splitViewController?.toggleMasterView()
@@ -270,30 +271,30 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         }
         if segue.identifier == "showDetailTabView"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speci
-                let controller = (segue.destinationViewController as! DetailTabBarViewController)
+                let object = self.fetchedResultsController.object(at: indexPath) as! Speci
+                let controller = (segue.destination as! DetailTabBarViewController)
                 controller.title = object.label
                 controller.selectedSpeci = object
-                segue.destinationViewController.hidesBottomBarWhenPushed = true
+                segue.destination.hidesBottomBarWhenPushed = true
                 
             }
         }
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "showDetail"{
             //detail view should be the top navigation stack on splitview controller
             if self.splitViewController?.viewControllers[1] is UINavigationController && (self.splitViewController?.viewControllers[1] as! UINavigationController).topViewController is DetailViewController{
                 
                 let controller = ((self.splitViewController?.viewControllers[1] as! UINavigationController).topViewController as! DetailViewController)
                 if let indexPath = self.tableView.indexPathForSelectedRow {
-                    let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Speci
+                    let object = self.fetchedResultsController.object(at: indexPath) as! Speci
                     //let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                     //    let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                     
                     controller.detailItem = object
                     controller.title = object.label
-                    controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                    controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                     controller.navigationItem.leftBarButtonItem?.title = self.title
                     self.navigationItem.backBarButtonItem?.title = self.title
                    // self.splitViewController?.toggleMasterView()

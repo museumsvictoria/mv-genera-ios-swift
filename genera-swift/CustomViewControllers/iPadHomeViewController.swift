@@ -41,49 +41,49 @@ class iPadHomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         DatabaseBuildingActivity.stopAnimating()
         
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+        if UIDevice.current.orientation.isLandscape {
             setHomePageLandscape()
         }
-        if ((UIApplication.sharedApplication().delegate as! AppDelegate).buildingDatabase){
+        if ((UIApplication.shared.delegate as! AppDelegate).buildingDatabase){
             //Subscribe to finish Building Notification
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(databaseBuildFinished), name:NotificationType.DidRefreshDatabase, object: nil)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(databasePercentComplete(_:)), name:NotificationType.DatabasePercentComplete, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(databaseBuildFinished), name:NSNotification.Name(rawValue: NotificationType.DidRefreshDatabase), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(databasePercentComplete(_:)), name:NSNotification.Name(rawValue: NotificationType.DatabasePercentComplete), object: nil)
             self.hideButtons()
             
-            DatabaseBuildingActivity.hidden = false;
+            DatabaseBuildingActivity.isHidden = false;
             DatabaseBuildingActivity.startAnimating()
-            DatabaseBuildProgress.hidden = false;
-            DatabaseBuildingLabel.hidden = false;
+            DatabaseBuildProgress.isHidden = false;
+            DatabaseBuildingLabel.isHidden = false;
         }else{
             //check gallery setup
             if !LocalDefaults.sharedInstance.hasGallery {
-                btnGallery.hidden = true
+                btnGallery.isHidden = true
             }
         }
         
     }
  
-    func databaseBuildFinished(notification: NSNotification){
+    func databaseBuildFinished(_ notification: Notification){
         //No longer need the notification - remove
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         self.showButtons()
         DatabaseBuildingActivity.stopAnimating()
-        DatabaseBuildingActivity.hidden = true;
-        DatabaseBuildProgress.hidden = true;
-        DatabaseBuildingLabel.hidden = true;
+        DatabaseBuildingActivity.isHidden = true;
+        DatabaseBuildProgress.isHidden = true;
+        DatabaseBuildingLabel.isHidden = true;
         
         
     }
     
-    func databasePercentComplete(notification:NSNotification){
+    func databasePercentComplete(_ notification:Notification){
         
-        if let percentage = notification.userInfo?["percentage"] as? Float{
+        if let percentage = (notification as NSNotification).userInfo?["percentage"] as? Float{
             
-            if !DatabaseBuildProgress.hidden {
+            if !DatabaseBuildProgress.isHidden {
             
                 DatabaseBuildProgress.progress = percentage
             }
@@ -94,25 +94,25 @@ class iPadHomeViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "embedAboutViewController"{
-            aboutWebViewController = segue.destinationViewController as? MVWebWrapperViewController
+            aboutWebViewController = segue.destination as? MVWebWrapperViewController
             
         }
         
     }
  
 
-    @IBAction func showMasterList(sender: AnyObject) {
+    @IBAction func showMasterList(_ sender: AnyObject) {
         delegate.showMaster()  
         
     }
     
     
-    @IBAction func showAbout(sender: AnyObject) {
+    @IBAction func showAbout(_ sender: AnyObject) {
 
         homePageInactive()
         aboutWebViewController!.nudgeUpContent()
@@ -129,8 +129,8 @@ class iPadHomeViewController: UIViewController {
         self.btnGallery.alpha = 0;
         self.HomeBackgroundImage.alpha = 0;
         self.showButtons()
-        self.HomeBackgroundImage.hidden = false;
-        UIView.animateWithDuration(1.0, animations:{
+        self.HomeBackgroundImage.isHidden = false;
+        UIView.animate(withDuration: 1.0, animations:{
            self.aboutWebViewController!.returnToTop()
             self.btnAbout.alpha = 1;
             self.btnAnimals.alpha = 1;
@@ -149,14 +149,14 @@ class iPadHomeViewController: UIViewController {
        // btnAbout.enabled = true;
         self.showButtons()
 
-        self.HomeBackgroundImage.hidden = false
+        self.HomeBackgroundImage.isHidden = false
         
     }
     
     func homePageInactive(){
         self.hideButtons()
 
-        self.HomeBackgroundImage.hidden = true
+        self.HomeBackgroundImage.isHidden = true
         
     }
     
@@ -172,24 +172,24 @@ class iPadHomeViewController: UIViewController {
     }
     
     func hideButtons(){
-        btnAbout.hidden = true;
-        btnAnimals.hidden = true;
-        btnGallery.hidden = true; 
+        btnAbout.isHidden = true;
+        btnAnimals.isHidden = true;
+        btnGallery.isHidden = true; 
     }
     
     func showButtons(){
         
-        btnAbout.hidden = false;
-        btnAnimals.hidden = false;
+        btnAbout.isHidden = false;
+        btnAnimals.isHidden = false;
         //only show Gallery button if Gallery exists
         if LocalDefaults.sharedInstance.hasGallery{
-            btnGallery.hidden = false;
+            btnGallery.isHidden = false;
         }
     }
     
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.current.orientation.isLandscape {
            setHomePageLandscape()
         } else {
            setHomePagePortrait()

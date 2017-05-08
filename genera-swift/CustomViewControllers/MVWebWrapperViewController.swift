@@ -21,10 +21,10 @@ import WebKit
     @IBInspectable var templateFilename:String = ""
     var displayHTML:String = "<html><h1>Default Display HTML</h1></html>"
     var templateHTML:String = ""
-    let baseURL = NSBundle.mainBundle().bundleURL
+    let baseURL = Bundle.main.bundleURL
     var customUIWebView:UIWebView?
     var customWKWebView:WKWebView?
-    let os = NSProcessInfo().operatingSystemVersion
+    let os = ProcessInfo().operatingSystemVersion
     var doubleTap:UITapGestureRecognizer = UITapGestureRecognizer()
     
     
@@ -32,7 +32,7 @@ import WebKit
         super.init(coder: aDecoder)
     }
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!) {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!) {
       
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -52,16 +52,16 @@ import WebKit
         if os.majorVersion == 8{
             self.customUIWebView = UIWebView()
             self.customUIWebView?.delegate = self;
-            customUIWebView!.backgroundColor = UIColor.clearColor()
-            customUIWebView!.opaque = false
+            customUIWebView!.backgroundColor = UIColor.clear
+            customUIWebView!.isOpaque = false
             customUIWebView!.scalesPageToFit = false;
            customUIWebView!.scrollView.addGestureRecognizer(doubleTap)
             self.view = self.customUIWebView
         }
         else{
             self.customWKWebView = WKWebView()
-            customWKWebView?.backgroundColor = UIColor.clearColor()
-            customWKWebView?.opaque = false
+            customWKWebView?.backgroundColor = UIColor.clear
+            customWKWebView?.isOpaque = false
             self.customWKWebView?.navigationDelegate  = self
            self.customWKWebView?.scrollView.addGestureRecognizer(doubleTap)
             self.view = self.customWKWebView
@@ -112,7 +112,7 @@ import WebKit
     }
     
     
-    func loadHTMLString(html:String, baseURL:NSURL){
+    func loadHTMLString(_ html:String, baseURL:URL){
         if (self.customUIWebView != nil){
             customUIWebView!.loadHTMLString(html, baseURL: baseURL)
         } else if (self.customWKWebView != nil){
@@ -121,12 +121,12 @@ import WebKit
         
     }
     
-    func webView(webView: UIWebView,
-                 shouldStartLoadWithRequest request: NSURLRequest,
+    func webView(_ webView: UIWebView,
+                 shouldStartLoadWith request: URLRequest,
                                             navigationType: UIWebViewNavigationType) -> Bool{
         
-        if (navigationType == UIWebViewNavigationType.LinkClicked){
-            UIApplication.sharedApplication().openURL((request.mainDocumentURL)!)
+        if (navigationType == UIWebViewNavigationType.linkClicked){
+            UIApplication.shared.openURL((request.mainDocumentURL)!)
             return false
             
         }
@@ -137,14 +137,14 @@ import WebKit
     
     
     
-    func webView(webView: WKWebView,
-                 decidePolicyForNavigationAction navigationAction: WKNavigationAction,
-                                                 decisionHandler: (WKNavigationActionPolicy) -> Void){
-        if navigationAction.navigationType == WKNavigationType.LinkActivated{
-            UIApplication.sharedApplication().openURL(navigationAction.request.mainDocumentURL!)
+    func webView(_ webView: WKWebView,
+                 decidePolicyFor navigationAction: WKNavigationAction,
+                                                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void){
+        if navigationAction.navigationType == WKNavigationType.linkActivated{
+            UIApplication.shared.openURL(navigationAction.request.mainDocumentURL!)
             
         }
-        decisionHandler(WKNavigationActionPolicy.Allow)
+        decisionHandler(WKNavigationActionPolicy.allow)
         
     }
     
@@ -188,30 +188,30 @@ import WebKit
     }
     
     
-    func replacePlaceholder(placeholder:String, with:String?){
+    func replacePlaceholder(_ placeholder:String, with:String?){
         
         if let replacementString = with {
-            if placeholder.containsString("_file"){
+            if placeholder.contains("_file"){
                 //find filepath
                 let filepath = replacementString.FileLocation
-                displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:filepath)
-                displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: replacementString)
+                displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:filepath)
+                displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: replacementString)
                 
             }else
             {
                 if replacementString == "" { //where a entry has no value, set the class placeholder to "invisible"
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:"")
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: "invisible")
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:"")
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: "invisible")
                 }else{
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:replacementString)
-                    displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: replacementString)
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:replacementString)
+                    displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: replacementString)
                 }
             }
             
         } else // string is null, so treat as blank
         {
-            displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)%>", withString:"")
-            displayHTML = displayHTML.stringByReplacingOccurrencesOfString("<%\(placeholder)Class%>", withString: "invisible")
+            displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)%>", with:"")
+            displayHTML = displayHTML.replacingOccurrences(of: "<%\(placeholder)Class%>", with: "invisible")
             
         }
         
@@ -234,7 +234,7 @@ import WebKit
                 let audios = audioSet
                 audioClass = "widget"
                 var audioCounter:Int = 1
-                for audio in audios.sort(>){
+                for audio in audios.sorted(by: >){
                     audioSetup = audioSetup + "var audio\(audioCounter) = new Audio(\"\(audio.FilePath())\");"
                     audioCredits = audioCredits + " <div class=\"audiocredit\">\(audio.credit ?? "")</div>"
                     audioNames = audioNames + " <div class=\"play\" id=\"audio\(audioCounter)div\" onclick=\"toggleAudio('audio\(audioCounter)div', audio\(audioCounter));\"> \(audio.audioDescription ?? "")</div>"
@@ -263,16 +263,16 @@ import WebKit
         
         if customUIWebView != nil{
             
-            customUIWebView!.scrollView.contentOffset = CGPointMake(0, 64);
-            UIView.animateWithDuration(0.5, animations: {
-               self.customUIWebView!.scrollView.contentOffset = CGPointMake(0, 300);
+            customUIWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 64);
+            UIView.animate(withDuration: 0.5, animations: {
+               self.customUIWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 300);
             })
         }
         if customWKWebView != nil{
             
-            customWKWebView!.scrollView.contentOffset = CGPointMake(0, 64);
-            UIView.animateWithDuration(0.5, animations: {
-                self.customWKWebView!.scrollView.contentOffset = CGPointMake(0, 300);
+            customWKWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 64);
+            UIView.animate(withDuration: 0.5, animations: {
+                self.customWKWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 300);
             })
         }
         
@@ -283,15 +283,15 @@ import WebKit
         if customUIWebView != nil{
             
             //customUIWebView!.scrollView.contentOffset = CGPointMake(0, 64);
-            UIView.animateWithDuration(0.5, animations: {
-                self.customUIWebView!.scrollView.contentOffset = CGPointMake(0, 64);
+            UIView.animate(withDuration: 0.5, animations: {
+                self.customUIWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 64);
             })
         }
         if customWKWebView != nil{
             
           //  customWKWebView!.scrollView.contentOffset = CGPointMake(0, 64);
-            UIView.animateWithDuration(0.5, animations: {
-                self.customWKWebView!.scrollView.contentOffset = CGPointMake(0, 64);
+            UIView.animate(withDuration: 0.5, animations: {
+                self.customWKWebView!.scrollView.contentOffset = CGPoint(x: 0, y: 64);
             })
         }
         

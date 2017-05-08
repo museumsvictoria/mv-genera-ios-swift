@@ -26,8 +26,8 @@ class IPhoneLoadViewController: UIViewController {
     @IBOutlet weak var LoadingTextLabel: UILabel!
 
     
-    @IBAction func ButtonPressed(sender: UIButton) {
-           self.performSegueWithIdentifier("openMainScreen", sender: sender)
+    @IBAction func ButtonPressed(_ sender: UIButton) {
+           self.performSegue(withIdentifier: "openMainScreen", sender: sender)
     
     }
     
@@ -37,7 +37,7 @@ class IPhoneLoadViewController: UIViewController {
     
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
     }
     
@@ -47,11 +47,11 @@ class IPhoneLoadViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if loadingComplete{
             setupFinished(nil)
@@ -59,21 +59,21 @@ class IPhoneLoadViewController: UIViewController {
         else{
             
         //subscribe to Database updates
-                        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(databasePercentComplete(_:)), name:NotificationType.DatabasePercentComplete, object: nil)
+                        NotificationCenter.default.addObserver(self, selector: #selector(databasePercentComplete(_:)), name:NSNotification.Name(rawValue: NotificationType.DatabasePercentComplete), object: nil)
             
-            progressBar.hidden = false
+            progressBar.isHidden = false
             activityIndicator.startAnimating()
-            activityIndicator.hidden = false
-            LoadingTextLabel.hidden = false
+            activityIndicator.isHidden = false
+            LoadingTextLabel.isHidden = false
             
         }
     }
     
-    func databasePercentComplete(notification:NSNotification){
+    func databasePercentComplete(_ notification:Notification){
         
-        if let percentage = notification.userInfo?["percentage"] as? Float{
+        if let percentage = (notification as NSNotification).userInfo?["percentage"] as? Float{
             
-            if !progressBar.hidden {
+            if !progressBar.isHidden {
                 
                 progressBar.progress = percentage
             }
@@ -89,8 +89,8 @@ class IPhoneLoadViewController: UIViewController {
     }
     
 
-    func setupFinished(sender:AnyObject?){
-        self.performSegueWithIdentifier("openMainScreen", sender: sender)
+    func setupFinished(_ sender:AnyObject?){
+        self.performSegue(withIdentifier: "openMainScreen", sender: sender)
         loadingComplete = true
     }
     
@@ -98,7 +98,7 @@ class IPhoneLoadViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
           if segue.identifier == "openMainScreen" {

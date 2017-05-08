@@ -16,7 +16,7 @@ import Foundation
 import UIKit
 extension UIColor{
     
-    func fromString(colorString:String) -> UIColor{
+    func fromString(_ colorString:String) -> UIColor{
         var red:Float = 255.0;
         var green:Float = 255.0;
         var blue:Float = 255.0;
@@ -26,7 +26,7 @@ extension UIColor{
         //either red,green,blue, alpha   e.g: 255,255,255,1.0
         
         //or  red, green, blue e.g 255,255,255 - alpha implicitly 1
-            var colours:[String] = colorString.componentsSeparatedByString(",")
+            var colours:[String] = colorString.components(separatedBy: ",")
             if colours.count == 3{
                 red = Float(colours[0]) ?? 0.0
                 green = Float(colours[1]) ?? 0.0

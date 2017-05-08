@@ -28,7 +28,7 @@ class Speci: NSManagedObject {
         return HTML
     }
     
-    func provideHTMLforPhoneTab(tabNumber:Int) -> String{
+    func provideHTMLforPhoneTab(_ tabNumber:Int) -> String{
         var HTML = ""
         HTML =  "<html><h1>Default Display HTML</h1></html>"
         //get tab template
@@ -40,7 +40,7 @@ class Speci: NSManagedObject {
         var returnArray:[Image] = []
         if self.images!.count > 0{
             returnArray = Array(self.images!)
-            returnArray = returnArray.sort({$0<$1})
+            returnArray = returnArray.sorted(by: {$0<$1})
         }
         return returnArray
     }
@@ -49,7 +49,7 @@ class Speci: NSManagedObject {
         var returnArray:[Audio] = []
         if self.audios!.count > 0{
             returnArray = Array(self.audios!)
-            returnArray = returnArray.sort({$0<$1})
+            returnArray = returnArray.sorted(by: {$0<$1})
         }
         return returnArray
     }

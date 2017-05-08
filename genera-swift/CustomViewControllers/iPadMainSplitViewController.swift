@@ -30,7 +30,7 @@ class iPadMainSplitViewController: UISplitViewController, UISplitViewControllerD
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
     }
@@ -40,17 +40,17 @@ class iPadMainSplitViewController: UISplitViewController, UISplitViewControllerD
  
      */
     
-    func splitViewController(svc: UISplitViewController,
-                               willChangeToDisplayMode displayMode: UISplitViewControllerDisplayMode){
+    func splitViewController(_ svc: UISplitViewController,
+                               willChangeTo displayMode: UISplitViewControllerDisplayMode){
         
-        if displayMode == UISplitViewControllerDisplayMode.PrimaryHidden{
+        if displayMode == UISplitViewControllerDisplayMode.primaryHidden{
             
             //detail view hidding - get topmost detail 
              let navCollection = self.viewControllers[0].childViewControllers
                 if navCollection.count > 0 {
                     //get top level controller
                     let topTitle = navCollection[navCollection.count - 1].title
-                    self.splitViewController?.displayModeButtonItem().title = topTitle
+                    self.splitViewController?.displayModeButtonItem.title = topTitle
                     self.title = topTitle
             }
             
@@ -60,7 +60,7 @@ class iPadMainSplitViewController: UISplitViewController, UISplitViewControllerD
     }
     
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
         if topAsDetailController.detailItem == nil {

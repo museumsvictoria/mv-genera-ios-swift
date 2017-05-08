@@ -14,6 +14,26 @@
 
 import UIKit
 import CoreData
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSource, PageContentViewControllerDelegate {
 
@@ -24,7 +44,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
         // Do any additional setup after loading the view.
     
@@ -89,12 +109,12 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
     
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //tabSetup()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //tabSetup()
     }
@@ -121,7 +141,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
                         imageViewController = viewController as? UIPageViewController
                         imageViewController!.dataSource = self
                         let pageContentViewController = self.viewControllerAtIndex(0)
-                        imageViewController!.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+                        imageViewController!.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
                     }
                     if viewController is AudioTableViewController  {
                         audioViewController = viewController as? AudioTableViewController
@@ -130,7 +150,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
                                 }
                          else
                                                     {
-                           audioViewController?.tabBarItem.enabled = false
+                           audioViewController?.tabBarItem.isEnabled = false
                        }
 
                         
@@ -244,7 +264,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
     // PageView Data Source Functions
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
     
     var index = (viewController as! PageContentViewController).pageIndex
     index += 1
@@ -262,7 +282,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
     
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     
     var index = (viewController as! PageContentViewController).pageIndex
     if(index <= 0){
@@ -273,13 +293,13 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
     
     }
     
-    func viewControllerAtIndex(index : Int) -> UIViewController? {
+    func viewControllerAtIndex(_ index : Int) -> UIViewController? {
         
         if let realSpeci = self.selectedSpeci{
             if((realSpeci.sortedImages().count == 0) || (index >= realSpeci.sortedImages().count )) {
                 return nil
             }
-            let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentController") as! PageContentViewController
+            let pageContentViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageContentController") as! PageContentViewController
            // var imageArray = self.selectedSpeci!.sortedImages()
             pageContentViewController.imageFile = realSpeci.sortedImages()[index].filename?.FileLocation ?? ""
             pageContentViewController.descriptionText = realSpeci.sortedImages()[index].imageDescription ?? ""
@@ -295,11 +315,11 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
         
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return self.selectedSpeci?.images?.count ?? 0
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
     return 0
     }
     

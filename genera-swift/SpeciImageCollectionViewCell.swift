@@ -36,8 +36,8 @@ class SpeciImageCollectionViewCell: UICollectionViewCell {
     var imageName:String = ""
     
     func updateCell() -> Void {
-        if let imageDirectory:NSURL = NSBundle.mainBundle().resourceURL?.URLByAppendingPathComponent("Images"){
-            let imageSource = "\(imageDirectory.path!)/\( self.imageName)"
+        if let imageDirectory:URL = Bundle.main.resourceURL?.appendingPathComponent("Images"){
+            let imageSource = "\(imageDirectory.path)/\( self.imageName)"
             if let image:UIImage = UIImage(contentsOfFile: imageSource){
                 //self.imageView.image = image
                 self.scrollableImageView.displayImage = image

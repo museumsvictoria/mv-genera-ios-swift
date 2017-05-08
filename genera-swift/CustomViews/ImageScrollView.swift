@@ -84,25 +84,25 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     {
         let contentSize = self.contentSize;
         let boundsSize = self.bounds.size;
-        return CGPointMake(contentSize.width - boundsSize.width, contentSize.height - boundsSize.height);
+        return CGPoint(x: contentSize.width - boundsSize.width, y: contentSize.height - boundsSize.height);
        
     }
     
     func minimumContentOffset() -> CGPoint
     {
-        return CGPointZero;
+        return CGPoint.zero;
         
     }
     
-    func restoreCenterPoint(oldCenter:CGPoint, oldScale:CGFloat) -> Void{
+    func restoreCenterPoint(_ oldCenter:CGPoint, oldScale:CGFloat) -> Void{
         self.zoomScale = min(self.maximumZoomScale, max(self.minimumZoomScale, oldScale));
         // Step 2: restore center point, first making sure it is within the allowable range.
         
         // 2a: convert our desired center point back to our own coordinate space
-        let boundsCenter = convertPoint(oldCenter, fromView: imageView)
+        let boundsCenter = convert(oldCenter, from: imageView)
         // 2b: calculate the content offset that would yield that center point
-        var offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0,
-            boundsCenter.y - self.bounds.size.height / 2.0);
+        var offset = CGPoint(x: boundsCenter.x - self.bounds.size.width / 2.0,
+            y: boundsCenter.y - self.bounds.size.height / 2.0);
         // 2c: restore offset, adjusted to be within the allowable range
         let maxOffset = self.maximumContentOffset()
         let minOffset = self.minimumContentOffset()
@@ -116,8 +116,8 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         //   CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
         //   return [self convertPoint:boundsCenter toView:imageView];
         
-        let boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds))
-        return convertPoint(boundsCenter, toView : imageView)
+        let boundsCenter = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
+        return convert(boundsCenter, to : imageView)
 
     }
     
@@ -157,7 +157,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         }
         if (displayImage != nil){
         imageView = UIImageView(image: displayImage)
-        imageView!.frame = CGRect(origin: CGPointMake(0.0, 0.0), size:displayImage!.size)
+        imageView!.frame = CGRect(origin: CGPoint(x: 0.0, y: 0.0), size:displayImage!.size)
             if !altText.isEmpty{
                 imageView.accessibilityLabel = "Image showing \(altText)"
                 imageView.isAccessibilityElement = true
@@ -208,15 +208,15 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         print("Center Scroll View Contents: \(contentsFrame)")
     }
     
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
     
-    func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
         centerScrollViewContents()
     }
     
-    func scrollViewDoubleTapped(recognizer: UITapGestureRecognizer) {
+    func scrollViewDoubleTapped(_ recognizer: UITapGestureRecognizer) {
         //doubleTapParent?.ImageScrollViewDoubleTapped(recognizer)
         
         if (self.zoomScale == self.maximumZoomScale){
@@ -225,16 +225,16 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
             
         }else
         {
-            let tapPoint = recognizer.locationInView(imageView)
+            let tapPoint = recognizer.location(in: imageView)
             let viewSize = self.bounds.size
             let w = viewSize.width / self.maximumZoomScale
             let h = viewSize.height / self.maximumZoomScale
             let x = tapPoint.x - (w / 2.0)
             let y = tapPoint.y - (h / 2.0)
             
-            let zoomRect = CGRectMake(x, y, w, h);
+            let zoomRect = CGRect(x: x, y: y, width: w, height: h);
             
-            self.zoomToRect(zoomRect, animated: true)
+            self.zoom(to: zoomRect, animated: true)
         }
       
     }
@@ -243,5 +243,5 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
 
 protocol ImageScrollViewDelegate {
-    func ImageScrollViewDoubleTapped(recogniser: UITapGestureRecognizer)
+    func ImageScrollViewDoubleTapped(_ recogniser: UITapGestureRecognizer)
 }

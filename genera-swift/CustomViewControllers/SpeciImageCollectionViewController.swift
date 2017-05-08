@@ -37,7 +37,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
         
         // Do any additional setup after loading the view.
 
-        self.collectionView!.contentOffset = CGPointMake(0,0)
+        self.collectionView!.contentOffset = CGPoint(x: 0,y: 0)
         self.collectionView!.invalidateIntrinsicContentSize()
         self.title = ""
         
@@ -47,21 +47,21 @@ class SpeciImageCollectionViewController: UICollectionViewController {
         singleTap.numberOfTapsRequired = 1
         let doubleTap = UITapGestureRecognizer(target:self, action: nil)
         doubleTap.numberOfTapsRequired = 2
-        singleTap.requireGestureRecognizerToFail(doubleTap)
+        singleTap.require(toFail: doubleTap)
         
         self.view.addGestureRecognizer(singleTap)
          self.view.addGestureRecognizer(doubleTap)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
 
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
      //   collectionView?.collectionViewLayout.invalidateLayout()
 
@@ -70,14 +70,14 @@ class SpeciImageCollectionViewController: UICollectionViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if !viewDidLayoutSubviewsForTheFirstTime{
-            self.collectionView!.contentOffset = CGPointMake(0,0)
+            self.collectionView!.contentOffset = CGPoint(x: 0,y: 0)
             self.collectionView!.collectionViewLayout.invalidateLayout()
            
          //   self.collectionView!.collectionViewLayout.collectionViewContentSize()
           
             let currentSize = self.collectionView!.bounds.size;
             let offset = CGFloat(self.currentIndex) * currentSize.width;
-            self.collectionView!.contentOffset = CGPointMake(offset, 0)
+            self.collectionView!.contentOffset = CGPoint(x: offset, y: 0)
             
             viewDidLayoutSubviewsForTheFirstTime = true
         }else{
@@ -104,24 +104,24 @@ class SpeciImageCollectionViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return self.imageArray.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SpeciImageCollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! SpeciImageCollectionViewCell
         
-       cell.imageDescriton?.attributedText = imageArray[indexPath.row].imageDescription?.AttributedString()
+       cell.imageDescriton?.attributedText = imageArray[(indexPath as NSIndexPath).row].imageDescription?.AttributedString()
     
-       cell.imageCredit?.attributedText = imageArray[indexPath.row].credit?.AttributedString()
-       cell.altText = imageArray[indexPath.row].altText ?? ""
+       cell.imageCredit?.attributedText = imageArray[(indexPath as NSIndexPath).row].credit?.AttributedString()
+       cell.altText = imageArray[(indexPath as NSIndexPath).row].altText ?? ""
         
 
         
@@ -130,18 +130,18 @@ class SpeciImageCollectionViewController: UICollectionViewController {
         
       //  cell.imageView.image = UIImage(named: "placeholder.jpg")
         //get image in background
-        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+        let priority = DispatchQueue.GlobalQueuePriority.default
+        DispatchQueue.global(priority: priority).async {
             
             // let imageSource = "\(imageDirectory.path!)/\( self.imageArray[indexPath.row])"
-            if let imageSource = self.imageArray[indexPath.row].filename?.FileLocation{
+            if let imageSource = self.imageArray[(indexPath as NSIndexPath).row].filename?.FileLocation{
                 if let image:UIImage = UIImage(contentsOfFile: imageSource){
                     
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         // update some UI
                         
-                        if let cellToUpdate = collectionView.cellForItemAtIndexPath(indexPath) as? SpeciImageCollectionViewCell {
+                        if let cellToUpdate = collectionView.cellForItem(at: indexPath) as? SpeciImageCollectionViewCell {
                             // cellToUpdate.imageView.image = image
                             cellToUpdate.scrollableImageView.displayImage = image
                         }
@@ -153,7 +153,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
             
             
         }
-        print("Index:\(indexPath.row)")
+        print("Index:\((indexPath as NSIndexPath).row)")
         
     
         return cell
@@ -161,9 +161,9 @@ class SpeciImageCollectionViewController: UICollectionViewController {
     
     
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize
     {
      
       return collectionView.frame.size
@@ -198,19 +198,19 @@ class SpeciImageCollectionViewController: UICollectionViewController {
 
   */
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
          //Make sure the currentIndex is up to date - will always pic the first image if the rotation happens when inbetween pages
         print("width:\(size.width)")
         var testCell:SpeciImageCollectionViewCell?
-        if let visibleCells = self.collectionView?.visibleCells(){
+        if let visibleCells = self.collectionView?.visibleCells{
             if (visibleCells.count > 0){
                 let currentCell = visibleCells[0] as! SpeciImageCollectionViewCell
                 testCell = currentCell
                 print("ScrollableImageViewFrame:\(currentCell.scrollableImageView.frame)")
      
-                if let currentIndexPath = self.collectionView?.indexPathForCell(currentCell){
-                   self.currentIndex = currentIndexPath.row
+                if let currentIndexPath = self.collectionView?.indexPath(for: currentCell){
+                   self.currentIndex = (currentIndexPath as NSIndexPath).row
                 }
                
             }
@@ -227,10 +227,10 @@ class SpeciImageCollectionViewController: UICollectionViewController {
             print("PreAnimating Cell ContentView Frame: \(testCell?.contentView.frame)")
         }
         
-        coordinator.animateAlongsideTransition({ (UIViewControllerTransitionCoordinatorContext) -> Void in
+        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
             
             let offset = CGFloat(self.currentIndex) * size.width
-            self.collectionView?.contentOffset = CGPointMake(offset, 0)
+            self.collectionView?.contentOffset = CGPoint(x: offset, y: 0)
           
             if (testCell != nil){
                 // testCell!.scrollableImageView.centerScrollViewContents()
@@ -238,10 +238,10 @@ class SpeciImageCollectionViewController: UICollectionViewController {
                 print("Animating Image Credit:\(testCell!.imageCredit.frame)")
                 print("Animating Cell ContentView Frame: \(testCell?.contentView.frame)")
             }
-            let orient = UIApplication.sharedApplication().statusBarOrientation
+            let orient = UIApplication.shared.statusBarOrientation
             
             switch orient {
-            case .Portrait:
+            case .portrait:
                 print("Portrait")
             // Do something
             default:
@@ -259,7 +259,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
                 }
         })
         
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
 
         
 
@@ -268,23 +268,23 @@ class SpeciImageCollectionViewController: UICollectionViewController {
     
     
     
-    func switchFullScreen(sender:UITapGestureRecognizer){
+    func switchFullScreen(_ sender:UITapGestureRecognizer){
             
         if delegate != nil {
             print("in Tab Controller")
             
             if let navcontroller = self.navigationController {
-                if (navcontroller.navigationBarHidden){
-                    delegate?.tabBar.hidden = false
+                if (navcontroller.isNavigationBarHidden){
+                    delegate?.tabBar.isHidden = false
                     navcontroller.setNavigationBarHidden(false, animated: true)
-                    UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+                    UIApplication.shared.setStatusBarHidden(false, with: .slide)
                     
                 }else
                 {
                     
-                    delegate?.tabBar.hidden = true
+                    delegate?.tabBar.isHidden = true
                     navcontroller.setNavigationBarHidden(true, animated: true)
-                    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+                    UIApplication.shared.setStatusBarHidden(true, with: .slide)
                     
                 }
             }

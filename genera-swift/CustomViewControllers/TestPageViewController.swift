@@ -25,14 +25,14 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let application = UIApplication.sharedApplication().delegate as! AppDelegate
+        let application = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = application.managedObjectContext
         loadGalleryImages()
         
         dataSource = self
         if let firstViewController = getItemController(0) {
             setViewControllers([firstViewController],
-                direction: .Forward,
+                direction: .forward,
                 animated: true,
                 completion: nil)
         }
@@ -44,14 +44,14 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
     func loadGalleryImages(){
         //get gallery objects
         let predicate = NSPredicate(format:"title='Primary'")
-        let fetchRequest = NSFetchRequest(entityName:"Gallery")
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName:"Gallery")
         fetchRequest.predicate = predicate
         do{
-            let currentGallery:[Gallery] =  try self.managedObjectContext!.executeFetchRequest(fetchRequest) as! [Gallery]
+            let currentGallery:[Gallery] =  try self.managedObjectContext!.fetch(fetchRequest) as! [Gallery]
             if currentGallery.count > 0 {
                 let primaryGallery = currentGallery[0]
                 imageArray = (primaryGallery.images?.allObjects as! [Image]) ?? [Image]()
-                imageArray.sortInPlace({$0 > $1})
+                imageArray.sort(by: {$0 > $1})
                 images.append(imageArray[0])
                 images.append(imageArray[1])
                 images.append(imageArray[2])
@@ -72,15 +72,15 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
     
 
     
-    private func setupPageControl() {
+    fileprivate func setupPageControl() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.grayColor()
-        appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-        appearance.backgroundColor = UIColor.darkGrayColor()
+        appearance.pageIndicatorTintColor = UIColor.gray
+        appearance.currentPageIndicatorTintColor = UIColor.white
+        appearance.backgroundColor = UIColor.darkGray
     }
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         let itemController = viewController as! SpeciImageViewController
         
@@ -91,7 +91,7 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
         return nil
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
         let itemController = viewController as! SpeciImageViewController
         
@@ -102,10 +102,10 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
         return nil
     }
     
-    private func getItemController(itemIndex: Int) -> SpeciImageViewController? {
+    fileprivate func getItemController(_ itemIndex: Int) -> SpeciImageViewController? {
         
         if itemIndex < images.count {
-            let pageItemController = self.storyboard!.instantiateViewControllerWithIdentifier("SpeciImageView") as! SpeciImageViewController
+            let pageItemController = self.storyboard!.instantiateViewController(withIdentifier: "SpeciImageView") as! SpeciImageViewController
             pageItemController.index = itemIndex
             pageItemController.image = UIImage(contentsOfFile: (images[itemIndex].filename?.FileLocation)!)
             pageItemController.imageDescription = images[itemIndex].imageDescription ?? ""
@@ -119,11 +119,11 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
     
     // MARK: - Page Indicator
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return images.count
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
     

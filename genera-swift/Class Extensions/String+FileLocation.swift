@@ -20,32 +20,32 @@ extension String
     var FileLocation:String{
         var returnPath:String?
         
-        let bareFileName:String? = (NSURL(fileURLWithPath: self).URLByDeletingPathExtension?.path)
-        let fileExtension:String? = NSURL(fileURLWithPath: self).pathExtension
+        let bareFileName:String? = (NSURL(fileURLWithPath: self).deletingPathExtension?.path)
+        let fileExtension:String? = URL(fileURLWithPath: self).pathExtension
       
         print("Filename: \(bareFileName), Extension: \(fileExtension)")
-        if let testImages = NSBundle.mainBundle().pathForResource(bareFileName, ofType: fileExtension, inDirectory: "Images")
+        if let testImages = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Images")
         {
             returnPath = testImages
         }
-        if let testAudio = NSBundle.mainBundle().pathForResource(bareFileName, ofType: fileExtension, inDirectory: "Audio")
+        if let testAudio = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Audio")
         {
             returnPath = testAudio
         }
-        if let testTemplates = NSBundle.mainBundle().pathForResource(bareFileName, ofType: fileExtension, inDirectory: "Templates")
+        if let testTemplates = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Templates")
         {
             returnPath = testTemplates
         }
-        let fileManager = NSFileManager.defaultManager()
-        let urls = fileManager.URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         
         guard urls.count == 0 else{
             //Application Support Directory hasn't been created - no updates to search - end function here.
             return returnPath ?? ""
         }
         
-        let testUpdatePath = urls.first!.URLByAppendingPathComponent("/updates/\(self)")
-        if fileManager.fileExistsAtPath(testUpdatePath.absoluteString){
+        let testUpdatePath = urls.first!.appendingPathComponent("/updates/\(self)")
+        if fileManager.fileExists(atPath: testUpdatePath.absoluteString){
                 returnPath = testUpdatePath.absoluteString
             
         }
@@ -60,8 +60,8 @@ extension String
         let nstext = NSMutableString(string: paragraphString)
         let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
         
-        var theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-        var theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+        var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
         
         if (theRange1.location != NSNotFound && theRange2.location != NSNotFound) //maked sure there's a pair
         {
@@ -69,14 +69,14 @@ extension String
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
                     mutableAttributedString.addAttributes(attribute1, range: combinedRange)
-                    mutableAttributedString.replaceCharactersInRange(theRange2, withString: "") //order of removal is important! Have to work backwards down the range
-                    mutableAttributedString.replaceCharactersInRange(theRange1, withString: "")
-                    nstext.replaceCharactersInRange(theRange2, withString: "")
-                    nstext.replaceCharactersInRange(theRange1, withString: "")
+                    mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
+                    mutableAttributedString.replaceCharacters(in: theRange1, with: "")
+                    nstext.replaceCharacters(in: theRange2, with: "")
+                    nstext.replaceCharacters(in: theRange1, with: "")
                 }
             //Check for more EM tags
-            theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-            theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+            theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+            theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
             
             }
 
@@ -99,13 +99,13 @@ extension String
         return mutableAttributedString
     }
     
-    func AttributedString(font: UIFont) -> NSMutableAttributedString{
+    func AttributedString(_ font: UIFont) -> NSMutableAttributedString{
         let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: self)
         let nstext = NSMutableString(string: self)
         let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
         
-        var theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-        var theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+        var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
         
         if (theRange1.location != NSNotFound && theRange2.location != NSNotFound) //maked sure there's a pair
         {
@@ -113,14 +113,14 @@ extension String
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
                     mutableAttributedString.addAttributes(attribute1, range: combinedRange)
-                    mutableAttributedString.replaceCharactersInRange(theRange2, withString: "") //order of removal is important! Have to work backwards down the range
-                    mutableAttributedString.replaceCharactersInRange(theRange1, withString: "")
-                    nstext.replaceCharactersInRange(theRange2, withString: "")
-                    nstext.replaceCharactersInRange(theRange1, withString: "")
+                    mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
+                    mutableAttributedString.replaceCharacters(in: theRange1, with: "")
+                    nstext.replaceCharacters(in: theRange2, with: "")
+                    nstext.replaceCharacters(in: theRange1, with: "")
                 }
                 //Check for more EM tags
-                theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-                theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+                theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+                theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
                 
             }
             
@@ -139,8 +139,8 @@ extension String
         let nstext = NSMutableString(string: paragraphString)
         let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
         
-        var theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-        var theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+        var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+        var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
         
         if (theRange1.location != NSNotFound && theRange2.location != NSNotFound) //maked sure there's a pair
         {
@@ -148,14 +148,14 @@ extension String
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
                     mutableAttributedString.addAttributes(attribute1, range: combinedRange)
-                    mutableAttributedString.replaceCharactersInRange(theRange2, withString: "") //order of removal is important! Have to work backwards down the range
-                    mutableAttributedString.replaceCharactersInRange(theRange1, withString: "")
-                    nstext.replaceCharactersInRange(theRange2, withString: "")
-                    nstext.replaceCharactersInRange(theRange1, withString: "")
+                    mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
+                    mutableAttributedString.replaceCharacters(in: theRange1, with: "")
+                    nstext.replaceCharacters(in: theRange2, with: "")
+                    nstext.replaceCharacters(in: theRange1, with: "")
                 }
                 //Check for more EM tags
-                theRange1 = nstext.rangeOfString("<em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
-                theRange2 = nstext.rangeOfString("</em>", options: NSStringCompareOptions.CaseInsensitiveSearch)
+                theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
+                theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
                 
             }
             

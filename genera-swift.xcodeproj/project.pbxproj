@@ -131,6 +131,9 @@
 		A4AFEAC11CE449B1009A4F02 /* home_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AFEABD1CE449B1009A4F02 /* home_btn@2x.png */; };
 		A4AFEAC21CE449B1009A4F02 /* PopOverSearch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AFEABE1CE449B1009A4F02 /* PopOverSearch.png */; };
 		A4AFEAC31CE449B1009A4F02 /* PopOverSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AFEABF1CE449B1009A4F02 /* PopOverSearch@2x.png */; };
+		A4BA65EC1DA9F365007806D5 /* Subgroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EA1DA9F365007806D5 /* Subgroup+CoreDataClass.swift */; };
+		A4BA65ED1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EB1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift */; };
+		A4BA65EF1DA9FE1B007806D5 /* TertiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */; };
 		A4C761711D4B299400B9A660 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = A4C761701D4B299400B9A660 /* Icons */; };
 		A4C761741D4B35F000B9A660 /* MVWebWrapperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C761731D4B35F000B9A660 /* MVWebWrapperViewController.xib */; };
 		A4D1C6FA1CC4AA4200D7EA97 /* Custom Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4D1C6F91CC4AA4200D7EA97 /* Custom Settings.plist */; };
@@ -290,6 +293,9 @@
 		A4AFEABD1CE449B1009A4F02 /* home_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_btn@2x.png"; path = "App Images/Default Icons/home_btn@2x.png"; sourceTree = "<group>"; };
 		A4AFEABE1CE449B1009A4F02 /* PopOverSearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PopOverSearch.png; path = "App Images/Default Icons/PopOverSearch.png"; sourceTree = "<group>"; };
 		A4AFEABF1CE449B1009A4F02 /* PopOverSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PopOverSearch@2x.png"; path = "App Images/Default Icons/PopOverSearch@2x.png"; sourceTree = "<group>"; };
+		A4BA65EA1DA9F365007806D5 /* Subgroup+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Subgroup+CoreDataClass.swift"; path = "Core Data Managed Classes/Subgroup+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A4BA65EB1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Subgroup+CoreDataProperties.swift"; path = "Core Data Managed Classes/Subgroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TertiaryTableViewCell.swift; path = CustomViews/TertiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A4C761701D4B299400B9A660 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		A4C761731D4B35F000B9A660 /* MVWebWrapperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVWebWrapperViewController.xib; sourceTree = "<group>"; };
 		A4D1C6F91CC4AA4200D7EA97 /* Custom Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Custom Settings.plist"; sourceTree = "<group>"; };
@@ -478,6 +484,8 @@
 		A499A7D71C4DDBC80020F3DD /* Core Data Managed Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A4BA65EA1DA9F365007806D5 /* Subgroup+CoreDataClass.swift */,
+				A4BA65EB1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift */,
 				A481DC9C1C72A24A00218D8B /* Gallery+CoreDataProperties.swift */,
 				A481DC9D1C72A24A00218D8B /* Gallery.swift */,
 				A499A7BB1C4DDB6C0020F3DD /* DataVersion+CoreDataProperties.swift */,
@@ -603,6 +611,7 @@
 				A49158781CDACC0300D9FD71 /* MVWebWrapperViewController.swift */,
 				A491587A1CDACC2F00D9FD71 /* MVUIWebViewController.swift */,
 				A498CBDA1CE0141A00EC2E65 /* iPadHomeViewController.swift */,
+				A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -670,18 +679,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = museumvictoria;
 				TargetAttributes = {
 					A499A7841C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 					};
 					A499A79D1C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 					A499A7A81C4DA7470020F3DD = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 				};
@@ -841,6 +853,7 @@
 				A499A7CC1C4DDB6C0020F3DD /* Speci.swift in Sources */,
 				A48532931C753B83005A0C0A /* AudioTableViewController.swift in Sources */,
 				A499A7D01C4DDB6C0020F3DD /* Group.swift in Sources */,
+				A4BA65ED1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift in Sources */,
 				A499A78C1C4DA7460020F3DD /* genera_swift.xcdatamodeld in Sources */,
 				A480E2FE1C924FF90085EF78 /* PageContentViewController.swift in Sources */,
 				A499A7D11C4DDB6C0020F3DD /* Image+CoreDataProperties.swift in Sources */,
@@ -859,11 +872,13 @@
 				A4970BBB1C5098D5005D4BD4 /* Constants.swift in Sources */,
 				A481DCA31C72C9B000218D8B /* IPhoneLoadViewController.swift in Sources */,
 				A499A7CA1C4DDB6C0020F3DD /* DataVersion.swift in Sources */,
+				A4BA65EC1DA9F365007806D5 /* Subgroup+CoreDataClass.swift in Sources */,
 				A42D03CE1C55C0280020666C /* SpeciSearchTableViewController.swift in Sources */,
 				A49678431CD1975000546C50 /* iPhoneAboutWebViewController.swift in Sources */,
 				A4AD24281CC5FA9900C2593C /* iPhoneMainTabBarController.swift in Sources */,
 				A499A7901C4DA7460020F3DD /* DetailViewController.swift in Sources */,
 				A499A7CE1C4DDB6C0020F3DD /* TemplateTab.swift in Sources */,
+				A4BA65EF1DA9FE1B007806D5 /* TertiaryTableViewCell.swift in Sources */,
 				A499A7CF1C4DDB6C0020F3DD /* Group+CoreDataProperties.swift in Sources */,
 				A4026D981C72F2180047DFCC /* SpeciImageCollectionViewCell.swift in Sources */,
 			);
@@ -933,8 +948,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -978,8 +995,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -998,6 +1017,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1007,14 +1027,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "genera-swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = scheme.naming.reverese.genera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1022,14 +1046,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "genera-swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = scheme.naming.reverese.genera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1041,6 +1068,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/genera-swift.app/genera-swift";
 			};
 			name = Debug;
@@ -1053,6 +1081,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/genera-swift.app/genera-swift";
 			};
 			name = Release;
@@ -1064,6 +1093,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "genera-swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -1076,6 +1106,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = "genera-swift";
 				USES_XCTRUNNER = YES;
 			};

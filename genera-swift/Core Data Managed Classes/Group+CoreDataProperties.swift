@@ -28,5 +28,6 @@ extension Group {
     @NSManaged var superGroup: String?
     @NSManaged var superGroupOrder: NSNumber?
     @NSManaged var speci: NSSet?
-
+    @NSManaged var sublabel: String?
+    @NSManaged var subgroups: NSSet?
 }

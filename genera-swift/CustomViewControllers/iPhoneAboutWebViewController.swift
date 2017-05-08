@@ -20,7 +20,7 @@ class iPhoneAboutWebViewController: UIViewController, UIWebViewDelegate {
     var customWebView: UIWebView?
     
     var displayHTML:String = "<html><h1>Default Display HTML</h1></html>"
-    let baseURL = NSBundle.mainBundle().bundleURL
+    let baseURL = Bundle.main.bundleURL
 
     
     
@@ -28,8 +28,8 @@ class iPhoneAboutWebViewController: UIViewController, UIWebViewDelegate {
        
         super.viewDidLoad()
         self.customWebView = UIWebView()
-        customWebView!.backgroundColor = UIColor.clearColor()
-        customWebView!.opaque = false
+        customWebView!.backgroundColor = UIColor.clear
+        customWebView!.isOpaque = false
         self.customWebView?.delegate = self
         self.view = self.customWebView
         do{
@@ -50,12 +50,12 @@ class iPhoneAboutWebViewController: UIViewController, UIWebViewDelegate {
     }
    
 
-    func webView(webView: UIWebView,
-                 shouldStartLoadWithRequest request: NSURLRequest,
+    func webView(_ webView: UIWebView,
+                 shouldStartLoadWith request: URLRequest,
                                             navigationType: UIWebViewNavigationType) -> Bool{
         
-        if (navigationType == UIWebViewNavigationType.LinkClicked){
-            UIApplication.sharedApplication().openURL((request.mainDocumentURL)!)
+        if (navigationType == UIWebViewNavigationType.linkClicked){
+            UIApplication.shared.openURL((request.mainDocumentURL)!)
             return false
             
         }

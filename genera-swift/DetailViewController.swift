@@ -37,7 +37,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     
     
-    var viewState:ViewState = ViewState.Split //Status holder for view test: 0 no image, 1 split , 2 full screen image, 3 split
+    var viewState:ViewState = ViewState.split //Status holder for view test: 0 no image, 1 split , 2 full screen image, 3 split
     
     
     let portaitImageProporition:CGFloat = 0.48
@@ -61,16 +61,16 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     //maintain previous search
     var searchTerm:String = ""
     
-    @IBAction func ViewSwitcherControlChanged(sender: UISegmentedControl) {
+    @IBAction func ViewSwitcherControlChanged(_ sender: UISegmentedControl) {
         
-        let orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation; //Current Orientation
+        let orientation:UIInterfaceOrientation = UIApplication.shared.statusBarOrientation; //Current Orientation
         self.view.layoutIfNeeded()
         if (sender.selectedSegmentIndex == 0){ //Text only
             imageViewHeightConstraint.constant = 0
-            viewState = .WebOnly
+            viewState = .webOnly
             
         }else if (sender.selectedSegmentIndex == 1){// Split Only
-            if orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight {
+            if orientation == UIInterfaceOrientation.landscapeLeft || orientation == UIInterfaceOrientation.landscapeRight {
                 // orientation is landscape ->
                 imageViewHeightConstraint.constant = floor(self.view.frame.height * landscapeImageProportion)
                 
@@ -78,16 +78,16 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
                 // orientation is portrait
                 imageViewHeightConstraint.constant = floor(self.view.frame.height * portaitImageProporition)
             }
-            viewState = .Split
+            viewState = .split
             
         }
             
         else {//Image Only
             imageViewHeightConstraint.constant = self.view.frame.height
-            viewState = .ImageOnly
+            viewState = .imageOnly
         }
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         })
         
@@ -95,8 +95,8 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     func configureView() {
         // Update the user interface for the detail item.
-        if self.navigationController?.splitViewController?.collapsed == false {
-            self.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        if self.navigationController?.splitViewController?.isCollapsed == false {
+            self.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
             if let speci = self.detailItem as? Speci{
                 if let group = speci.group as? Group{
                     self.navigationItem.leftBarButtonItem?.title = group.label
@@ -108,7 +108,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
 
         if let detail = self.detailItem as? Speci{
             if let label = self.detailDescriptionLabel {
-                label.text = detail.valueForKey("label")!.description
+                label.text = (detail.value(forKey: "label")! as AnyObject).description
             }
             self.title = detail.label
             //update Web Details
@@ -124,18 +124,18 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
             imagepageController?.dataSource = self
             let pageContentViewController = self.viewControllerAtIndex(0)
             if (pageContentViewController != nil ){
-                imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+                imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
             }
             
             //Hide About/Homeview if it's visible
-            if homeViewController?.view.hidden == false{
+            if homeViewController?.view.isHidden == false{
                 
                 HideHomeView()
 
                 enableViewSwitcher()
             }
             
-            self.navigationController?.splitViewController?.preferredDisplayMode = .PrimaryHidden
+            self.navigationController?.splitViewController?.preferredDisplayMode = .primaryHidden
         }
 
         
@@ -146,14 +146,14 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     
     func disableViewSwitcher(){
-        ViewSwitcherControl.enabled = false
-        ViewSwitcherControl.userInteractionEnabled = false
+        ViewSwitcherControl.isEnabled = false
+        ViewSwitcherControl.isUserInteractionEnabled = false
         print("Switcher - disabled")
     }
     
     func enableViewSwitcher(){
-        ViewSwitcherControl.enabled = true
-        ViewSwitcherControl.userInteractionEnabled = true
+        ViewSwitcherControl.isEnabled = true
+        ViewSwitcherControl.isUserInteractionEnabled = true
         print("Switcher - enabled")
     }
     
@@ -187,9 +187,9 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
              // disableViewSwitcher()
     }
 
-    override func viewDidAppear(animated: Bool) {
-        let orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation; //Current Orientation
-        if orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight {
+    override func viewDidAppear(_ animated: Bool) {
+        let orientation:UIInterfaceOrientation = UIApplication.shared.statusBarOrientation; //Current Orientation
+        if orientation == UIInterfaceOrientation.landscapeLeft || orientation == UIInterfaceOrientation.landscapeRight {
             // orientation is landscape ->
             imageViewHeightConstraint.constant = floor(self.view.frame.height * landscapeImageProportion)
             
@@ -226,12 +226,12 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     }
 
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSearch" {
             
-            let controller = (segue.destinationViewController as! SpeciSearchTableViewController)
+            let controller = (segue.destination as! SpeciSearchTableViewController)
             
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             controller.managedObjectContext = appDelegate.managedObjectContext
             controller.detailViewController = self
             controller.existingSearchTerm = searchTerm
@@ -239,18 +239,18 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
 
         }
         if segue.identifier == "embedPageViewController"{
-            imagepageController = segue.destinationViewController as? UIPageViewController
-            imagepageController?.view.backgroundColor = UIColor.blackColor()
+            imagepageController = segue.destination as? UIPageViewController
+            imagepageController?.view.backgroundColor = UIColor.black
             imagepageController?.dataSource = self
             if (detailItem != nil){
                 let pageContentViewController = self.viewControllerAtIndex(0)
                 if (pageContentViewController != nil){
-                    imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+                    imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
                 }
             }
         }
        if segue.identifier == "embedWebViewController"{
-            detailWebController = segue.destinationViewController as? MVWebWrapperViewController
+            detailWebController = segue.destination as? MVWebWrapperViewController
            // detailWebController?.view.backgroundColor = UIColor.blackColor()
             if let actualDetailItem = detailItem as? Speci{
                 detailWebController?.speci = actualDetailItem
@@ -261,7 +261,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         
         }
         if segue.identifier == "embedHomeViewController"{
-            homeViewController = segue.destinationViewController as? iPadHomeViewController
+            homeViewController = segue.destination as? iPadHomeViewController
             homeViewController!.delegate = self
         }
         
@@ -278,7 +278,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     //View Switching Functions
     
-    @IBAction func ToggleHomeScreen(sender: AnyObject) {
+    @IBAction func ToggleHomeScreen(_ sender: AnyObject) {
         
         ShowHomeView()
         
@@ -291,13 +291,13 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     
     func ShowHomeView(){
-        if homeViewController?.view.hidden == true {
+        if homeViewController?.view.isHidden == true {
                 self.view.layoutIfNeeded()
                 self.title = "home"
-                self.homeViewController?.view.hidden = false
+                self.homeViewController?.view.isHidden = false
                 self.aboutViewTopConstraint.constant = 0
                 self.aboutViewBottomConstraint.constant = 0
-            UIView.animateWithDuration(0.5
+            UIView.animate(withDuration: 0.5
                 , animations: {
                     self.view.layoutIfNeeded()
 
@@ -312,7 +312,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         else{
             homeViewController?.homePageActive()
         }
-        homeButton.enabled = false
+        homeButton.isEnabled = false
         disableViewSwitcher()
     }
     
@@ -320,14 +320,14 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         self.view.layoutIfNeeded()
         self.aboutViewTopConstraint.constant = self.view.frame.height
         self.aboutViewBottomConstraint.constant = -self.view.frame.height
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
            
                 //TO DO - Chose between height and width depending on orientation and animate change.
                 self.view.layoutIfNeeded()
                
                 },completion: {finished in if(finished){
-                    self.homeViewController?.view.hidden = true
-                    UIView.animateWithDuration(0){}
+                    self.homeViewController?.view.isHidden = true
+                    UIView.animate(withDuration: 0, animations: {})
                     // need to work on animation in and out.
                     }
             })
@@ -339,7 +339,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         isHomePageActive = false
         isAboutPageActive = false
 
-        homeButton.enabled = true
+        homeButton.isEnabled = true
         disableViewSwitcher()
     }
 
@@ -349,21 +349,21 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     //iPadHomeDelegate Protocol functions
     
     func aboutShown(){
-        homeButton.enabled = true
+        homeButton.isEnabled = true
         self.title = "About"
         isAboutPageActive = true
         disableViewSwitcher()
     }
 
     func aboutHidden(){
-        homeButton.enabled = false
+        homeButton.isEnabled = false
         isAboutPageActive = false
         disableViewSwitcher()
-        if homeViewController!.view.hidden == false {self.title = "Home"} else {self.title = (self.detailItem as? Speci)?.label}
+        if homeViewController!.view.isHidden == false {self.title = "Home"} else {self.title = (self.detailItem as? Speci)?.label}
     }
     
     func showMaster(){
-        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.PrimaryOverlay
+        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.primaryOverlay
         
     }
     
@@ -371,7 +371,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     // PageView Data Source Functions
     
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
   
         if let realSpeci = self.detailItem as? Speci{
         
@@ -390,7 +390,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
        
         var index = (viewController as! PageContentViewController).pageIndex
         if(index <= 0){
@@ -401,10 +401,10 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         
     }
     
-    func viewControllerAtIndex(index : Int) -> UIViewController? {
+    func viewControllerAtIndex(_ index : Int) -> UIViewController? {
         
         if let realSpeci = self.detailItem as? Speci{
-            let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageContentController") as! PageContentViewController
+            let pageContentViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageContentController") as! PageContentViewController
             
             if((realSpeci.sortedImages().count == 0) || (index >= realSpeci.sortedImages().count )) {
                 pageContentViewController.imageFile = "missingthumbnail.jpg".FileLocation ?? ""
@@ -429,22 +429,22 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
         
     }
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return (self.detailItem as? Speci)?.images?.count ?? 0
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
    
     
     //Test of constraint changes
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
        
-        if viewState == .Split||viewState == .SecondSplit {
-            let orientation:UIInterfaceOrientation = UIApplication.sharedApplication().statusBarOrientation; //Current Orientation
-            if orientation == UIInterfaceOrientation.LandscapeLeft || orientation == UIInterfaceOrientation.LandscapeRight {
+        if viewState == .split||viewState == .secondSplit {
+            let orientation:UIInterfaceOrientation = UIApplication.shared.statusBarOrientation; //Current Orientation
+            if orientation == UIInterfaceOrientation.landscapeLeft || orientation == UIInterfaceOrientation.landscapeRight {
                 // orientation is landscape -> so Going to Portrait
                 imageViewHeightConstraint.constant = floor(size.height * portaitImageProporition)
                 
@@ -455,23 +455,23 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
             
             //self.imagepageController?.view.setNeedsUpdateConstraints()
        // (imageViewHeightConstraint.firstItem as? UIView)?.setNeedsUpdateConstraints()
-        } else if viewState == .ImageOnly {
+        } else if viewState == .imageOnly {
              imageViewHeightConstraint.constant = size.height//self.view.frame.width //Width will become the height on rotation.
-        } else if viewState == .WebOnly{
+        } else if viewState == .webOnly{
              imageViewHeightConstraint.constant = 0
         }
         
         self.view.setNeedsLayout()
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
 
             
     }
     
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
      
 
         
-        super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+        super.willTransition(to: newCollection, with: coordinator)
         
         
     }
@@ -484,6 +484,6 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
 
 enum ViewState
 {
-    case WebOnly,Split,ImageOnly,SecondSplit
+    case webOnly,split,imageOnly,secondSplit
     
 }

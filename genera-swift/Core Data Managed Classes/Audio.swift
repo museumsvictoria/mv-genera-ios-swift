@@ -52,7 +52,7 @@ class Audio: NSManagedObject {
     
     var actualOrder:Int{
         if let unwrappedOrder = order{
-            return unwrappedOrder.integerValue
+            return unwrappedOrder.intValue
         }else
         {
             return 0

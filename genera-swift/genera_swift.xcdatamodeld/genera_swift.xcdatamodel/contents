@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Audio" representedClassName=".Audio" syncable="YES">
         <attribute name="altText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="audioDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="credit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="object" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Speci" inverseName="audios" inverseEntity="Speci" syncable="YES"/>
     </entity>
     <entity name="DataVersion" representedClassName=".DataVersion" syncable="YES">
-        <attribute name="checkForUpdateAfter" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="versionID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="checkForUpdateAfter" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="versionID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Gallery" representedClassName=".Gallery" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,11 +21,13 @@
         <attribute name="groupid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="highlightedImage" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="standardImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sublabel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="superGroup" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="superGroupOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="superGroupOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="speci" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Speci" inverseName="group" inverseEntity="Speci" syncable="YES"/>
+        <relationship name="subgroups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subgroup" inverseName="group" inverseEntity="Subgroup" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName=".Image" syncable="YES">
         <attribute name="altText" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +35,7 @@
         <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="gallery" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Gallery" inverseName="images" inverseEntity="Gallery" syncable="YES"/>
         <relationship name="object" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Speci" inverseName="images" inverseEntity="Speci" syncable="YES"/>
     </entity>
@@ -45,13 +47,22 @@
         <attribute name="labelStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="searchText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="squareThumbnail" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="subgroup" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sublabel" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sublabelStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tertiaryLabel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tertiaryLabelStyle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="audios" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Audio" inverseName="object" inverseEntity="Audio" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="speci" inverseEntity="Group" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="object" inverseEntity="Image" syncable="YES"/>
+        <relationship name="subgroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Subgroup" inverseName="speci" inverseEntity="Subgroup" syncable="YES"/>
         <relationship name="template" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Template" inverseName="objects" inverseEntity="Template" syncable="YES"/>
+    </entity>
+    <entity name="Subgroup" representedClassName=".Subgroup" syncable="YES">
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subgroupID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sublabel" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="subgroups" inverseEntity="Group" syncable="YES"/>
+        <relationship name="speci" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Speci" inverseName="subgroup" inverseEntity="Speci" syncable="YES"/>
     </entity>
     <entity name="Template" representedClassName=".Template" syncable="YES">
         <attribute name="phoneTemplate" optional="YES" attributeType="String" syncable="YES"/>
@@ -79,10 +90,11 @@
         <element name="Audio" positionX="297" positionY="333" width="128" height="150"/>
         <element name="DataVersion" positionX="306" positionY="342" width="128" height="75"/>
         <element name="Gallery" positionX="306" positionY="351" width="128" height="75"/>
-        <element name="Group" positionX="288" positionY="306" width="128" height="165"/>
+        <element name="Group" positionX="288" positionY="306" width="128" height="195"/>
         <element name="Image" positionX="270" positionY="279" width="128" height="165"/>
-        <element name="Speci" positionX="261" positionY="198" width="128" height="255"/>
+        <element name="Speci" positionX="261" positionY="198" width="128" height="285"/>
         <element name="Template" positionX="324" positionY="351" width="128" height="180"/>
         <element name="TemplateTab" positionX="342" positionY="378" width="128" height="180"/>
+        <element name="Subgroup" positionX="306" positionY="351" width="128" height="120"/>
     </elements>
 </model>

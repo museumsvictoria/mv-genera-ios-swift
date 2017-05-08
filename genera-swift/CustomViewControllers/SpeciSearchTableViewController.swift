@@ -38,12 +38,12 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
     }
     
     var existingSearchTerm:String = ""
-    let os = NSProcessInfo().operatingSystemVersion
+    let os = ProcessInfo().operatingSystemVersion
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let application = UIApplication.sharedApplication().delegate as! AppDelegate
+        let application = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = application.managedObjectContext
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -70,17 +70,17 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
             searchController.searchBar.text = existingSearchTerm
         }
         
-        self.preferredContentSize = CGSizeMake(400.0,600.0)
+        self.preferredContentSize = CGSize(width: 400.0,height: 600.0)
     
     }
     
 
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        // tableView.tableHeaderView?.hidden = false
         //self.navigationController?.navigationBar.translucent = false
-        searchController.active = true
+        searchController.isActive = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,12 +90,12 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if speciResults.count == 0{
             return 0}
@@ -106,19 +106,19 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SpeciCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
 
         // Configure the cell...
-        let currentSpeci:Speci = self.speciResults[indexPath.row]
+        let currentSpeci:Speci = self.speciResults[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = currentSpeci.label
         cell.detailTextLabel!.text = currentSpeci.sublabel
         if currentSpeci.sublabelStyle == "italic"{
-            cell.detailTextLabel!.font = UIFont.italicSystemFontOfSize((cell.detailTextLabel?.font.pointSize)!)
+            cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
         }
         if let imagePath:String = currentSpeci.squareThumbnail!.FileLocation{
             
-            if NSFileManager.defaultManager().fileExistsAtPath(imagePath){
+            if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)
             } else
             {
@@ -129,22 +129,22 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let realDetailViewController = detailViewController{
             
-            realDetailViewController.detailItem = speciResults[indexPath.row]
+            realDetailViewController.detailItem = speciResults[(indexPath as NSIndexPath).row]
             realDetailViewController.updateNavigationTree()
             
             if let currentSearch = searchController.searchBar.text{
             realDetailViewController.searchTerm = currentSearch
             }
-            self.presentingViewController!.dismissViewControllerAnimated(true, completion: nil)
+            self.presentingViewController!.dismiss(animated: true, completion: nil)
         }
     }
 
     
     func dismissMe(){
-        self.presentingViewController?.dismissViewControllerAnimated(true, completion:nil)
+        self.presentingViewController?.dismiss(animated: true, completion:nil)
         
     }
     
@@ -195,11 +195,11 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
     */
     
     // MARK: - SearchUpdater
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
     }
 
-    func filterContentForSearchText(searchText:String, scope:String = "All"){
+    func filterContentForSearchText(_ searchText:String, scope:String = "All"){
     
             
             //use context
@@ -221,7 +221,7 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
             */
         if searchText.characters.count > 0 { //make sure there's something to search on
             do{
-                let fetchRequest = NSFetchRequest(entityName: "Speci")
+                let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Speci")
                 //Split search text on spaces to build predicate
                 let searchterms:[String] = searchText.characters.split{$0 == " "}.map(String.init)
                 var searchQuery:String = ""
@@ -242,11 +242,11 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
                 }
 
                 
-                if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Speci] {
+                if let fetchResults = try self.managedObjectContext.fetch(fetchRequest) as? [Speci] {
                     speciResults = fetchResults
                 }
                 
-                speciResults.sortInPlace{ $0.label!.localizedCaseInsensitiveCompare($1.label!) == NSComparisonResult.OrderedAscending}
+                speciResults.sort{ $0.label!.localizedCaseInsensitiveCompare($1.label!) == ComparisonResult.orderedAscending}
                 
             }catch
             {
@@ -261,13 +261,13 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
             
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = speciResults[indexPath.row]
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+                let object = speciResults[(indexPath as NSIndexPath).row]
+                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
                 controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 
             }
             
@@ -276,12 +276,12 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
         }
         if segue.identifier == "showDetailTabView"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.speciResults[indexPath.row]
-                let controller = (segue.destinationViewController as! DetailTabBarViewController)
+                let object = self.speciResults[(indexPath as NSIndexPath).row]
+                let controller = (segue.destination as! DetailTabBarViewController)
                 controller.title = object.label
                 controller.selectedSpeci = object
                 
-                segue.destinationViewController.hidesBottomBarWhenPushed = true
+                segue.destination.hidesBottomBarWhenPushed = true
                 
             }
         }

@@ -20,6 +20,6 @@ import CoreData
 extension DataVersion {
 
     @NSManaged var versionID: NSNumber?
-    @NSManaged var checkForUpdateAfter: NSDate?
+    @NSManaged var checkForUpdateAfter: Date?
 
 }

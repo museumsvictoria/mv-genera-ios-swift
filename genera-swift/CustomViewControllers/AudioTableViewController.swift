@@ -85,23 +85,23 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return audiolist.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
 
         // Configure the cell...
         //Get the Audio file
-        let cellAudio = self.audiolist[indexPath.row]
+        let cellAudio = self.audiolist[(indexPath as NSIndexPath).row]
        cell.textLabel?.attributedText = cellAudio.audioDescription?.AttributedStringNoIndent()
        // cell.textLabel?.text = cellAudio.audioDescription
         cell.detailTextLabel?.text = cellAudio.credit
@@ -115,14 +115,14 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let selectedAudio: Audio = self.audiolist[indexPath.row]
+        let selectedAudio: Audio = self.audiolist[(indexPath as NSIndexPath).row]
         if let audioLocation = selectedAudio.filename?.FileLocation{
             
-            self.fileCellLookup[NSURL(fileURLWithPath:audioLocation).absoluteString] = indexPath.row //so we can update the cell when the audio stops playing.
+            self.fileCellLookup[URL(fileURLWithPath:audioLocation).absoluteString] = (indexPath as NSIndexPath).row //so we can update the cell when the audio stops playing.
             playAudio(selectedAudio)
-            if let activeCell = tableView.cellForRowAtIndexPath(indexPath){
+            if let activeCell = tableView.cellForRow(at: indexPath){
                 activeCell.imageView?.image = activeTrack?.image;
                 activeCell.imageView?.highlightedImage = activeTrack?.highlightedImage;
                 activeCell.imageView?.animationImages = activeTrack?.animationImages;
@@ -135,7 +135,7 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
 
     // MARK: - Audio Player 
     
-    func playAudio(selectedAudio: Audio) -> Bool {
+    func playAudio(_ selectedAudio: Audio) -> Bool {
         var returnValue: Bool = true
         let audioFileLocation  = selectedAudio.filename?.FileLocation
         
@@ -146,7 +146,7 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
             self.player?.delegate = nil
         }
         do{
-            self.player = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFileLocation!))
+            self.player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioFileLocation!))
             if let actualPlayer = self.player
             {
                 actualPlayer.delegate = self
@@ -164,11 +164,11 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
     
     //MARK: Audio Player Delegate Functions
     
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer, successfully flag: Bool) {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
        
         if let tmpURL = player.url{
             if let cellRow = self.fileCellLookup[tmpURL.absoluteString]{
-                if let finishedCell = self.tableView.cellForRowAtIndexPath(NSIndexPath(forRow: cellRow, inSection: 0))
+                if let finishedCell = self.tableView.cellForRow(at: IndexPath(row: cellRow, section: 0))
                 {
                     finishedCell.imageView?.stopAnimating()
                     finishedCell.imageView?.image = self.inactiveTrack?.image

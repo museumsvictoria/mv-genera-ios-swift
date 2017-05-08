@@ -31,7 +31,8 @@
       "label": "Murchison meteorite", 
       "searchText": "", 
       "squareThumbnail": "t_1113.jpg", 
-      "subgroup": "Meteorites and Tektites", 
+      "subgroup": "Meteorites and Tektites",
+      "subgroupID" : "1",
       "sublabel": "Specimen E 4805", 
       "sublabelStyle": {}, 
       "template": "NHObject"
@@ -70,7 +71,8 @@
       "label": "Fossil Club Moss", 
       "searchText": "Baragwanathia longifolia Fossil Club Moss Equisetopsida", 
       "squareThumbnail": "t_1128.jpg", 
-      "subgroup": "Palaeobotany", 
+      "subgroup": "Palaeobotany",
+      "subgroupID" : "2",
       "sublabel": "Baragwanathia longifolia", 
       "sublabelStyle": {}, 
       "template": "NHObject"
@@ -105,7 +107,8 @@
       "label": "Taxidermied Mount - Phar Lap, 1932", 
       "searchText": "Equus caballus Phar Lap", 
       "squareThumbnail": "t_1124.jpg", 
-      "subgroup": "Mammalogy", 
+      "subgroup": "Mammalogy",
+      "subgroupID" : "3",
       "sublabel": "Equus caballus", 
       "sublabelStyle": {}, 
       "template": "NHObject"
@@ -152,7 +155,8 @@
       "label": "Royal Red Cross, King George V, 1st Class", 
       "searchText": "Decoration - Royal Red Cross, King George V, 1st Class, Great Britain, circa 1916", 
       "squareThumbnail": "t_1132.jpg", 
-      "subgroup": "Numismatics & Philately", 
+      "subgroup": "Numismatics & Philately",
+      "subgroupID" : "4",
       "sublabel": "Decoration, Great Britain, circa 1916", 
       "sublabelStyle": {}, 
       "template": "HTObject"
@@ -191,7 +195,8 @@
       "label": "Pocket Compass Sundial", 
       "searchText": "HT 29959 Pocket Compass Sundial George Bass  circa 1790", 
       "squareThumbnail": "t_1121.jpg", 
-      "subgroup": "Science and Measurement", 
+      "subgroup": "Science and Measurement",
+       "subgroupID" : "5",
       "sublabel": "George Bass, circa 1790 ", 
       "sublabelStyle": {}, 
       "template": "HTObject"
@@ -238,7 +243,8 @@
       "label": "Symphonion - Cole's Book Arcade", 
       "searchText": "Symphonion Cole's Book Arcade  Polyphon Great German Music Box Clockwork mechanical musical perforated metal discs", 
       "squareThumbnail": "t_1116.jpg", 
-      "subgroup": "Information and Communication", 
+      "subgroup": "Information and Communication",
+      "subgroupID" : "6",
       "sublabel": "Item ST 181124", 
       "sublabelStyle": {}, 
       "template": "HTObject"
@@ -276,48 +282,86 @@
   "groupList": [
     {
       "groupid": "1090", 
-      "highlightedImage": "Murchison meteorite", 
+      "highlightedImage": "t_1113.jpg",
       "label": "Geology", 
       "order": "0", 
-      "standardImage": "Murchison meteorite", 
-      "superGroupID":"1"
+      "standardImage": "t_1113.jpg", 
+      "superGroupID":"1",
+                "sublabel":"Géologie"
     }, 
     {
       "groupid": "1091", 
-      "highlightedImage": "Club Moss Fossil 2", 
+      "highlightedImage": "t_1128.jpg",
       "label": "Palaeontology", 
       "order": "1", 
-      "standardImage": "Club Moss Fossil 2", 
-      "superGroupID":"1",
+      "standardImage": "t_1128.jpg",
+                "superGroupID":"1",
+                "sublabel":"Paléontologie"
     }, 
     {
       "groupid": "1096", 
-      "highlightedImage": "Pharlap", 
+      "highlightedImage": "t_1124.jpg",
       "label": "Zoology", 
       "order": "2", 
-      "standardImage": "Pharlap", 
-      "superGroupID":"1"
+      "standardImage": "t_1124.jpg",
+                "superGroupID":"1",
+                "sublabel":"Zoologie"
     
     }, 
     {
       "groupid": "1089", 
-      "highlightedImage": "George Cross - Obverse", 
+      "highlightedImage": "t_1132.jpg",
       "label": "Historical Studies", 
       "order": "3", 
-      "standardImage": "Royal Red Cross", 
-      "superGroupID":"2"
+      "standardImage": "t_1132.jpg",
+                "superGroupID":"2",
+                "sublabel":"Des études historiques"
    
     }, 
     {
       "groupid": "1086", 
-      "highlightedImage": "Symphonion", 
+      "highlightedImage": "t_1116.jpg",
       "label": "Technology And Society", 
       "order": "4", 
-      "standardImage": "Symphonion", 
-      "superGroupID":"2"
+      "standardImage": "t_1116.jpg",
+                "superGroupID":"2",
+                "sublabel":"Technologie et société"
       
     }
-  ], 
+  ],
+    
+"subgroupList": [
+    { "subgroupID": "1",
+      "label":"Meteorites and Tektites",
+      "sublabel": "Météorites et Tektites",
+      "groupID" : "1090"
+    },
+                 { "subgroupID": "2",
+                 "label":"Palaeobotany",
+                 "sublabel": "Palaeobotany",
+                 "groupID" : "1091"
+                 },
+                 { "subgroupID": "3",
+                 "label":"Mammalogy",
+                 "sublabel": "Mammalogie",
+                 "groupID" : "1096"
+                 },
+                 { "subgroupID": "4",
+                 "label":"Numismatics & Philately",
+                 "sublabel": "Numismatique et philatélie",
+                 "groupID" : "1089"
+                 },
+                 { "subgroupID": "5",
+                 "label":"Science and Measurement",
+                 "sublabel": "Sciences et évaluation",
+                 "groupID" : "1086"
+                 },
+                 { "subgroupID": "6",
+                 "label":"Information and Communication",
+                 "sublabel": "Information et communication",
+                 "groupID" : "1086"
+                 }
+    ],
   "templateList": [
     {
       "mobileTabs": [

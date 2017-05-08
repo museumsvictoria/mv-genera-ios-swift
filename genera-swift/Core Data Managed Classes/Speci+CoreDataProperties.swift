@@ -26,9 +26,11 @@ extension Speci {
     @NSManaged var labelStyle: String?
     @NSManaged var searchText: String?
     @NSManaged var squareThumbnail: String?
-    @NSManaged var subgroup: String?
+    @NSManaged var subgroup: NSManagedObject?
     @NSManaged var sublabel: String?
     @NSManaged var sublabelStyle: String?
+    @NSManaged var tertiaryLabel: String?
+    @NSManaged var tertiaryLabelStyle: String?
     @NSManaged var images: Set<Image>?
     @NSManaged var group: NSManagedObject?
     @NSManaged var audios: Set<Audio>?
@@ -37,7 +39,7 @@ extension Speci {
     var firstLetter:String?{
         if let actualLabel = label{
             
-            return "\(actualLabel[actualLabel.startIndex])".uppercaseString
+            return "\(actualLabel[actualLabel.startIndex])".uppercased()
             
         }else
         { return nil }

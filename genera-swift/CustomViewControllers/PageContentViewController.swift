@@ -38,7 +38,7 @@ class PageContentViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.black
         
         //Catch Single Tap to Hide Chrome
         let aSelector : Selector = #selector(PageContentViewController.showHideChrome(_:))
@@ -47,7 +47,7 @@ class PageContentViewController: UIViewController {
         
         let doubleTap = UITapGestureRecognizer(target:self, action: nil)
         doubleTap.numberOfTapsRequired = 2
-        singleTap.requireGestureRecognizerToFail(doubleTap)
+        singleTap.require(toFail: doubleTap)
         self.view.addGestureRecognizer(singleTap)
         self.view.addGestureRecognizer(doubleTap)
         
@@ -59,7 +59,7 @@ class PageContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     
@@ -68,7 +68,7 @@ class PageContentViewController: UIViewController {
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
     }
@@ -102,24 +102,24 @@ class PageContentViewController: UIViewController {
     }
     
     
-    func showHideChrome(sender:UITapGestureRecognizer){
+    func showHideChrome(_ sender:UITapGestureRecognizer){
         
         print("Single Tap Fired")
         if delegate != nil {
             print("in Tab Controller")
         
             if let navcontroller = self.navigationController {
-                if (navcontroller.navigationBarHidden){
-                        delegate?.tabBar.hidden = false
+                if (navcontroller.isNavigationBarHidden){
+                        delegate?.tabBar.isHidden = false
                     navcontroller.setNavigationBarHidden(false, animated: true)
-                    UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Slide)
+                    UIApplication.shared.setStatusBarHidden(false, with: .slide)
     
                 }else
                 {
                     
-                    delegate?.tabBar.hidden = true
+                    delegate?.tabBar.isHidden = true
                     navcontroller.setNavigationBarHidden(true, animated: true)
-                    UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Slide)
+                    UIApplication.shared.setStatusBarHidden(true, with: .slide)
  
                 }
             }

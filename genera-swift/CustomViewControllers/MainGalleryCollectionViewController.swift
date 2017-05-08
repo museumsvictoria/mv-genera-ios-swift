@@ -31,7 +31,7 @@ class MainGalleryCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         //  self.collectionView!.registerClass(MainGalleryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        let application = UIApplication.sharedApplication().delegate as! AppDelegate
+        let application = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = application.managedObjectContext
         
         //Load Image Gallery Images
@@ -40,7 +40,7 @@ class MainGalleryCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
         
         //check if it's parent is a tab view controller
-        if self.parentViewController?.parentViewController is iPhoneMainTabBarController
+        if self.parent?.parent is iPhoneMainTabBarController
         {
             print("in Tab Bar Controller")
         }
@@ -57,20 +57,20 @@ class MainGalleryCollectionViewController: UICollectionViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
         if segue.identifier == "showFullScreen" {
-            let controller = (segue.destinationViewController as! SpeciImageCollectionViewController)
+            let controller = (segue.destination as! SpeciImageCollectionViewController)
             controller.imageArray = imageArray
-            if self.parentViewController?.parentViewController is iPhoneMainTabBarController
+            if self.parent?.parent is iPhoneMainTabBarController
             {
-                if let mainTabBar = self.parentViewController?.parentViewController as? iPhoneMainTabBarController   {
+                if let mainTabBar = self.parent?.parent as? iPhoneMainTabBarController   {
                     controller.delegate = mainTabBar
                 }
             }
-            if let indexPath = self.collectionView?.indexPathForCell(sender as! MainGalleryCollectionViewCell) {
-                let selectedCell = indexPath.row
+            if let indexPath = self.collectionView?.indexPath(for: sender as! MainGalleryCollectionViewCell) {
+                let selectedCell = (indexPath as NSIndexPath).row
                 controller.currentIndex = selectedCell
               //  controller.parentFrameSize = self.collectionView?.bounds
             }
@@ -81,29 +81,29 @@ class MainGalleryCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return imageArray.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MainGalleryCollectionViewCell
-        cell.backgroundColor = UIColor.blueColor()
-        let cellImage = imageArray[indexPath.row]
-        let thumbnailFilename: String = cellImage.filename?.stringByReplacingOccurrencesOfString(".", withString: "_tmb.") ?? "placeholder.jpg"
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MainGalleryCollectionViewCell
+        cell.backgroundColor = UIColor.blue
+        let cellImage = imageArray[(indexPath as NSIndexPath).row]
+        let thumbnailFilename: String = cellImage.filename?.replacingOccurrences(of: ".", with: "_tmb.") ?? "placeholder.jpg"
         cell.thumbnailImageView.image = UIImage(contentsOfFile: thumbnailFilename.FileLocation )
 
         return cell
     }
 
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
        // self.collectionView?.performBatchUpdates(nil, completion: nil)
         self.collectionView?.collectionViewLayout.invalidateLayout()
     }
@@ -112,14 +112,14 @@ class MainGalleryCollectionViewController: UICollectionViewController {
     func loadGalleryImages(){
         //get gallery objects
         let predicate = NSPredicate(format:"title='Primary'")
-        let fetchRequest = NSFetchRequest(entityName:"Gallery")
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> =  NSFetchRequest(entityName:"Gallery")
         fetchRequest.predicate = predicate
         do{
-            let currentGallery:[Gallery] =  try self.managedObjectContext!.executeFetchRequest(fetchRequest) as! [Gallery]
+            let currentGallery:[Gallery] =  try self.managedObjectContext!.fetch(fetchRequest) as! [Gallery]
             if currentGallery.count > 0 {
                 let primaryGallery = currentGallery[0]
                 imageArray = (primaryGallery.images?.allObjects as! [Image]) ?? [Image]()
-                imageArray.sortInPlace({$0 < $1})
+                imageArray.sort(by: {$0 < $1})
             }
             
         }catch{
@@ -127,9 +127,9 @@ class MainGalleryCollectionViewController: UICollectionViewController {
         }
     }
     
-    func collectionView(collectionView: UICollectionView,
+    func collectionView(_ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
             
        /*     let flickrPhoto =  photoForIndexPath(indexPath)
             //2
@@ -138,8 +138,8 @@ class MainGalleryCollectionViewController: UICollectionViewController {
                 size.height += 10
                 return size
             }*/
-            if self.traitCollection.userInterfaceIdiom  == UIUserInterfaceIdiom.Pad{
-                if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+            if self.traitCollection.userInterfaceIdiom  == UIUserInterfaceIdiom.pad{
+                if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
                     let onefifth = (collectionView.bounds.size.width-60)/5.0
                     return CGSize(width: onefifth, height: onefifth)
                 }
@@ -152,7 +152,7 @@ class MainGalleryCollectionViewController: UICollectionViewController {
               
             }else
             {
-                if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+                if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
                     let onefifth = (collectionView.bounds.size.width-40)/5.0
                     return CGSize(width: onefifth, height: onefifth)
                 }
