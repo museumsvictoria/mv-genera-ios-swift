@@ -39,6 +39,13 @@ class SpeciImageCollectionViewController: UICollectionViewController {
 
         self.collectionView!.contentOffset = CGPoint(x: 0,y: 0)
         self.collectionView!.invalidateIntrinsicContentSize()
+        //Disable prefetching for the gallery.
+        if #available(iOS 10.0, *) {
+            self.collectionView!.isPrefetchingEnabled = false
+        } else {
+            // Fallback on earlier versions
+        };
+
         self.title = ""
         
         //Setup Single Tap
@@ -130,10 +137,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
         
       //  cell.imageView.image = UIImage(named: "placeholder.jpg")
         //get image in background
-        let priority = DispatchQueue.GlobalQueuePriority.default
-        DispatchQueue.global(priority: priority).async {
-            
-            // let imageSource = "\(imageDirectory.path!)/\( self.imageArray[indexPath.row])"
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let imageSource = self.imageArray[(indexPath as NSIndexPath).row].filename?.FileLocation{
                 if let image:UIImage = UIImage(contentsOfFile: imageSource){
                     
@@ -150,9 +154,8 @@ class SpeciImageCollectionViewController: UICollectionViewController {
                 }
             }
             
-            
-            
         }
+
         print("Index:\((indexPath as NSIndexPath).row)")
         
     

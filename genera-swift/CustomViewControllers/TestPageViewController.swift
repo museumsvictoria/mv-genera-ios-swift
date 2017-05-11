@@ -50,7 +50,7 @@ class TestPageViewController: UIPageViewController, UIPageViewControllerDataSour
             let currentGallery:[Gallery] =  try self.managedObjectContext!.fetch(fetchRequest) as! [Gallery]
             if currentGallery.count > 0 {
                 let primaryGallery = currentGallery[0]
-                imageArray = (primaryGallery.images?.allObjects as! [Image]) ?? [Image]()
+                imageArray = (primaryGallery.images?.allObjects as? [Image]) ?? [Image]()
                 imageArray.sort(by: {$0 > $1})
                 images.append(imageArray[0])
                 images.append(imageArray[1])

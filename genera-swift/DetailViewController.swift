@@ -407,7 +407,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
             let pageContentViewController = self.storyboard?.instantiateViewController(withIdentifier: "PageContentController") as! PageContentViewController
             
             if((realSpeci.sortedImages().count == 0) || (index >= realSpeci.sortedImages().count )) {
-                pageContentViewController.imageFile = "missingthumbnail.jpg".FileLocation ?? ""
+                pageContentViewController.imageFile = "missingthumbnail.jpg".FileLocation
                 pageContentViewController.descriptionText = "No Images"
                 pageContentViewController.creditText = "No Images"
                 pageContentViewController.pageIndex = index

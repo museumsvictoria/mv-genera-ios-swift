@@ -98,7 +98,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         if object.sublabelStyle == "italic"{
             cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
         }
-        if let imagePath:String = object.squareThumbnail!.FileLocation{
+        if let imagePath:String = object.squareThumbnail?.FileLocation{
             print("imagePath: \(imagePath)")
             if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)

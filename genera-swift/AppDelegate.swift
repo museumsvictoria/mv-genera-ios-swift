@@ -177,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     func setupDatabase() -> Void {
         //Set to a background thread - but send updates
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async { // 1
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { // 1
             do{
                 print("No database Found")
                 //create new Managed Object Context - separate from main thread to prevent conflicts
@@ -461,7 +461,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                             
                             //Add Audio
                             positionCounter = 0
-                            print(tmpSpeci["audio"])
+                            //print(tmpSpeci["audio"] ?? "no audio detail")
                             if let audioArray:[[String:String]] = tmpSpeci["audio"] as? [[String:String]]
                             {
                                 

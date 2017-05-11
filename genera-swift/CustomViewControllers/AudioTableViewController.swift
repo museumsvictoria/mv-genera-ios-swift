@@ -121,14 +121,16 @@ class AudioTableViewController: UITableViewController, AVAudioPlayerDelegate {
         if let audioLocation = selectedAudio.filename?.FileLocation{
             
             self.fileCellLookup[URL(fileURLWithPath:audioLocation).absoluteString] = (indexPath as NSIndexPath).row //so we can update the cell when the audio stops playing.
-            playAudio(selectedAudio)
-            if let activeCell = tableView.cellForRow(at: indexPath){
-                activeCell.imageView?.image = activeTrack?.image;
-                activeCell.imageView?.highlightedImage = activeTrack?.highlightedImage;
-                activeCell.imageView?.animationImages = activeTrack?.animationImages;
-                activeCell.imageView?.highlightedAnimationImages = activeTrack?.highlightedAnimationImages;
-                activeCell.imageView?.animationDuration = 1;
-                activeCell.imageView?.startAnimating()
+           let playing = playAudio(selectedAudio)
+            if let activeCell = tableView.cellForRow(at: indexPath) {
+                if playing{
+                    activeCell.imageView?.image = activeTrack?.image;
+                    activeCell.imageView?.highlightedImage = activeTrack?.highlightedImage;
+                    activeCell.imageView?.animationImages = activeTrack?.animationImages;
+                    activeCell.imageView?.highlightedAnimationImages = activeTrack?.highlightedAnimationImages;
+                    activeCell.imageView?.animationDuration = 1;
+                    activeCell.imageView?.startAnimating()
+                }
             }
         }
     }

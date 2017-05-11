@@ -684,16 +684,16 @@
 				TargetAttributes = {
 					A499A7841C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					A499A79D1C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 					A499A7A81C4DA7470020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 				};

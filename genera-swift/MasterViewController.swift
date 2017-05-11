@@ -196,7 +196,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let object = self.fetchedResultsController.object(at: indexPath) as! Group
         cell.textLabel!.text = (object.value(forKey: "label")! as AnyObject).description
         cell.detailTextLabel!.text = object.sublabel!
-        if let imagePath:String = object.standardImage!.FileLocation{
+        if let imagePath:String = object.standardImage?.FileLocation{
             print("imagePath: \(imagePath)")
             if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)

@@ -116,7 +116,7 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
         if currentSpeci.sublabelStyle == "italic"{
             cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
         }
-        if let imagePath:String = currentSpeci.squareThumbnail!.FileLocation{
+        if let imagePath:String = currentSpeci.squareThumbnail?.FileLocation{
             
             if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)

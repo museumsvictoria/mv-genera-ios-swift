@@ -99,7 +99,7 @@ class SpeciFullTableViewController: UITableViewController, NSFetchedResultsContr
          cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
         }
         
-        if let imagePath:String = object.squareThumbnail!.FileLocation{
+        if let imagePath:String = object.squareThumbnail?.FileLocation{
            
             if FileManager.default.fileExists(atPath: imagePath){
                 cell.imageView!.image = UIImage(contentsOfFile: imagePath)
