@@ -270,6 +270,15 @@
     ],
     "groupList": [
         {
+            "groupID": "1096",
+            "highlightedImage": "t_1124.jpg",
+            "label": "Zoology",
+            "order": "2",
+            "standardImage": "t_1124.jpg",
+            "sublabel": "Zoologie",
+            "supergroupID": "1"
+        },    
+        {
             "groupID": "1090",
             "highlightedImage": "t_1113.jpg",
             "label": "Geology",
@@ -285,15 +294,6 @@
             "order": "1",
             "standardImage": "t_1128.jpg",
             "sublabel": "Paléontologie",
-            "supergroupID": "1"
-        },
-        {
-            "groupID": "1096",
-            "highlightedImage": "t_1124.jpg",
-            "label": "Zoology",
-            "order": "2",
-            "standardImage": "t_1124.jpg",
-            "sublabel": "Zoologie",
             "supergroupID": "1"
         },
         {
