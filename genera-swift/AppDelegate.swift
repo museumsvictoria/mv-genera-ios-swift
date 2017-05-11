@@ -229,13 +229,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                     
                         //Get Supergroups
                         var superGroups:[String:SuperGroup] = [String:SuperGroup]()
-                        let superGroupList:[[String:String]] = importData["superGroupList"] as! [[String:String]]
+                        let superGroupList:[[String:String]] = importData["supergroupList"] as! [[String:String]]
                         var superGroupCount = 1 //for inferred order
                         for tmpSuperGroup in superGroupList{
                             //not currently storing superGroups - just dictionary for adding to Group Details.
                             
                             let superGroup:SuperGroup = SuperGroup()
-                            superGroup.ID = tmpSuperGroup["superGroupID"]!
+                            superGroup.ID = tmpSuperGroup["supergroupID"]!
                             if let superGroupOrder = Int(tmpSuperGroup["order"]!){
                                 superGroup.order = superGroupOrder
                             }else{
@@ -259,7 +259,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                 testGroup.order = Int(order) as NSNumber?
                             }
                             testGroup.groupid = tmpgroup["groupid"]
-                            if let superGroupID = tmpgroup["superGroupID"]{
+                            if let superGroupID = tmpgroup["supergroupID"]{
                                 if let superGroup = superGroups[superGroupID]
                                 {
                                     testGroup.superGroup = superGroup.label
