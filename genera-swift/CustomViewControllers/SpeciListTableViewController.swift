@@ -60,7 +60,13 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         self.title = selectedGroup.label
         self.tableView.rowHeight = 75.0;
-        //TODO - remove t
+        
+        //Register NIB for SecondaryTableViewCell and TertiaryTableViewCell
+        let twoLabelNib = UINib(nibName: "SecondaryTableViewCell", bundle: nil)
+        let threeLabelNib = UINib(nibName: "TertiaryTableViewCell", bundle: nil)
+        self.tableView.register(twoLabelNib, forCellReuseIdentifier: "twoLabels")
+        self.tableView.register(threeLabelNib, forCellReuseIdentifier: "threeLabels")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,7 +90,15 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
+        var cell:UITableViewCell
+      
+        let object:Speci = self.fetchedResultsController.object(at: indexPath)
+        if (object.tertiaryLabel != nil){
+             cell = tableView.dequeueReusableCell(withIdentifier: "threeLabels", for: indexPath)
+        }else{
+             cell = tableView.dequeueReusableCell(withIdentifier: "twoLabels", for: indexPath)
+        }
+      //  let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
 
         self.configureCell(cell, atIndexPath: indexPath)
 
@@ -92,22 +106,73 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
-        let object = self.fetchedResultsController.object(at: indexPath) as! Speci
-        cell.textLabel!.text = object.label
-        cell.detailTextLabel!.text = object.sublabel!
-        if object.sublabelStyle == "italic"{
-            cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
-        }
-        if let imagePath:String = object.squareThumbnail?.FileLocation{
-            print("imagePath: \(imagePath)")
-            if FileManager.default.fileExists(atPath: imagePath){
-                cell.imageView!.image = UIImage(contentsOfFile: imagePath)
-            } else
-            {
-                cell.imageView!.image = UIImage(named: "missingthumbnail.jpg")
+        
+        let object:Speci = self.fetchedResultsController.object(at: indexPath)
+        if let cellform = cell as? TertiaryTableViewCell {
+            cellform.primaryLabel!.text = object.label
+            cellform.secondaryLabel!.text = object.sublabel
+            cellform.tertiaryLabel!.text = object.tertiaryLabel
+            setLabelFontStyle(uiLabel: cellform.primaryLabel, fontStyle: object.labelStyle)
+            setLabelFontStyle(uiLabel: cellform.secondaryLabel, fontStyle: object.sublabelStyle)
+            setLabelFontStyle(uiLabel: cellform.tertiaryLabel, fontStyle: object.tertiaryLabelStyle)
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cellform.thumbnail!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cellform.thumbnail!.image = UIImage(named: "missingthumbnail.jpg")
+                }
             }
         }
+        else if let cellform = cell as? SecondaryTableViewCell{
+
+            cellform.primaryLabel!.text = object.label
+            cellform.secondaryLabel!.text = object.sublabel
+
+            setLabelFontStyle(uiLabel: cellform.primaryLabel, fontStyle: object.labelStyle)
+            setLabelFontStyle(uiLabel: cellform.secondaryLabel, fontStyle: object.sublabelStyle)
+
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cellform.thumbnail!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cellform.thumbnail!.image = UIImage(named: "missingthumbnail.jpg")
+                }
+            }
+
+        } else {
         
+            cell.textLabel!.text = object.label
+            cell.detailTextLabel!.text = object.sublabel!
+            if object.sublabelStyle == "italic"{
+                cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
+            }
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cell.imageView!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cell.imageView!.image = UIImage(named: "missingthumbnail.jpg")
+                }
+            }
+
+        }
+
+        
+    }
+    
+    func setLabelFontStyle(uiLabel: UILabel, fontStyle: String?)
+    {
+        if fontStyle == "italic" {
+            uiLabel.font = UIFont.italicSystemFont(ofSize:(uiLabel.font.pointSize))
+        }else
+        {
+            uiLabel.font = UIFont.systemFont(ofSize: (uiLabel.font.pointSize))
+        }
         
     }
     
@@ -165,14 +230,14 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     */
 
     
-    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult> {
+    var fetchedResultsController: NSFetchedResultsController<Speci> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         //Clear cache from previous launch - could be removed from production code if there is a significant boost.
         NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Speci")
         
-        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest()
+        let fetchRequest:NSFetchRequest<Speci> = NSFetchRequest()
         // Edit the entity name as appropriate.
         let entity = NSEntityDescription.entity(forEntityName: "Speci", in: self.managedObjectContext)
         fetchRequest.entity = entity
@@ -191,7 +256,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         print("group.label = '\(selectedGroup.label)'")
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "subgroup", cacheName: "Speci")
+        let aFetchedResultsController = NSFetchedResultsController<Speci>(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "subgroup", cacheName: "Speci")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
@@ -206,7 +271,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>?
+    var _fetchedResultsController: NSFetchedResultsController<Speci>?
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
@@ -252,6 +317,22 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     
     
     // MARK: - Navigation
+    
+    //Becuase we've introduced the custom tableViewCell, the segues are no longer automatically linked, and there doesn't appear to be a way
+    //to determine the segue that's been associated with the prototype cell, so we're using the storyboard name to determine which segue to fire.
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let currentStoryBoard:UIStoryboard = self.storyboard{
+            if currentStoryBoard.value(forKey: "name") as! String == "Main-Phone"
+            {
+                self.performSegue(withIdentifier: "showDetailTabView", sender: self)
+            }else
+            {
+                self.performSegue(withIdentifier: "showDetail", sender: self)
+            }
+        
+
+        }
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

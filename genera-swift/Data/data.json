@@ -111,7 +111,7 @@
             "subgroup": "Mammalogy",
             "subgroupID": "3",
             "sublabel": "Equus caballus",
-            "sublabelStyle": "",
+            "sublabelStyle": "italic",
             "template": "NHObject"
         },
         {

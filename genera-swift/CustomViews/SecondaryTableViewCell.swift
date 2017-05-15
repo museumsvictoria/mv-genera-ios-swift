@@ -8,15 +8,15 @@
 
 import UIKit
 
-class TertiaryTableViewCell: UITableViewCell {
+class SecondaryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var thumbnail: UIImageView!
     
     @IBOutlet weak var primaryLabel: UILabel!
+        
+    @IBOutlet weak var secondaryLabel: UILabel!
     
     @IBOutlet weak var tertiaryLabel: UILabel!
-    
-    @IBOutlet weak var secondaryLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -71,6 +71,13 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
         }
         
         self.preferredContentSize = CGSize(width: 400.0,height: 600.0)
+        
+        //Register NIB for SecondaryTableViewCell and TertiaryTableViewCell
+        let twoLabelNib = UINib(nibName: "SecondaryTableViewCell", bundle: nil)
+        let threeLabelNib = UINib(nibName: "TertiaryTableViewCell", bundle: nil)
+        self.tableView.register(twoLabelNib, forCellReuseIdentifier: "twoLabels")
+        self.tableView.register(threeLabelNib, forCellReuseIdentifier: "threeLabels")
+        
     
     }
     
@@ -107,28 +114,123 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
 
         // Configure the cell...
-        let currentSpeci:Speci = self.speciResults[(indexPath as NSIndexPath).row]
-        cell.textLabel!.text = currentSpeci.label
-        cell.detailTextLabel!.text = currentSpeci.sublabel
-        if currentSpeci.sublabelStyle == "italic"{
-            cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
+        let object:Speci = self.speciResults[(indexPath as NSIndexPath).row]
+        
+        
+        
+        var cell:UITableViewCell
+      
+        if (object.tertiaryLabel != nil){
+            cell = tableView.dequeueReusableCell(withIdentifier: "threeLabels", for: indexPath)
+        }else{
+            cell = tableView.dequeueReusableCell(withIdentifier: "twoLabels", for: indexPath)
         }
-        if let imagePath:String = currentSpeci.squareThumbnail?.FileLocation{
-            
-            if FileManager.default.fileExists(atPath: imagePath){
-                cell.imageView!.image = UIImage(contentsOfFile: imagePath)
-            } else
-            {
-                cell.imageView!.image = UIImage(named: "missingthumbnail.jpg")
-            }
-        }
-
+        //  let cell = tableView.dequeueReusableCell(withIdentifier: "SpeciCell", for: indexPath)
+        
+        self.configureCell(cell, atIndexPath: indexPath)
+        
         return cell
+
     }
 
+    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
+        
+           let object:Speci = self.speciResults[(indexPath as NSIndexPath).row]
+        
+        if let cellform = cell as? TertiaryTableViewCell {
+            cellform.primaryLabel!.text = object.label
+            cellform.secondaryLabel!.text = object.sublabel
+            cellform.tertiaryLabel!.text = object.tertiaryLabel
+            setLabelFontStyle(uiLabel: cellform.primaryLabel, fontStyle: object.labelStyle)
+            setLabelFontStyle(uiLabel: cellform.secondaryLabel, fontStyle: object.sublabelStyle)
+            setLabelFontStyle(uiLabel: cellform.tertiaryLabel, fontStyle: object.tertiaryLabelStyle)
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cellform.thumbnail!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cellform.thumbnail!.image = UIImage(named: "missingthumbnail.jpg")
+                }
+            }
+        }
+        else if let cellform = cell as? SecondaryTableViewCell{
+            
+            cellform.primaryLabel!.text = object.label
+            cellform.secondaryLabel!.text = object.sublabel
+            
+            setLabelFontStyle(uiLabel: cellform.primaryLabel, fontStyle: object.labelStyle)
+            setLabelFontStyle(uiLabel: cellform.secondaryLabel, fontStyle: object.sublabelStyle)
+            
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cellform.thumbnail!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cellform.thumbnail!.image = UIImage(named: "missingthumbnail.jpg")
+                }
+            }
+            
+        } else {
+            
+            cell.textLabel!.text = object.label
+            cell.detailTextLabel!.text = object.sublabel!
+            if object.sublabelStyle == "italic"{
+                cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
+            }
+            if let imagePath:String = object.squareThumbnail?.FileLocation{
+                print("imagePath: \(imagePath)")
+                if FileManager.default.fileExists(atPath: imagePath){
+                    cell.imageView!.image = UIImage(contentsOfFile: imagePath)
+                } else
+                {
+                    cell.imageView!.image = UIImage(named: "missingthumbnail.jpg")
+                }
+            }
+            
+        }
+        
+        /* Old Cell Code - for storyboard protoype cell
+         cell.textLabel!.text = object.label
+         cell.detailTextLabel!.text = object.sublabel!
+         if object.sublabelStyle == "italic"{
+         cell.detailTextLabel!.font = UIFont.italicSystemFont(ofSize: (cell.detailTextLabel?.font.pointSize)!)
+         }
+         if let imagePath:String = object.squareThumbnail?.FileLocation{
+         print("imagePath: \(imagePath)")
+         if FileManager.default.fileExists(atPath: imagePath){
+         cell.imageView!.image = UIImage(contentsOfFile: imagePath)
+         } else
+         {
+         cell.imageView!.image = UIImage(named: "missingthumbnail.jpg")
+         }
+         }
+         */
+        
+    }
+    
+    
+    func setLabelFontStyle(uiLabel: UILabel, fontStyle: String?)
+    {
+        if fontStyle == "italic" {
+            uiLabel.font = UIFont.italicSystemFont(ofSize:(uiLabel.font.pointSize))
+        }else
+        {
+            uiLabel.font = UIFont.systemFont(ofSize: (uiLabel.font.pointSize))
+        }
+        
+    }
+    
+    
+    //Becuase we've introduced the custom tableViewCell, the segues are no longer automatically linked, and there doesn't appear to be a way
+    //to determine the segue that's been associated with the prototype cell. In this case, the realDetailViewController property is being used to determine if 
+    //the primary controller is a splitview controller. If it isn't, the "iPhone" segue is fired. 
+    //TO DO: Revaluate if this or the method used in SpeciListTableViewController is the best approach.
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let realDetailViewController = detailViewController{
             
@@ -139,6 +241,10 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
             realDetailViewController.searchTerm = currentSearch
             }
             self.presentingViewController!.dismiss(animated: true, completion: nil)
+        }else
+        {
+            self.performSegue(withIdentifier: "showDetailTabView", sender: self)
+           
         }
     }
 
@@ -187,12 +293,20 @@ class SpeciSearchTableViewController: UITableViewController, UISearchResultsUpda
     /*
     // MARK: - Navigation
 
+     
+     
+     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //Becuase we've introduced the custom tableViewCell, the segues are no longer automatically linked, and there doesn't appear to be a way
+    //to determine the segue that's been associated with the prototype cell, so we're using the storyboard name to determine which segue to fire.
+    
+
     
     // MARK: - SearchUpdater
     func updateSearchResults(for searchController: UISearchController) {

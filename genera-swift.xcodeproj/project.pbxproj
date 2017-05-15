@@ -20,6 +20,8 @@
 		A4153FA91D54379E002DCAC4 /* placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4153FA71D54379E002DCAC4 /* placeholder.jpg */; };
 		A4153FAA1D54379E002DCAC4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = A4153FA81D54379E002DCAC4 /* placeholder.png */; };
 		A42D03CE1C55C0280020666C /* SpeciSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42D03CD1C55C0280020666C /* SpeciSearchTableViewController.swift */; };
+		A43D72451EC54C3D00EF2B06 /* SecondaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A43D72431EC54C3D00EF2B06 /* SecondaryTableViewCell.xib */; };
+		A43D72461EC54C3D00EF2B06 /* SecondaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43D72441EC54C3D00EF2B06 /* SecondaryTableViewCell.swift */; };
 		A47AB61D1C5870DD00EE7CA6 /* SpeciFullTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47AB61C1C5870DD00EE7CA6 /* SpeciFullTableViewController.swift */; };
 		A480E2FE1C924FF90085EF78 /* PageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A480E2FD1C924FF90085EF78 /* PageContentViewController.swift */; };
 		A481DC9E1C72A24A00218D8B /* Gallery+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A481DC9C1C72A24A00218D8B /* Gallery+CoreDataProperties.swift */; };
@@ -133,9 +135,10 @@
 		A4AFEAC31CE449B1009A4F02 /* PopOverSearch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4AFEABF1CE449B1009A4F02 /* PopOverSearch@2x.png */; };
 		A4BA65EC1DA9F365007806D5 /* Subgroup+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EA1DA9F365007806D5 /* Subgroup+CoreDataClass.swift */; };
 		A4BA65ED1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EB1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift */; };
-		A4BA65EF1DA9FE1B007806D5 /* TertiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */; };
 		A4C761711D4B299400B9A660 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = A4C761701D4B299400B9A660 /* Icons */; };
 		A4C761741D4B35F000B9A660 /* MVWebWrapperViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4C761731D4B35F000B9A660 /* MVWebWrapperViewController.xib */; };
+		A4CBF1E01EC4430C00855ED6 /* TertiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CBF1DE1EC4430C00855ED6 /* TertiaryTableViewCell.swift */; };
+		A4CBF1E11EC4430C00855ED6 /* TertiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CBF1DF1EC4430C00855ED6 /* TertiaryTableViewCell.xib */; };
 		A4D1C6FA1CC4AA4200D7EA97 /* Custom Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4D1C6F91CC4AA4200D7EA97 /* Custom Settings.plist */; };
 		A4D78D221C51AB920099D0FC /* missingthumbnail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4D78D211C51AB920099D0FC /* missingthumbnail.jpg */; };
 		A4D78D271C51B25D0099D0FC /* SpeciListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D78D261C51B25D0099D0FC /* SpeciListTableViewController.swift */; };
@@ -176,6 +179,8 @@
 		A4153FA71D54379E002DCAC4 /* placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = placeholder.jpg; path = "App Images/placeholder.jpg"; sourceTree = "<group>"; };
 		A4153FA81D54379E002DCAC4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = "App Images/placeholder.png"; sourceTree = "<group>"; };
 		A42D03CD1C55C0280020666C /* SpeciSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SpeciSearchTableViewController.swift; path = CustomViewControllers/SpeciSearchTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A43D72431EC54C3D00EF2B06 /* SecondaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SecondaryTableViewCell.xib; path = CustomViews/SecondaryTableViewCell.xib; sourceTree = "<group>"; };
+		A43D72441EC54C3D00EF2B06 /* SecondaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SecondaryTableViewCell.swift; path = CustomViews/SecondaryTableViewCell.swift; sourceTree = "<group>"; };
 		A47AB61C1C5870DD00EE7CA6 /* SpeciFullTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SpeciFullTableViewController.swift; path = CustomViewControllers/SpeciFullTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A480E2FD1C924FF90085EF78 /* PageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PageContentViewController.swift; path = CustomViewControllers/PageContentViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A481DC9C1C72A24A00218D8B /* Gallery+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = "Gallery+CoreDataProperties.swift"; path = "Core Data Managed Classes/Gallery+CoreDataProperties.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -295,9 +300,10 @@
 		A4AFEABF1CE449B1009A4F02 /* PopOverSearch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PopOverSearch@2x.png"; path = "App Images/Default Icons/PopOverSearch@2x.png"; sourceTree = "<group>"; };
 		A4BA65EA1DA9F365007806D5 /* Subgroup+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Subgroup+CoreDataClass.swift"; path = "Core Data Managed Classes/Subgroup+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A4BA65EB1DA9F365007806D5 /* Subgroup+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Subgroup+CoreDataProperties.swift"; path = "Core Data Managed Classes/Subgroup+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TertiaryTableViewCell.swift; path = CustomViews/TertiaryTableViewCell.swift; sourceTree = "<group>"; };
 		A4C761701D4B299400B9A660 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		A4C761731D4B35F000B9A660 /* MVWebWrapperViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MVWebWrapperViewController.xib; sourceTree = "<group>"; };
+		A4CBF1DE1EC4430C00855ED6 /* TertiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TertiaryTableViewCell.swift; path = CustomViews/TertiaryTableViewCell.swift; sourceTree = "<group>"; };
+		A4CBF1DF1EC4430C00855ED6 /* TertiaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TertiaryTableViewCell.xib; path = CustomViews/TertiaryTableViewCell.xib; sourceTree = "<group>"; };
 		A4D1C6F91CC4AA4200D7EA97 /* Custom Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Custom Settings.plist"; sourceTree = "<group>"; };
 		A4D78D211C51AB920099D0FC /* missingthumbnail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = missingthumbnail.jpg; path = "App Images/Default Icons/missingthumbnail.jpg"; sourceTree = "<group>"; };
 		A4D78D261C51B25D0099D0FC /* SpeciListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SpeciListTableViewController.swift; path = CustomViewControllers/SpeciListTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -335,7 +341,11 @@
 		A4026D991C72F2600047DFCC /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				A43D72431EC54C3D00EF2B06 /* SecondaryTableViewCell.xib */,
+				A43D72441EC54C3D00EF2B06 /* SecondaryTableViewCell.swift */,
 				A4026D9A1C72F2890047DFCC /* ImageScrollView.swift */,
+				A4CBF1DE1EC4430C00855ED6 /* TertiaryTableViewCell.swift */,
+				A4CBF1DF1EC4430C00855ED6 /* TertiaryTableViewCell.xib */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -611,7 +621,6 @@
 				A49158781CDACC0300D9FD71 /* MVWebWrapperViewController.swift */,
 				A491587A1CDACC2F00D9FD71 /* MVUIWebViewController.swift */,
 				A498CBDA1CE0141A00EC2E65 /* iPadHomeViewController.swift */,
-				A4BA65EE1DA9FE1B007806D5 /* TertiaryTableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -768,6 +777,7 @@
 				A48533101C7566CA005A0C0A /* tabBar2_audio.png in Resources */,
 				A485330E1C7566CA005A0C0A /* tabBar1_search.png in Resources */,
 				A48533001C7566CA005A0C0A /* iphone_scarcity@2x.png in Resources */,
+				A4CBF1E11EC4430C00855ED6 /* TertiaryTableViewCell.xib in Resources */,
 				A48532DB1C7566BD005A0C0A /* AudioTrackInactive@2x.png in Resources */,
 				A48532FD1C7566CA005A0C0A /* iphone_distribution.png in Resources */,
 				A499CE301CED4624002BDB01 /* btn_gallery.png in Resources */,
@@ -808,6 +818,7 @@
 				A4A81E831D541786001CC471 /* iPhoneLaunch.png in Resources */,
 				A4AFEAC11CE449B1009A4F02 /* home_btn@2x.png in Resources */,
 				A48532DA1C7566BD005A0C0A /* AudioTrackInactive.png in Resources */,
+				A43D72451EC54C3D00EF2B06 /* SecondaryTableViewCell.xib in Resources */,
 				A499CE2F1CED4624002BDB01 /* btn_groups.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -866,6 +877,7 @@
 				A4026D961C72F18E0047DFCC /* SpeciImageCollectionViewController.swift in Sources */,
 				A499A7D41C4DDB6C0020F3DD /* Audio.swift in Sources */,
 				A491587B1CDACC2F00D9FD71 /* MVUIWebViewController.swift in Sources */,
+				A43D72461EC54C3D00EF2B06 /* SecondaryTableViewCell.swift in Sources */,
 				A499A7D21C4DDB6C0020F3DD /* Image.swift in Sources */,
 				A499A7C91C4DDB6C0020F3DD /* DataVersion+CoreDataProperties.swift in Sources */,
 				A499A78E1C4DA7460020F3DD /* MasterViewController.swift in Sources */,
@@ -878,7 +890,7 @@
 				A4AD24281CC5FA9900C2593C /* iPhoneMainTabBarController.swift in Sources */,
 				A499A7901C4DA7460020F3DD /* DetailViewController.swift in Sources */,
 				A499A7CE1C4DDB6C0020F3DD /* TemplateTab.swift in Sources */,
-				A4BA65EF1DA9FE1B007806D5 /* TertiaryTableViewCell.swift in Sources */,
+				A4CBF1E01EC4430C00855ED6 /* TertiaryTableViewCell.swift in Sources */,
 				A499A7CF1C4DDB6C0020F3DD /* Group+CoreDataProperties.swift in Sources */,
 				A4026D981C72F2180047DFCC /* SpeciImageCollectionViewCell.swift in Sources */,
 			);
