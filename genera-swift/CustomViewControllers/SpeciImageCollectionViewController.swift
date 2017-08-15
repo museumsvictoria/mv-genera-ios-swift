@@ -227,7 +227,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
             // testCell!.scrollableImageView.centerScrollViewContents()
             print("PreAnimating ScrollableImageViewFrame:\(testCell!.scrollableImageView.frame)")
             print("PreAnimating Image Credit:\(testCell!.imageCredit.frame)")
-            print("PreAnimating Cell ContentView Frame: \(testCell?.contentView.frame)")
+            print("PreAnimating Cell ContentView Frame: \(String(describing: testCell?.contentView.frame))")
         }
         
         coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) -> Void in
@@ -239,7 +239,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
                 // testCell!.scrollableImageView.centerScrollViewContents()
                 print("Animating ScrollableImageViewFrame:\(testCell!.scrollableImageView.frame)")
                 print("Animating Image Credit:\(testCell!.imageCredit.frame)")
-                print("Animating Cell ContentView Frame: \(testCell?.contentView.frame)")
+                print("Animating Cell ContentView Frame: \(String(describing: testCell?.contentView.frame))")
             }
             let orient = UIApplication.shared.statusBarOrientation
             
@@ -258,7 +258,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
                     // testCell!.scrollableImageView.centerScrollViewContents()
                     print("Final ScrollableImageViewFrame:\(testCell!.scrollableImageView.frame)")
                     print("Final Image Credit:\(testCell!.imageCredit.frame)")
-                    print("Final Cell ContentView Frame: \(testCell?.contentView.frame)")
+                    print("Final Cell ContentView Frame: \(String(describing: testCell?.contentView.frame))")
                 }
         })
         

@@ -57,7 +57,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        print("imageView:\(imageView?.frame.size)")
+        print("imageView:\(String(describing: imageView?.frame.size))")
 
         
     }

@@ -23,7 +23,7 @@ extension String
         let bareFileName:String? = (NSURL(fileURLWithPath: self).deletingPathExtension?.path)
         let fileExtension:String? = URL(fileURLWithPath: self).pathExtension
       
-        print("Filename: \(bareFileName), Extension: \(fileExtension)")
+        print("Filename: \(String(describing: bareFileName)), Extension: \(String(describing: fileExtension))")
         if let testImages = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Images")
         {
             returnPath = testImages

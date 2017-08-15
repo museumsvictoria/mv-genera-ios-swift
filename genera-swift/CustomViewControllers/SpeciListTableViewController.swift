@@ -253,7 +253,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         fetchRequest.sortDescriptors = [subgroupSort, sortDescriptor]
 
         fetchRequest.predicate = NSPredicate(format: "group.label = '\(selectedGroup.label!)'")
-        print("group.label = '\(selectedGroup.label)'")
+        print("group.label = '\(String(describing: selectedGroup.label))'")
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
         let aFetchedResultsController = NSFetchedResultsController<Speci>(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: "subgroup", cacheName: "Speci")
@@ -338,7 +338,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.fetchedResultsController.object(at: indexPath) as! Speci
+                let object = self.fetchedResultsController.object(at: indexPath) 
                 //let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
 
@@ -352,7 +352,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
         }
         if segue.identifier == "showDetailTabView"{
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.fetchedResultsController.object(at: indexPath) as! Speci
+                let object = self.fetchedResultsController.object(at: indexPath) 
                 let controller = (segue.destination as! DetailTabBarViewController)
                 controller.title = object.label
                 controller.selectedSpeci = object
@@ -369,7 +369,7 @@ class SpeciListTableViewController: UITableViewController, NSFetchedResultsContr
                 
                 let controller = ((self.splitViewController?.viewControllers[1] as! UINavigationController).topViewController as! DetailViewController)
                 if let indexPath = self.tableView.indexPathForSelectedRow {
-                    let object = self.fetchedResultsController.object(at: indexPath) as! Speci
+                    let object = self.fetchedResultsController.object(at: indexPath) 
                     //let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                     //    let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
                     

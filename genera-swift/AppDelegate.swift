@@ -267,7 +267,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                 }
                             }
 
-                            print("Group name set to \(tmpgroup["label"])")
+                            print("Group name set to \(String(describing: tmpgroup["label"]))")
                         }//End Group Loop
                         
                         //Setup Subgroups
@@ -449,7 +449,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                         newImage.order = positionCounter as NSNumber?
                                         positionCounter+=1
                                         newImage.object = newSpeci
-                                        print ("\(newImage.imageDescription): Postion \(newImage.order)")
+                                        print ("\(String(describing: newImage.imageDescription)): Postion \(String(describing: newImage.order))")
                                         
                                         
                                     }
@@ -491,7 +491,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                 
                             }//End Add Audio
                             
-                            print("Added \(newSpeci.label)")
+                            print("Added \(String(describing: newSpeci.label))")
                         }
                         
                         //Image Gallery Loop
@@ -635,7 +635,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         //Data base name incorporates the major Version number - updating to a new major Version will create a new database.
         let infoDictionary = Bundle.main.infoDictionary;
         let majorVersion = infoDictionary!["CFBundleShortVersonString"]
-        let databaseName:String = "genera-\(majorVersion).sqlite"
+        let databaseName:String = "genera-\(String(describing: majorVersion)).sqlite"
         return self.applicationSupportDirectory().appendingPathComponent(databaseName)
         
     }
