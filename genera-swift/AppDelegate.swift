@@ -208,12 +208,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                         let imageTab:TemplateTab = NSEntityDescription.insertNewObject(forEntityName: "TemplateTab", into: backgroundManagedObjectContext)as!TemplateTab
                         imageTab.tabName = "images"
                         imageTab.tabLabel = "Images"
-                        imageTab.tabIcon = "images.png"
+                        imageTab.tabIcon = "Icons/images.png"
                         
                         let audioTab:TemplateTab = NSEntityDescription.insertNewObject(forEntityName: "TemplateTab", into: backgroundManagedObjectContext) as! TemplateTab
                         audioTab.tabName = "audio"
                         audioTab.tabLabel = "Audio"
-                        audioTab.tabIcon = "audio.png"
+                        audioTab.tabIcon = "Icons/audio.png"
                         
                         let detailsTab:TemplateTab = NSEntityDescription.insertNewObject(forEntityName: "TemplateTab", into: backgroundManagedObjectContext) as! TemplateTab
                         detailsTab.tabName = "details"
@@ -320,11 +320,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                 
                                 switch tabName{
                                 case "audio":
+                                    audioTab.tabLabel = tmpMobileTab["tabLabel"]
+                                    if let iconName = tmpMobileTab["tabIcon"]{
+                                        audioTab.tabIcon = "Icons/" + iconName
+                                    }else
+                                    {
+                                        audioTab.tabIcon = "missingimage.jpg"
+                                    }
+
                                     newTemplateTab = audioTab
-                             //   case "details":
-                             //       newTemplateTab = detailsTab
-                             //       newTemplateTab.tabTemplate = tmpMobileTab["tabTemplate"]
+
                                 case "images":
+                                    imageTab.tabLabel = tmpMobileTab["tabLabel"]
+                                    if let iconName = tmpMobileTab["tabIcon"]{
+                                        imageTab.tabIcon = "Icons/" + iconName
+                                    }else
+                                    {
+                                        imageTab.tabIcon = "missingimage.jpg"
+                                    }
                                     newTemplateTab = imageTab
                                 default:
                                     newTemplateTab = NSEntityDescription.insertNewObject(forEntityName: "TemplateTab", into: backgroundManagedObjectContext) as! TemplateTab
