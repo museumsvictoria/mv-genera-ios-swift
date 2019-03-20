@@ -216,7 +216,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         centerScrollViewContents()
     }
     
-    func scrollViewDoubleTapped(_ recognizer: UITapGestureRecognizer) {
+    @objc func scrollViewDoubleTapped(_ recognizer: UITapGestureRecognizer) {
         //doubleTapParent?.ImageScrollViewDoubleTapped(recognizer)
         
         if (self.zoomScale == self.maximumZoomScale){

@@ -17,10 +17,10 @@ import UIKit
 extension UIColor{
     
     func fromString(_ colorString:String) -> UIColor{
-        var red:Float = 255.0;
-        var green:Float = 255.0;
-        var blue:Float = 255.0;
-        var alpha:Float = 1.0;
+        var red:CGFloat = 255.0;
+        var green:CGFloat = 255.0;
+        var blue:CGFloat = 255.0;
+        var alpha:CGFloat = 1.0;
         
         //assumption string comma separated list
         //either red,green,blue, alpha   e.g: 255,255,255,1.0
@@ -28,19 +28,21 @@ extension UIColor{
         //or  red, green, blue e.g 255,255,255 - alpha implicitly 1
             var colours:[String] = colorString.components(separatedBy: ",")
             if colours.count == 3{
-                red = Float(colours[0]) ?? 0.0
-                green = Float(colours[1]) ?? 0.0
-                blue = Float(colours[2]) ?? 0.0
+                red = CGFloat(Float(colours[0]) ?? 0.0)
+                green = CGFloat(Float(colours[1]) ?? 0.0)
+                blue = CGFloat(Float(colours[2]) ?? 0.0)
             }
             if colours.count == 4{
-                red = Float(colours[0]) ?? 0.0
-                green = Float(colours[1]) ?? 0.0
-                blue = Float(colours[2]) ?? 0.0
-                alpha = Float(colours[3]) ?? 0.0
+                red = CGFloat(Float(colours[0]) ?? 0.0)
+                green = CGFloat(Float(colours[1]) ?? 0.0)
+                blue = CGFloat(Float(colours[2]) ?? 0.0)
+                alpha = CGFloat(Float(colours[3]) ?? 0.0)
             }
             //if colours
 
-        return UIColor(colorLiteralRed: red/255.0, green: green/255.0, blue: blue/255.0, alpha: alpha)
+        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: alpha)
     }
     
 }
+
+

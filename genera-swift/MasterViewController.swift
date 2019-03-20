@@ -26,7 +26,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Do any additional setup after loading the view, typically from a nib.
         let application = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = application.managedObjectContext
-        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.primaryHidden
+        self.splitViewController?.preferredDisplayMode = UISplitViewController.DisplayMode.primaryHidden
         
         if self.traitCollection.userInterfaceIdiom  == UIUserInterfaceIdiom.phone
         {
@@ -45,7 +45,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     }
     
-    func refresh() -> Void{
+    @objc func refresh() -> Void{
 
         
         NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: "Groups")
@@ -168,7 +168,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return false
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = self.fetchedResultsController.managedObjectContext
             context.delete(self.fetchedResultsController.object(at: indexPath) as! NSManagedObject)

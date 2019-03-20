@@ -139,7 +139,7 @@ class MainGalleryCollectionViewController: UICollectionViewController {
                 return size
             }*/
             if self.traitCollection.userInterfaceIdiom  == UIUserInterfaceIdiom.pad{
-                if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
+                if(UIDevice.current.orientation.isLandscape){
                     let onefifth = (collectionView.bounds.size.width-60)/5.0
                     return CGSize(width: onefifth, height: onefifth)
                 }
@@ -152,7 +152,7 @@ class MainGalleryCollectionViewController: UICollectionViewController {
               
             }else
             {
-                if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
+                if(UIDevice.current.orientation.isLandscape){
                     let onefifth = (collectionView.bounds.size.width-40)/5.0
                     return CGSize(width: onefifth, height: onefifth)
                 }

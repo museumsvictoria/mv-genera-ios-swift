@@ -67,7 +67,7 @@ class iPadHomeViewController: UIViewController {
         
     }
  
-    func databaseBuildFinished(_ notification: Notification){
+    @objc func databaseBuildFinished(_ notification: Notification){
         //No longer need the notification - remove
         NotificationCenter.default.removeObserver(self)
         self.showButtons()
@@ -79,7 +79,7 @@ class iPadHomeViewController: UIViewController {
         
     }
     
-    func databasePercentComplete(_ notification:Notification){
+    @objc func databasePercentComplete(_ notification:Notification){
         
         if let percentage = (notification as NSNotification).userInfo?["percentage"] as? Float{
             

@@ -69,7 +69,7 @@ class IPhoneLoadViewController: UIViewController {
         }
     }
     
-    func databasePercentComplete(_ notification:Notification){
+    @objc func databasePercentComplete(_ notification:Notification){
         
         if let percentage = (notification as NSNotification).userInfo?["percentage"] as? Float{
             

@@ -41,12 +41,12 @@ class iPadMainSplitViewController: UISplitViewController, UISplitViewControllerD
      */
     
     func splitViewController(_ svc: UISplitViewController,
-                               willChangeTo displayMode: UISplitViewControllerDisplayMode){
+                               willChangeTo displayMode: UISplitViewController.DisplayMode){
         
-        if displayMode == UISplitViewControllerDisplayMode.primaryHidden{
+        if displayMode == UISplitViewController.DisplayMode.primaryHidden{
             
             //detail view hidding - get topmost detail 
-             let navCollection = self.viewControllers[0].childViewControllers
+             let navCollection = self.viewControllers[0].children
                 if navCollection.count > 0 {
                     //get top level controller
                     let topTitle = navCollection[navCollection.count - 1].title

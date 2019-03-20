@@ -271,7 +271,7 @@ class SpeciImageCollectionViewController: UICollectionViewController {
     
     
     
-    func switchFullScreen(_ sender:UITapGestureRecognizer){
+    @objc func switchFullScreen(_ sender:UITapGestureRecognizer){
             
         if delegate != nil {
             print("in Tab Controller")

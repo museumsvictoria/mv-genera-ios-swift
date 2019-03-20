@@ -363,7 +363,7 @@
         {
             "mobileTabs": [
                 {
-                    "tabIcon": "tabBar2_images.png",
+                    "tabIcon": "test-images.png",
                     "tabLabel": "Images",
                     "tabName": "images",
                     "tabTemplate": "default"
@@ -381,13 +381,13 @@
                     "tabTemplate": "NHObject-further-phone.html"
                 },
                 {
-                    "tabIcon": "audio.png",
+                    "tabIcon": "test-audio.png",
                     "tabLabel": "Audio",
                     "tabName": "audio",
                     "tabTemplate": ""
                 },
                 {
-                    "tabIcon": "tabBar2_notes.png",
+                    "tabIcon": "tabBar2_scarcity.png",
                     "tabLabel": "Notes",
                     "tabName": "usernotes",
                     "tabTemplate": "default"
@@ -399,7 +399,7 @@
         {
             "mobileTabs": [
                 {
-                    "tabIcon": "tabBar2_images.png",
+                    "tabIcon": "test-images.png",
                     "tabLabel": "Images",
                     "tabName": "images",
                     "tabTemplate": "default"
@@ -417,13 +417,13 @@
                     "tabTemplate": "htobject-significance-phone.html"
                 },
                 {
-                    "tabIcon": "audio.png",
+                    "tabIcon": "test-audio.png",
                     "tabLabel": "Audio",
                     "tabName": "audio",
                     "tabTemplate": ""
                 },
                 {
-                    "tabIcon": "tabBar2_notes.png",
+                    "tabIcon": "tabBar2_scarcity.png",
                     "tabLabel": "Notes",
                     "tabName": "usernotes",
                     "tabTemplate": "default"

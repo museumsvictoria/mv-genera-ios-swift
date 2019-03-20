@@ -102,7 +102,7 @@ class PageContentViewController: UIViewController {
     }
     
     
-    func showHideChrome(_ sender:UITapGestureRecognizer){
+    @objc func showHideChrome(_ sender:UITapGestureRecognizer){
         
         print("Single Tap Fired")
         if delegate != nil {

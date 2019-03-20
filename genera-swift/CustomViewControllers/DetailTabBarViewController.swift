@@ -141,7 +141,7 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
                         imageViewController = viewController as? UIPageViewController
                         imageViewController!.dataSource = self
                         let pageContentViewController = self.viewControllerAtIndex(0)
-                        imageViewController!.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+                        imageViewController!.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
                     }
                     if viewController is AudioTableViewController  {
                         audioViewController = viewController as? AudioTableViewController
@@ -165,9 +165,13 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
                 self.viewControllers?.removeAll()
             for templateTab in templateTabs{
                 if templateTab.tabName == "images" || templateTab.tabName == "image"{
-                self.viewControllers!.append(imageViewController!)
+                    imageViewController?.tabBarItem.image =  UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
+                    imageViewController?.tabBarItem.selectedImage = UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
+                    self.viewControllers!.append(imageViewController!)
                 }
                 else if templateTab.tabName == "audio"{
+                    audioViewController?.tabBarItem.image =  UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
+                    audioViewController?.tabBarItem.selectedImage = UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
                     self.viewControllers!.append(audioViewController!)
                 }
                 else  //webview tab
@@ -180,8 +184,10 @@ class DetailTabBarViewController: UITabBarController, UIPageViewControllerDataSo
                         webViewController.speci = selectedSpeci
                         webViewController.title = templateTab.tabLabel
                         webViewController.templateFilename = templateTab.tabTemplate ?? ""
-             
+                        //let tabImage = UIImage(named:templateTab.tabIcon ?? "missingthumbnail.jpg")
+                        //webViewController.tabBarItem.image = tabImage                      
                         webViewController.tabBarItem.image = UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
+                        webViewController.tabBarItem.selectedImage = UIImage(named:templateTab.tabIcon ?? "missingimage.jpg" )
                         self.viewControllers!.append(webViewController)
                         
                     }

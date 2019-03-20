@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
         //Check for database
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         UINavigationBar.appearance().barTintColor = UIColor().fromString(barTintColor)
         UINavigationBar.appearance().tintColor = UIColor().fromString(tintColor)
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor().fromString(titleTextColor)]
+        UINavigationBar.appearance().titleTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue : UIColor().fromString(titleTextColor)])
         UIApplication.shared.statusBarStyle = .default
         
     
@@ -366,7 +366,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                                 default:
                                     break
                                 }
-        
+                        
                                 
                             }
                             
@@ -775,3 +775,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

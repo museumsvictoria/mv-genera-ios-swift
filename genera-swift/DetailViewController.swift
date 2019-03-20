@@ -124,7 +124,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
             imagepageController?.dataSource = self
             let pageContentViewController = self.viewControllerAtIndex(0)
             if (pageContentViewController != nil ){
-                imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+                imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
             }
             
             //Hide About/Homeview if it's visible
@@ -160,7 +160,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     
     func updateNavigationTree(){
         if let speci = detailItem as? Speci{
-            if  let navStack = self.splitViewController?.viewControllers[0].childViewControllers{
+            if  let navStack = self.splitViewController?.viewControllers[0].children{
                 if navStack.count > 1 {
                     //already have Speci List
                     let speciList = navStack[1] as! SpeciListTableViewController
@@ -245,7 +245,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
             if (detailItem != nil){
                 let pageContentViewController = self.viewControllerAtIndex(0)
                 if (pageContentViewController != nil){
-                    imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewControllerNavigationDirection.forward, animated: true, completion: nil)
+                    imagepageController?.setViewControllers([pageContentViewController!], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
                 }
             }
         }
@@ -363,7 +363,7 @@ class DetailViewController: UIViewController, UIPageViewControllerDataSource, iP
     }
     
     func showMaster(){
-        self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.primaryOverlay
+        self.splitViewController?.preferredDisplayMode = UISplitViewController.DisplayMode.primaryOverlay
         
     }
     

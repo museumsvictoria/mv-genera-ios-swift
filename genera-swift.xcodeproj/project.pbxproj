@@ -74,8 +74,6 @@
 		A48533131C7566CA005A0C0A /* tabBar2_details@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A48532F41C7566CA005A0C0A /* tabBar2_details@2x.png */; };
 		A48533161C7566CA005A0C0A /* tabBar2_images.png in Resources */ = {isa = PBXBuildFile; fileRef = A48532F71C7566CA005A0C0A /* tabBar2_images.png */; };
 		A48533171C7566CA005A0C0A /* tabBar2_images@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A48532F81C7566CA005A0C0A /* tabBar2_images@2x.png */; };
-		A48533181C7566CA005A0C0A /* tabBar2_scarcity.png in Resources */ = {isa = PBXBuildFile; fileRef = A48532F91C7566CA005A0C0A /* tabBar2_scarcity.png */; };
-		A48533191C7566CA005A0C0A /* tabBar2_scarcity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A48532FA1C7566CA005A0C0A /* tabBar2_scarcity@2x.png */; };
 		A49158791CDACC0300D9FD71 /* MVWebWrapperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49158781CDACC0300D9FD71 /* MVWebWrapperViewController.swift */; };
 		A491587B1CDACC2F00D9FD71 /* MVUIWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491587A1CDACC2F00D9FD71 /* MVUIWebViewController.swift */; };
 		A491DD1C1D58510100E28C93 /* SuperGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A491DD1B1D58510100E28C93 /* SuperGroup.swift */; };
@@ -234,8 +232,6 @@
 		A48532F41C7566CA005A0C0A /* tabBar2_details@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar2_details@2x.png"; path = "App Images/Default Icons/iphone icons/tabBar2_details@2x.png"; sourceTree = "<group>"; };
 		A48532F71C7566CA005A0C0A /* tabBar2_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar2_images.png; path = "App Images/Default Icons/iphone icons/tabBar2_images.png"; sourceTree = "<group>"; };
 		A48532F81C7566CA005A0C0A /* tabBar2_images@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar2_images@2x.png"; path = "App Images/Default Icons/iphone icons/tabBar2_images@2x.png"; sourceTree = "<group>"; };
-		A48532F91C7566CA005A0C0A /* tabBar2_scarcity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tabBar2_scarcity.png; path = "App Images/Default Icons/iphone icons/tabBar2_scarcity.png"; sourceTree = "<group>"; };
-		A48532FA1C7566CA005A0C0A /* tabBar2_scarcity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabBar2_scarcity@2x.png"; path = "App Images/Default Icons/iphone icons/tabBar2_scarcity@2x.png"; sourceTree = "<group>"; };
 		A49158781CDACC0300D9FD71 /* MVWebWrapperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = MVWebWrapperViewController.swift; path = CustomViewControllers/MVWebWrapperViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A491587A1CDACC2F00D9FD71 /* MVUIWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = MVUIWebViewController.swift; path = CustomViewControllers/MVUIWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A491DD1B1D58510100E28C93 /* SuperGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SuperGroup.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -395,8 +391,6 @@
 				A48532F41C7566CA005A0C0A /* tabBar2_details@2x.png */,
 				A48532F71C7566CA005A0C0A /* tabBar2_images.png */,
 				A48532F81C7566CA005A0C0A /* tabBar2_images@2x.png */,
-				A48532F91C7566CA005A0C0A /* tabBar2_scarcity.png */,
-				A48532FA1C7566CA005A0C0A /* tabBar2_scarcity@2x.png */,
 			);
 			name = "Phone Icons";
 			sourceTree = "<group>";
@@ -534,7 +528,6 @@
 			isa = PBXGroup;
 			children = (
 				A49F96DE1C73C781008B12F8 /* iPadGallery.storyboard */,
-				A499A7911C4DA7460020F3DD /* Main.storyboard */,
 				A499A7961C4DA7460020F3DD /* LaunchScreen.storyboard */,
 				A4A9B0D11C76BC4500CA536A /* paging example.storyboard */,
 				A481DCA01C72C86700218D8B /* Main-Phone.storyboard */,
@@ -545,6 +538,7 @@
 		A4A380E21CD9CAE8006A25BE /* TestGroup */ = {
 			isa = PBXGroup;
 			children = (
+				A499A7911C4DA7460020F3DD /* Main.storyboard */,
 			);
 			name = TestGroup;
 			sourceTree = "<group>";
@@ -696,16 +690,16 @@
 				TargetAttributes = {
 					A499A7841C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 					};
 					A499A79D1C4DA7460020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 					A499A7A81C4DA7470020F3DD = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 1010;
 						TestTargetID = A499A7841C4DA7460020F3DD;
 					};
 				};
@@ -794,7 +788,6 @@
 				A4A81E821D541786001CC471 /* iPadDefault.png in Resources */,
 				A4A81E811D541786001CC471 /* iPadDefault-Landscape.png in Resources */,
 				A48532D71C7566BD005A0C0A /* AudioTrackHighlightActive3@2x.png in Resources */,
-				A48533191C7566CA005A0C0A /* tabBar2_scarcity@2x.png in Resources */,
 				A4026DA71C7304440047DFCC /* style-iphone.css in Resources */,
 				A48533031C7566CA005A0C0A /* iphone_search.png in Resources */,
 				A48533081C7566CA005A0C0A /* tabBar1_about.png in Resources */,
@@ -805,7 +798,6 @@
 				A48532CB1C7566BD005A0C0A /* AudioTrackActive.png in Resources */,
 				A4026DA51C7304440047DFCC /* pagestyles-iphone.css in Resources */,
 				A48532D91C7566BD005A0C0A /* AudioTrackHighlightInactive@2x.png in Resources */,
-				A48533181C7566CA005A0C0A /* tabBar2_scarcity.png in Resources */,
 				A48533061C7566CA005A0C0A /* iphone_tab03_search.png in Resources */,
 				A499A7951C4DA7460020F3DD /* Assets.xcassets in Resources */,
 				A48533011C7566CA005A0C0A /* iphone_scarcity@x2.png in Resources */,
@@ -1054,7 +1046,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1072,7 +1065,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = scheme.naming.reverese.genera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -1084,7 +1078,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/genera-swift.app/genera-swift";
 			};
 			name = Debug;
@@ -1097,7 +1092,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/genera-swift.app/genera-swift";
 			};
 			name = Release;
@@ -1109,7 +1105,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = "genera-swift";
 				USES_XCTRUNNER = YES;
 			};
@@ -1122,7 +1119,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "museumvictoria.com.au.genera-swiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = "genera-swift";
 				USES_XCTRUNNER = YES;
 			};

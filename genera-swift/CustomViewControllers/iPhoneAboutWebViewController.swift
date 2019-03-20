@@ -52,9 +52,9 @@ class iPhoneAboutWebViewController: UIViewController, UIWebViewDelegate {
 
     func webView(_ webView: UIWebView,
                  shouldStartLoadWith request: URLRequest,
-                                            navigationType: UIWebViewNavigationType) -> Bool{
+                                            navigationType: UIWebView.NavigationType) -> Bool{
         
-        if (navigationType == UIWebViewNavigationType.linkClicked){
+        if (navigationType == UIWebView.NavigationType.linkClicked){
             UIApplication.shared.openURL((request.mainDocumentURL)!)
             return false
             

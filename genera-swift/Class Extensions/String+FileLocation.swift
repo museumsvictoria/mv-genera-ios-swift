@@ -24,15 +24,15 @@ extension String
         let fileExtension:String? = URL(fileURLWithPath: self).pathExtension
       
         print("Filename: \(String(describing: bareFileName)), Extension: \(String(describing: fileExtension))")
-        if let testImages = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Images")
+        if let testImages = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "images")
         {
             returnPath = testImages
         }
-        if let testAudio = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Audio")
+        if let testAudio = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "audio")
         {
             returnPath = testAudio
         }
-        if let testTemplates = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "Templates")
+        if let testTemplates = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "templates")
         {
             returnPath = testTemplates
         }
@@ -58,7 +58,7 @@ extension String
         let paragraphString = "\(self)"
         let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: paragraphString)
         let nstext = NSMutableString(string: paragraphString)
-        let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
+        let attribute1 = [convertFromNSAttributedStringKey(NSAttributedString.Key.obliqueness) : "0.3" ] //Substitute for Italic given various font sizes
         
         var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
         var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
@@ -68,7 +68,7 @@ extension String
         while (theRange1.location != NSNotFound && theRange2.location != NSNotFound){
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
-                    mutableAttributedString.addAttributes(attribute1, range: combinedRange)
+                    mutableAttributedString.addAttributes(convertToNSAttributedStringKeyDictionary(attribute1), range: combinedRange)
                     mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
                     mutableAttributedString.replaceCharacters(in: theRange1, with: "")
                     nstext.replaceCharacters(in: theRange2, with: "")
@@ -94,7 +94,7 @@ extension String
      //   paraStyle.lineSpacing = 10.0
        
         // Apply paragraph styles to paragraph
-        mutableAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: mutableAttributedString.length))
+        mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paraStyle, range: NSRange(location: 0,length: mutableAttributedString.length))
        
         return mutableAttributedString
     }
@@ -102,7 +102,7 @@ extension String
     func AttributedString(_ font: UIFont) -> NSMutableAttributedString{
         let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: self)
         let nstext = NSMutableString(string: self)
-        let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
+        let attribute1 = [convertFromNSAttributedStringKey(NSAttributedString.Key.obliqueness) : "0.3" ] //Substitute for Italic given various font sizes
         
         var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
         var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
@@ -112,7 +112,7 @@ extension String
             while (theRange1.location != NSNotFound && theRange2.location != NSNotFound){
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
-                    mutableAttributedString.addAttributes(attribute1, range: combinedRange)
+                    mutableAttributedString.addAttributes(convertToNSAttributedStringKeyDictionary(attribute1), range: combinedRange)
                     mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
                     mutableAttributedString.replaceCharacters(in: theRange1, with: "")
                     nstext.replaceCharacters(in: theRange2, with: "")
@@ -137,7 +137,7 @@ extension String
         let paragraphString = "\(self)"
         let mutableAttributedString: NSMutableAttributedString = NSMutableAttributedString(string: paragraphString)
         let nstext = NSMutableString(string: paragraphString)
-        let attribute1 = [NSObliquenessAttributeName : "0.3" ] //Substitute for Italic given various font sizes
+        let attribute1 = [convertFromNSAttributedStringKey(NSAttributedString.Key.obliqueness) : "0.3" ] //Substitute for Italic given various font sizes
         
         var theRange1 = nstext.range(of: "<em>", options: NSString.CompareOptions.caseInsensitive)
         var theRange2 = nstext.range(of: "</em>", options: NSString.CompareOptions.caseInsensitive)
@@ -147,7 +147,7 @@ extension String
             while (theRange1.location != NSNotFound && theRange2.location != NSNotFound){
                 let combinedRange = NSUnionRange(theRange1, theRange2)
                 if (combinedRange.length > 0){
-                    mutableAttributedString.addAttributes(attribute1, range: combinedRange)
+                    mutableAttributedString.addAttributes(convertToNSAttributedStringKeyDictionary(attribute1), range: combinedRange)
                     mutableAttributedString.replaceCharacters(in: theRange2, with: "") //order of removal is important! Have to work backwards down the range
                     mutableAttributedString.replaceCharacters(in: theRange1, with: "")
                     nstext.replaceCharacters(in: theRange2, with: "")
@@ -173,10 +173,20 @@ extension String
         //   paraStyle.lineSpacing = 10.0
         
         // Apply paragraph styles to paragraph
-        mutableAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paraStyle, range: NSRange(location: 0,length: mutableAttributedString.length))
+        mutableAttributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paraStyle, range: NSRange(location: 0,length: mutableAttributedString.length))
         
         return mutableAttributedString
     }
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
