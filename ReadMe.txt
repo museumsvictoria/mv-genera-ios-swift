@@ -76,6 +76,6 @@ HTML Templates -> genera-swift/Templates
 Any subdirectories you create under the Templates directory - e.g. for CSS, javascript and CSS Assets - will be automatically included in the project. The app expects the iPad About page to be "about-ipad.html" and the iPhone About page to be "about-iphone.html"
 
 
-Developing and Adding Content:
-Although the data structure has changed slightly, a lot of the information on content from our original blog posts is still relevant and can be found here: https://museumvictoria.com.au/discoverycentre/mv-field-guide-app/blog/
+
+
 
