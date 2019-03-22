@@ -75,6 +75,8 @@ HTML Templates -> genera-swift/Templates
 
 Any subdirectories you create under the Templates directory - e.g. for CSS, javascript and CSS Assets - will be automatically included in the project. The app expects the iPad About page to be "about-ipad.html" and the iPhone About page to be "about-iphone.html"
 
+Basic Introduction
+A basic introduction to the concepts behind the Genera project can be found in this paper, presented at the Museums and The Web conference in 2012:  https://www.museumsandtheweb.com/mw2012/papers/creating_a_mobile_app_ecosystem_the_genera_pro.html
 
 
 
