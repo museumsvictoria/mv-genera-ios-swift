@@ -23,17 +23,21 @@ extension String
         let bareFileName:String? = (NSURL(fileURLWithPath: self).deletingPathExtension?.path)
         let fileExtension:String? = URL(fileURLWithPath: self).pathExtension
       
-        print("Filename: \(String(describing: bareFileName)), Extension: \(String(describing: fileExtension))")
+        print ("Looking for \(self)")
+//       print("Filename: \(String(describing: bareFileName)), Extension: \(String(describing: fileExtension))")
         if let testImages = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "images")
         {
+            print("Found \(self) in images")
             returnPath = testImages
         }
         if let testAudio = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "audio")
         {
+            print("Found \(self) in audio")
             returnPath = testAudio
         }
         if let testTemplates = Bundle.main.path(forResource: bareFileName, ofType: fileExtension, inDirectory: "templates")
         {
+            print("Found \(self) in templates")
             returnPath = testTemplates
         }
         let fileManager = FileManager.default
@@ -41,6 +45,9 @@ extension String
         
         guard urls.count == 0 else{
             //Application Support Directory hasn't been created - no updates to search - end function here.
+            if returnPath == nil || returnPath == "" {
+                print ("Couldn't find \(self) in bundle")
+            }
             return returnPath ?? ""
         }
         
@@ -48,6 +55,9 @@ extension String
         if fileManager.fileExists(atPath: testUpdatePath.absoluteString){
                 returnPath = testUpdatePath.absoluteString
             
+        }
+        if returnPath == nil || returnPath == "" {
+            print ("Couldn't find \(self) in bundle")
         }
         
         return returnPath ?? ""
